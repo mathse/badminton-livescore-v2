@@ -1,0 +1,461 @@
+<html>
+<style type="text/css">
+<!--
+* { <?php if($_GET['type']!='control') { echo"cursor: none;"; } ?> color: white; scrolling: no; font-family: Arial; }
+body { background: black; text-align: center; padding: 0; margin: 0; overflow:hidden; }
+a { text-decoration: none }
+input, select { font-size: 1em;  background: black; border: 5px solid white; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;}
+select { font-size: 1.1em; }
+#currentEvent, #currentCourt, #currentPlayers, #currentSet {  background: black; border: 0px; color: gray; -webkit-border-radius: 10px; border-radius: 10px;}
+#main { height: 100%; }
+
+#input { height: 80%; margin: 15px auto; width: 90%; text-align: center }
+#pl, #pm, #pr { font-size: 1500%; width: 30%; line-height:80%}
+.settingslabel { font-size: 2em }
+#inputName1, #inputName2 { -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
+#output { height: 100%; width: 98%; font-size: 1300%; padding: 0px; text-align: center; line-height: 80%; }
+#output td { -moz-border-radius: 20px} 
+#namePlayer1, #namePlayer2 { font-size: 40%;  line-height: 70% } 
+
+.scoreboard { background-color: #111; border: 10px solid #111; width: 33%;  -webkit-border-radius: 10px; border-radius: 10px;}
+-->
+</style>
+<?php
+include('settings.php');
+?>
+
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript" src="js/scriptaculous.js?load=effects"></script>
+
+<script type="text/javascript">
+
+var sponsors=0;
+var photos=0;
+
+
+if (navigator.userAgent.match(/Android/i)) {
+	 document.height=530;
+    window.scrollTo(0,1);
+  }
+
+function pushButton(v,disappear)
+{
+  
+
+
+	for(var i = 0; i < document.getElementsByName(v.name).length; i++)
+	{
+		document.getElementsByName(v.name)[i].style.backgroundColor = 'black';
+	}
+	if(disappear)
+	{
+		new Effect.Highlight(v, { startcolor: '#0000ff', endcolor: '#000000' }); 
+	} else {	
+		$(v).style.backgroundColor = 'blue';
+	}	
+	
+	
+	if(v.name == 'event')
+	{
+		new Ajax.Request("getPlayers.php?event="+v.value,{
+				onSuccess: function(r) {
+					$('selectNation1').innerHTML = r.responseText; $('selectNation2').innerHTML = r.responseText; // set nations
+					$('selectPlayer1').innerHTML = ''; $('selectPlayer2').innerHTML = ''; // reset players
+					$('player1').show(); $('player2').show(); // show player selector 
+				}
+			}
+		);
+		$('currentEvent').value = v.value;
+		$('eventCheck').show();
+	}
+	if(v.name == 'court')
+	{
+		$('currentCourt').value = v.value;
+		
+		$('courtCheck').show();
+	}
+	if(v.name == 'selectNation1')
+	{
+		new Ajax.Request("getPlayers.php?event="+$('currentEvent').value+"&nation="+$('selectNation1').value,{
+				onSuccess: function(r) {
+					$('selectPlayer1').innerHTML = r.responseText;
+				}
+			}
+		);
+	}
+	if(v.name == 'selectNation2')
+	{
+		new Ajax.Request("getPlayers.php?event="+$('currentEvent').value+"&nation="+$('selectNation2').value,{
+				onSuccess: function(r) {
+					$('selectPlayer2').innerHTML = r.responseText;
+				}
+			}
+		);
+	}
+	if(v.name == 'selectPlayer1') // set checkmark when player 1 is set
+	{
+		$('playerCheck1').show();		
+	}
+	if(v.name == 'selectPlayer2') // set checkmark when player 2 is set
+	{
+		$('playerCheck2').show();		
+	}
+	if(v.name == 'closeSettings')  // close settings and set values to main input
+	{
+		$('currentPlayers').value = $('selectPlayer1').value+"|"+$('selectPlayer2').value;
+		$('settings').hide();
+		$('settingsButton').hide();
+		   
+		$('inputButtons').show();
+
+		$('inputSet1').style.backgroundColor = 'blue';
+		$('currentSet').value = '1';
+		new Ajax.Request("setcourt.php?newgame=1&court="+$('currentCourt').value+"&p1="+$('selectPlayer1').value+"&p2="+$('selectPlayer2').value);
+				
+	}
+	
+	// show close button when all settings where set
+	try
+	{
+		if($('eventCheck').style.display == '' && $('courtCheck').style.display == '' && $('playerCheck1').style.display == '' && $('playerCheck2').style.display == '') 
+		{ $('closeSettings').show(); $('settingsinfo').hide(); }	
+	} catch(r) {}
+	
+	
+	if(v.alt=='courtselect')
+	{
+		//alert("setcourt.php?deviceid="+v.name+"&court="+v.value);
+		new Ajax.Request("setcourt.php?deviceid="+v.name+"&court="+v.value);	
+	}
+	
+	if(v.name=='pointP1')
+	{
+		if($('currentSet').value=='') { $('currentSet').value = 1; $('inputSet1').style.backgroundColor = 'blue'; }
+		new Ajax.Request("setcourt.php?court="+$('currentCourt').value+"&value="+v.value+"&player=1&set="+$('currentSet').value);	
+	}
+	if(v.name=='pointP2')
+	{
+		if($('currentSet').value=='') { $('currentSet').value = 1; $('inputSet1').style.backgroundColor = 'blue'; }
+		new Ajax.Request("setcourt.php?court="+$('currentCourt').value+"&value="+v.value+"&player=2&set="+$('currentSet').value);	
+	}
+	if(v.name=='set')
+	{
+		$('currentSet').value = v.value;
+	}
+	
+	
+		
+}
+
+new PeriodicalExecuter(function(pe) {
+
+<?php if($_GET['type']=='output') { ?>
+
+	new Ajax.Request("controller.php?debugid=<?php echo $_GET['debugid']; ?>",{
+			onSuccess: function(r) {
+				// status 200 ok
+				// status 201 show sponsoren
+				// status 202 show images
+				// 210 show names only
+				// 220 show score only
+				// status '' show misc/error
+				// alert(r.responseText);
+				var status = r.responseText;
+				if(status == '200') { 
+					$('sponsoren').hide(); $('misc').hide(); $('images').hide(); 
+					$('tblScore1').show(); $('tblScore2').show(); $('tblNames1').show(); $('tblNames2').show();
+					photos=0;
+				}
+				if(status == '201') { $('sponsoren').show(); $('misc').hide(); $('images').hide(); }
+				if(status == '202') { 
+						$('sponsoren').hide(); $('misc').hide(); $('images').show();
+						if(photos==0)
+						{ 
+							$('images').innerHTML = '<iframe src="externalPhotos.php?source=photos" width="100%" height="768" name="SELFHTML_in_a_box"></iframe>';
+							photos=1;
+						}					
+				}
+				
+				if(status == '210') 
+					{ 
+						$('sponsoren').hide(); $('misc').hide(); $('images').hide(); 
+						$('tblScore1').hide(); $('tblScore2').hide(); $('tblNames1').show(); $('tblNames2').show();
+					}				
+				
+				if(status == '220') 
+					{ 
+						$('sponsoren').hide(); $('misc').hide(); $('images').hide(); 
+						$('tblScore1').show(); $('tblScore2').show(); $('tblNames1').hide(); $('tblNames2').hide();
+
+					}				
+				
+				if(status == '400') { $('sponsoren').hide(); $('misc').show(); $('images').hide(); }				
+			}
+		}
+	);	
+
+	
+	
+	new Ajax.Request("output.php?debugid=<?php echo $_GET['debugid']; ?>",{
+			onSuccess: function(r) {
+				var root = r.responseXML;
+				for(var i = 0; i < root.childNodes.length; i++)
+				{
+					if(root.childNodes[i].nodeType != 1) continue;
+					var item = root.childNodes[i];
+					
+					$('namePlayer1').innerHTML = item.getElementsByTagName("player1")[0].firstChild.nodeValue;
+					$('namePlayer2').innerHTML = item.getElementsByTagName("player2")[0].firstChild.nodeValue;
+					
+					// set the points
+					for(var p=1; p<3; p++) {
+						for(var s=1; s<4; s++) {
+							if(item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue == '-') {
+								$('set'+s+'p'+p).innerHTML = '&nbsp;'; 
+							} else {
+								$('set'+s+'p'+p).innerHTML = item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue;
+							}
+							// reset every border back to gray
+							$('set'+s+'p'+p).style.border = '10px solid #111';
+							
+						}
+						
+					}
+					
+					// set one green border to show how is servicing at the moment
+					$('set'+item.getElementsByTagName("currentSet")[0].firstChild.nodeValue+'p'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '10px solid #0f0'; 
+					
+					// 
+					if(item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue > 0) $('set1p'+item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue).style.border = '10px solid #f00';
+					if(item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue > 0) $('set2p'+item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue).style.border = '10px solid #f00';
+					if(item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) $('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.border = '10px solid #f00';
+					
+					//;
+
+				}		
+			}
+		}
+	);
+	
+<?php } ?>
+
+<?php if($_GET['type']=='input') { ?>
+if($('currentCourt').value) {
+	new Ajax.Request("output.php?input=1&court="+$('currentCourt').value,{
+			onSuccess: function(r) {
+				var root = r.responseXML;
+				for(var i = 0; i < root.childNodes.length; i++)
+				{
+					
+					if(root.childNodes[i].nodeType != 1) continue;
+					var item = root.childNodes[i];					
+					
+					$('pl').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p1')[0].firstChild.nodeValue;
+					$('pr').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p2')[0].firstChild.nodeValue;
+														
+//					alert(item.getElementsByTagName('player1')[0].firstChild.nodeValue);				
+					$('inputName1').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
+					$('inputName2').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue; 
+					//= 
+					$('background').innerHTML = "court "+$('currentCourt').value;
+					
+					// set one green border to show how is servicing at the moment
+					$('inputName1').style.border = '0px';
+					$('inputName2').style.border = '0px';
+					$('inputName'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '5px solid #0f0'; 
+					
+				}		
+			}
+		}
+	);
+}
+<?php } ?>	
+
+<?php if($_GET['type']=='control') { ?>
+	new Ajax.Request("monitors.php",{
+			onSuccess: function(r) {
+
+				$('allmonitors').innerHTML = r.responseText;
+				
+			}
+		}
+	);	
+<?php } ?>	
+	
+	
+}, <?php echo $updateInterval; ?>);
+
+
+</script>
+<body>
+<div id='main' style=''>
+<center>
+<?php if($_GET['skipmain']) { ?>
+<a href="?"><input id='mainB' class='button' type="button" value="main menu" style="width: 20%; height: 10%; font-size: 200%"></a>
+<?php } ?>
+
+<?php
+if(!$_GET['type']) {
+?>
+
+
+
+<a href="?type=input"><input class='button' type="button" value="input" style="width: 30%; height: 30%; font-size: 200%"></a>
+<a href="?type=output"><input class='button' type="button" value="output" style="width: 30%; height: 30%; font-size: 200%"></a>
+<a href="?type=control"><input class='button' type="button" value="control" style="width: 30%; height: 30%; font-size: 200%"></a>
+<?php } ?>
+
+<?php
+if($_GET['type']=='input') {
+?>
+<div id="settings" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
+<table style='height: 100%'>
+	
+	<tr>
+		<td class="settingslabel">event:</td><td>
+			<?php $events = scandir('players'); 
+			foreach($events as $event)
+			{
+				if($event == '.' || $event == '..' || strpos($event,'~') != 0) continue;
+				$event = str_replace(".txt","",$event);
+				?>
+				<input type="button" value='<?php echo $event; ?>' name='event' style="width: 3.5em; height: 1.5em; font-size: 200%" onclick="javascript:pushButton(this,false)">
+				<?php	
+			}
+			?>
+		</td><td><img src="img/symbol_check.png" id='eventCheck' style="height:32px; width:32px; display: none"></td>
+	</tr>
+	<tr>
+		<td class="settingslabel">court:</td><td> 
+			<?php
+			for($i=1;$i<$courts+1;$i++)
+			{
+				?>
+				<input type="button" value='<?php echo $i; ?>' name='court' style="width: 3em; height: 1.5em; font-size: 200%" onclick="javascript:pushButton(this,false)">
+				<?php
+			}
+			?>
+		</td><td><img src="img/symbol_check.png" id='courtCheck' style="height:32px; width:32px; display: none"></td>
+	</tr>
+	<tr id='player1' style='display: none'>
+		<td class="settingslabel"></td><td>
+			<select id='selectNation1' name='selectNation1' onchange="pushButton(this,false)"></select>
+			<select id='selectPlayer1' name='selectPlayer1' onchange="pushButton(this,false)"></select>
+		</td><td><img src="img/symbol_check.png" id='playerCheck1' style="height:32px; width:32px; display: none"></td>
+	</tr>	
+	<tr id='player2' style='display: none'>
+		<td class="settingslabel">players:</td><td align="right">
+			<select id='selectPlayer2' name='selectPlayer2' onchange="pushButton(this,false)"></select>
+			<select id='selectNation2' name='selectNation2' onchange="pushButton(this,false)"></select>
+		</td><td><img src="img/symbol_check.png" id='playerCheck2' style="height:32px; width:32px; display: none"></td>
+	</tr>
+	<tr>
+		<td colspan='3' align='center'>
+			<input type="button" name='closeSettings' id='closeSettings' value='close' style="display:none; width: 40%; height: 1.5em; font-size: 200%" onclick="javascript:pushButton(this,false)">
+		</td>
+	</tr>	
+	<tr><td></td><td class="settingslabel" id='settingsinfo'>please select event, court and players</td></tr>	
+</table>
+
+</div>
+<table id='input' style='height: 90%;'>
+	<tr>
+		<td id='pl'>-1</td>
+		<td id="pm" style="">:</td>
+		<td id='pr'>-</td>	
+	</tr>	
+	<tr>
+		<td id="inputName1" style='font-weight: bold'></td>
+		<td>
+<!--			<input class='button' type="button" value="continue this match" id='settingsButton' style=" height: 2em; font-size: 150%"  onclick="javascript:$('settings').show()"> -->	
+			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:$('settings').show()">
+		</td>
+		<td id="inputName2" style='font-weight: bold'></td>
+	</tr>
+	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
+		<td id='kl'>
+			<input class='button' type="button" value="+" name="pointP1" style="width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP1" style="width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">					
+		</td>
+		<td id="km" style="">
+			Set:<br>
+			<input class='button' type="button" value="1" id='inputSet1' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
+			<input class='button' type="button" value="2" id='inputSet2' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
+			<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
+		</td>
+		<td id='kr'>
+			<input class='button' type="button" value="+" name="pointP2" style="width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP2" style="width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+		</td>	
+	</tr>	
+	<tr style="display: none">
+		<td colspan='3' style='color: gray'>
+			Court: <input id='currentCourt' type='text' value='<?php echo $_GET['c']; ?>' style='width: 4%'> - Event: <input id='currentEvent' type='text' value='' style='width: 4%'> - Players: <input id='currentPlayers' type='text' value=''> - Set: <input id='currentSet' type='text' value='' style='width: 4%'> 
+		</td>
+	</tr>
+</table>
+
+
+<?php } ?>
+
+<?php
+if($_GET['type']=='output') {
+?>
+<div id="sponsoren" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
+sponsors
+</div>
+
+<div id="images" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
+photos
+</div>
+
+<div id="misc" style=" position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
+	<table style='height:100%'>
+		<td>
+			<center>
+			<img src='img/astrop_black.png'>
+			<br><br>
+			unconnected monitor
+			</center>
+		</td>
+	</table>
+</div>
+<table summary="" id="output">
+	<tr id="tblNames1">
+		<td colspan="3" id="namePlayer1">&nbsp;</td>	
+	</tr>
+	<tr id="tblScore1">
+		<td class='scoreboard' id='set1p1'>-</td>
+		<td class='scoreboard' id='set2p1'>-</td>
+		<td class='scoreboard' id='set3p1'>-</td>	
+	</tr>
+	<tr id="tblScore2">
+		<td class='scoreboard' id='set1p2'>-</td>
+		<td class='scoreboard' id='set2p2'>-</td>
+		<td class='scoreboard' id='set3p2'>-</td>	
+	</tr>
+	<tr id="tblNames2">
+		<td colspan="3" id="namePlayer2">&nbsp;</td>	
+	</tr>
+</table>
+<?php } ?>
+
+<?php 
+if($_GET['type']=='control')
+{
+?>
+
+	these are the monitors
+	<div id="allmonitors">
+	
+	</div>
+<?php	
+}
+?>
+
+
+</center>
+<div id="background" style='bottom: -10px; right: 10px; color: #333; font-weight: bold; z-index: -1; position: absolute;  font-size: 10em'></div>
+</div>
+</body>
+</html>

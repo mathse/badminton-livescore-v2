@@ -1,0 +1,48 @@
+RUS|RUS Abramov / Grachev
+AUT|AUT Almer/Vattanirappel
+ENG|ENG Aspinall / Towler
+KOR|KOR Bae / Jung
+RUS|RUS Balandin / Yartsev
+FRA|FRA Baumann/Mittelheisser
+GER|GER Beck / Scherpen
+GER|GER Becker / Kamburg
+GER|GER Bittorf / Kroll
+GER|GER Borsutzki / Spengler
+GER|GER B&#246;se / Fitzgerald
+ENG|ENG Briggs / Mccarthy
+GER|GER Byerly / Lamsfu&#223;
+SCO|SCO Campbell/Machugh
+HKG|HKG Chang / Hei Tam
+NOR|NOR Christensen/Hem
+NOR|NOR Christensen/Hagen
+DEN|DEN Colberg / Mikkelsen
+ENG|ENG Coles / Nottingham
+FRA|FRA Corvee / Grosjean
+NED|NED De Vries / Tabeling
+CAN|GER D'souza / Teuber
+GER|GER Ewert / Fink
+GER|GER Felsner/Hagemei.
+SWE|SWE Fernstr&#246;m / Oja&#228;&#228;r
+DEN|DEN Fladberg / Astrup
+GER|GER Flato / F&#246;rtsch
+GER|GER Flemming / Sch&#228;nzler
+WAL|WAL Font / Gwilt
+UKR|UKR Garist / Leonov
+MAS|MAS Goh / Soo
+GER|GER Hafner / Karge
+FIN|FIN Heino / K&#246;ng&#228;s
+MAS|MAS Heng / Yi Teo
+GER|GER Holzer / Schwenger
+GER|GER Huyhsen / Klein
+MAS|MAS Jagdish / Shen Low
+KOR|KOR Jung / Kim
+KOR|KOR Jung / Lee
+FIN|FIN Kaisti / Lehikoinen
+GER|GER Kaminski / K&#246;hler
+KOR|KOR Kim / Park
+GER|GER Lang / Legleitner
+HKG|HKG C. H. Lee / K. L. Ng
+NED|NED Middelburg / Muns
+GER|GER Pistorius / Roth
+GER|GER Rotter / Sch&#228;fer
+MAS|MAS Soong / Kang Tai

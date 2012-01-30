@@ -1,0 +1,88 @@
+RUS Konstantin Abramov
+AUT Matthias Almer
+ENG Philip Aspinall
+RUS Dmitriy Balandin
+FRA Marin Baumann
+GER Raphael Beck
+GER Dominic Becker
+GER Dennis Bittorf
+GER Jan Borsutzki
+GER Daniel B&#246;se
+ENG Peter Briggs
+DEN Morten Br&#248;db&#230;k
+GER Mark Byerly
+HKG Tak Ching Chang
+NOR Magnus Christensen
+FRA Lucas Claerbout
+ENG Christopher Coles
+FRA Lucas Corvee
+NOR Matz Coucheron-Aamot
+NED Vincent De Vries
+DEN Kasper Dinesen
+CAN Andrew D'Souza
+GER Mirco Ewert
+GER Till Felsner
+SWE Christian Fernstr&#246;m
+GER Albert Fink
+GER Ciar&#225;n Fitzgerald
+DEN Rasmus Fladberg
+GER Marc Flato
+GER Patrick Flemming
+WAL Daniel Font
+GER Jonas F&#246;rtsch
+NED Nick Fransman
+UKR Sergiy Garist
+MAS Giap Chin Goh
+RUS Denis Grachev
+ENG Joshua Green
+GER Tobias Hafner
+GER Bj&#246;rn Hagemeister
+NOR Johannes Hagen
+FIN Iikka Heino
+NOR Carl Christian Hem
+GER Jan Huyhsen
+KOR Jae Wook Jung
+KOR Ki Hwa Jung
+KOR Suk Hoon Jung
+KOR Young Joon Jung
+FIN Anton Kaisti
+GER Jens Kamburg
+GER Florian Kaminski
+GER Francis Karge
+KOR Jin Kim
+GER Christopher Klein
+GER Bennet K&#246;hler
+FIN Kalle Koljonen
+FIN Mika K&#246;ng&#228;s
+GER Martin Kroll
+GER Mark Lamsfu&#223;
+GER Peter Lang
+HKG Chun Hei Lee
+KOR Hong Je Lee
+GER Thomas Legleitner
+FIN Kasper Lehikoinen
+UKR Kyrylo Leonov
+ENG Ryan Mccarthy
+NED Jim Middelburg
+DEN Mikkel Mikkelsen
+HKG Ka Long Ng
+GER Johannes Pistorius
+DEN Flemming Quach
+GER Fabian Roth
+GER Nils Rotter
+GER Kai Sch&#228;fer
+GER Lars Sch&#228;nzler
+GER Fabian Scherpen
+MAS Teck Zhi Soo
+MAS Joo Ven Soong
+RUS Aleksandr Sorokin
+CZE Ivo Stoklas
+LUX Maxime Szturma
+MAS An Kang Tai
+HKG Chun Hei Tam
+GER Michael Teuber
+ENG Harley Towler
+WAL Oliver Gwilt
+AUT Vilson Vattanirappel
+SWE Mikael Westerb&#228;ck
+RUS Anatoliy Yartsev
