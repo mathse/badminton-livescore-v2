@@ -40,7 +40,7 @@ foreach($files as $file)
 	}
 	echo '&nbsp;<input class="courtselect" alt="courtselect" type="button" name="'.$file.'" style="" value="x" onclick="javascript:pushButton(this,false)">';	
 	echo '</td><td><input class="courtselect" alt="courtselect" type="button" name="'.$file.'" style=" " value="sponsors" onclick="javascript:pushButton(this,false)">';
-//	echo '</td><td><input class="courtselect" alt="courtselect" type="button" name="'.$file.'" style=" " value="photos" onclick="javascript:pushButton(this,false)">';
+	echo '</td><td><input class="courtselect" alt="courtselect" type="button" name="'.$file.'" style=" " value="reset" onclick="javascript:pushButton(this,false)">';
 	echo "</tr>";
 }
 ?>

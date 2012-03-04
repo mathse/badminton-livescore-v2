@@ -60,13 +60,18 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 	// set red marker
 	for($i=0;$i<9;$i++)
 	{	
-		if($set1p1==(21+$i) && $set1p2<(20+$i)) $winnerSet1 = 1;
-		if($set1p2==(21+$i) && $set1p1<(20+$i)) $winnerSet1 = 2;
+		if($set1p1==($maxpoints+$i) && $set1p2<($maxpoints-1+$i)) $winnerSet1 = 1;
+		if($set1p2==($maxpoints+$i) && $set1p1<($maxpoints-1+$i)) $winnerSet1 = 2;
 	}
 	for($i=0;$i<9;$i++)
 	{	
-		if($set2p1==(21+$i) && $set2p2<(20+$i)) $winnerSet2 = 1;
-		if($set2p2==(21+$i) && $set2p1<(20+$i)) $winnerSet2 = 2;
+		if($set2p1==($maxpoints+$i) && $set2p2<($maxpoints-1+$i)) $winnerSet2 = 1;
+		if($set2p2==($maxpoints+$i) && $set2p1<($maxpoints-1+$i)) $winnerSet2 = 2;
+	}
+	for($i=0;$i<9;$i++)
+	{	
+		if($set3p1==($maxpoints+$i) && $set3p2<($maxpoints-1+$i)) $winnerSet3 = 1;
+		if($set3p2==($maxpoints+$i) && $set3p1<($maxpoints-1+$i)) $winnerSet3 = 2;
 	}
 	if($set1p1==30) $winnerSet1 = 1;	
 	if($set1p2==30) $winnerSet1 = 2;

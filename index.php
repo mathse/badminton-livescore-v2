@@ -32,6 +32,7 @@ include('settings.php');
 var sponsors=0;
 var photos=0;
 var switched=0;
+//var dialogShown=false;
 
 if (navigator.userAgent.match(/Android/i)) {
 	 document.height=530;
@@ -131,12 +132,16 @@ function pushButton(v,disappear)
 	if(v.name=='pointP1')
 	{
 		if($('currentSet').value=='') { $('currentSet').value = 1; $('inputSet1').style.backgroundColor = 'blue'; }
-		new Ajax.Request("setcourt.php?court="+$('currentCourt').value+"&value="+v.value+"&player=1&set="+$('currentSet').value);	
+		new Ajax.Request("setcourt.php?court="+$('currentCourt').value+"&value="+v.value+"&player=1&set="+$('currentSet').value);
 	}
 	if(v.name=='pointP2')
 	{
 		if($('currentSet').value=='') { $('currentSet').value = 1; $('inputSet1').style.backgroundColor = 'blue'; }
 		new Ajax.Request("setcourt.php?court="+$('currentCourt').value+"&value="+v.value+"&player=2&set="+$('currentSet').value);	
+	}
+	if(v.name=='pointP1' || v.name=='pointP2')
+	{
+		
 	}
 	if(v.name=='set')
 	{
@@ -164,6 +169,7 @@ new PeriodicalExecuter(function(pe) {
 				// status 202 show images
 				// 210 show names only
 				// 220 show score only
+				// 500 reload code of a monitor
 				// status '' show misc/error
 				// alert(r.responseText);
 				var status = r.responseText;
@@ -195,7 +201,9 @@ new PeriodicalExecuter(function(pe) {
 
 					}				
 				
-				if(status == '400') { $('sponsoren').hide(); $('misc').show(); $('images').hide(); }				
+				if(status == '400') { $('sponsoren').hide(); $('misc').show(); $('images').hide(); }
+				
+				if(status == '500') { window.location.reload(); }				
 			}
 		}
 	);	
@@ -270,16 +278,32 @@ if($('currentCourt').value) {
 					if(root.childNodes[i].nodeType != 1) continue;
 					var item = root.childNodes[i];					
 					
+					// controls are locked when a match finished - we need to unlock it once both players got 0 points
+					 
+					if($('pl').innerText=='-' && $('pr').innerText=='-')
+					{
+					//	alert(1);
+						$('inputlocked').hide();
+						$('currentSet').value=1;
+						$('inputSet2').style.backgroundColor = '';
+						$('inputSet3').style.backgroundColor = '';
+						$('inputSet1').style.backgroundColor = 'blue';
+					}					
+					
 					if(switched==0)
 					 {
-						$('pl').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p1')[0].firstChild.nodeValue;
-						$('pr').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p2')[0].firstChild.nodeValue;
+					 	if($('currentSet').value=='') { $('currentSet').value=1; }
+					 	//alert(item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue);
+						//$('pl').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p1')[0].firstChild.nodeValue;
+						//$('pr').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p2')[0].firstChild.nodeValue;
+						$('pl').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue;
+						$('pr').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p2')[0].firstChild.nodeValue;
 						$('inputName1').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
 						$('inputName2').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue; 
 
 					 } else {
-						$('pr').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p1')[0].firstChild.nodeValue;
-						$('pl').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p2')[0].firstChild.nodeValue;
+						$('pr').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue;
+						$('pl').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p2')[0].firstChild.nodeValue;
 						$('inputName2').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
 						$('inputName1').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue; 
 
@@ -302,6 +326,62 @@ if($('currentCourt').value) {
 						 
 					 
 					 }
+					 
+					 	
+					 // when a set is over - show a dialog box
+
+					if(item.getElementsByTagName('winnerSet'+$('currentSet').value)[0].firstChild.nodeValue>0 && dialogShown==false) {
+												
+						
+						if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
+						{
+							if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
+							if($('currentSet').value==2) { confirmtext='2nd set finished, switch to next match?'; }
+						} else {
+							if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
+							if($('currentSet').value==2) { confirmtext='2nd set finished, switch to 3rd set?'; }
+							if($('currentSet').value==3) { confirmtext='3rd set finished, switch to next match?'; }
+						}												 
+						if(confirm(confirmtext)) { //yes
+							if($('currentSet').value==3)
+							{
+								$('currentSet').value = 1;
+								$('inputSet1').style.backgroundColor = 'blue';						
+								$('inputSet3').style.backgroundColor = '';
+								dialogShown=true;
+								$('inputlocked').show();
+							}
+
+							if($('currentSet').value==2)
+							{
+								if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
+								{
+									$('currentSet').value = 1;
+									$('inputSet1').style.backgroundColor = 'blue';
+									dialogShown=true;
+									$('inputlocked').show();	
+								} else {
+									$('currentSet').value = 3;
+									$('inputSet3').style.backgroundColor = 'blue';
+									
+								}	
+								$('inputSet2').style.backgroundColor = '';					
+							}
+							
+							if($('currentSet').value==1)
+							{
+								$('currentSet').value = 2;
+								$('inputSet2').style.backgroundColor = 'blue';
+								$('inputSet1').style.backgroundColor = '';
+													
+							}
+							
+						} else {
+							dialogShown = true;
+						}
+					}
+					
+					if(item.getElementsByTagName('winnerSet'+$('currentSet').value)[0].firstChild.nodeValue==0) { dialogShown=false; }
 				}		
 			}
 		}
@@ -346,6 +426,12 @@ if(!$_GET['type']) {
 <?php
 if($_GET['type']=='input') {
 ?>
+<div id="inputlocked" style="opacity: 0.9; display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
+	<table summary=""  width="100%" height="100%">
+		<td width="100%" height="100%" align="center" style='font-size: 2em'>this match is over<br><br><br>match control will soon place a new match on this court</td>
+	</table>
+</div>
+
 <div id="settings" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
 <table style='height: 100%'>
 	
@@ -398,14 +484,14 @@ if($_GET['type']=='input') {
 </div>
 <table id='input' style='height: 90%;'>
 	<tr>
-		<td id='pl'>-1</td>
+		<td id='pl'>-</td>
 		<td id="pm" style="">:</td>
 		<td id='pr'>-</td>	
 	</tr>	
 	<tr>
 		<td id="inputName1" style='font-weight: bold'></td>
 		<td>
-			<input class='button' type="button" value="switch" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true)"><br>
+			<input class='button' type="button" value="switch" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true)"><br>to switch players<br>
 			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:$('settings').show()">
 		</td>
 		<td id="inputName2" style='font-weight: bold'></td>
@@ -459,6 +545,8 @@ if($_GET['type']=='output') {
 	</ul>
 </div>
 
+
+
 <div id="images" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
 photos
 </div>
@@ -469,7 +557,8 @@ photos
 			<center>
 			<img src='img/astrop_black.png'>
 			<br><br>
-			unconnected monitor<br><br><?php echo $_SERVER['REMOTE_ADDR']; ?>
+			unconnected monitor<br><br>
+			<span style="font-size: 10em; position: absolute; right: 10px; bottom: 10px; opacity:0.2"><?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $ips[3]; ?></span>
 			</center>
 		</td>
 	</table>
