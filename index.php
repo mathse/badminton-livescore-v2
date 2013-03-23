@@ -1,7 +1,15 @@
 <html>
 <style type="text/css">
 <!--
-* { <?php if($_GET['type']=='output') { echo"cursor: none;"; } ?> color: white; scrolling: no; font-family: Arial; }
+* { 
+<?php 
+if($_GET['type']=='output' && !$_GET['style']) { 
+	echo "cursor: none; font-size: 112%;";  
+} 
+if($_GET['type']=='output' && $_GET['style']==2) { 
+	echo "cursor: none; font-size: 108%;";  
+}	
+?> color: white; scrolling: no; font-family: Arial; }
 body { background: black; text-align: center; padding: 0; margin: 0; overflow:hidden; }
 a { text-decoration: none }
 input, select { font-size: 1em;  background: black; border: 5px solid white; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;}
@@ -175,7 +183,17 @@ new PeriodicalExecuter(function(pe) {
 				var status = r.responseText;
 				if(status == '200') { 
 					$('sponsoren').hide(); $('misc').hide(); $('images').hide(); 
-					$('tblScore1').show(); $('tblScore2').show(); $('tblNames1').show(); $('tblNames2').show();
+					if(serv==0) {
+						$('tblScore1').hide();
+						$('tblScore2').hide();
+					} else {
+						$('tblScore1').show();
+						$('tblScore2').show();	
+					}
+					
+//					$('tblNames1').show(); $('tblNames2').show();
+					$('tblNames1').show(); 
+					$('tblNames2').show();
 					photos=0;
 				}
 				if(status == '201') { $('sponsoren').show(); $('misc').hide(); $('images').hide(); }
@@ -217,7 +235,17 @@ new PeriodicalExecuter(function(pe) {
 				{
 					if(root.childNodes[i].nodeType != 1) continue;
 					var item = root.childNodes[i];
-					 
+					serv = 0;
+					try
+					  {
+					  serv = item.getElementsByTagName("service")[0].firstChild.nodeValue;
+					  }
+					catch(err)
+					  {
+					  //Handle errors here
+					  }
+					
+					
 					 if(item.getElementsByTagName("flag1")[0].firstChild.nodeValue!='AAA')
 					 {
 					 $('namePlayer1').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag1")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player1")[0].firstChild.nodeValue;
@@ -249,6 +277,7 @@ new PeriodicalExecuter(function(pe) {
 						}
 						
 					}
+
 					
 					// set one green border to show how is servicing at the moment
 					$('set'+item.getElementsByTagName("currentSet")[0].firstChild.nodeValue+'p'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '10px solid #0f0'; 
@@ -258,7 +287,8 @@ new PeriodicalExecuter(function(pe) {
 					if(item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue > 0) $('set2p'+item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue).style.border = '10px solid #f00';
 					if(item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) $('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.border = '10px solid #f00';
 					
-					//;
+					//
+					
 
 				}		
 			}
@@ -289,7 +319,15 @@ if($('currentCourt').value) {
 						$('inputSet3').style.backgroundColor = '';
 						$('inputSet1').style.backgroundColor = 'blue';
 					}					
-					
+					if($('pl').innerHTML=='-' && $('pr').innerHTML=='-')
+					{
+					//	alert(1);
+						$('inputlocked').hide();
+						$('currentSet').value=1;
+						$('inputSet2').style.backgroundColor = '';
+						$('inputSet3').style.backgroundColor = '';
+						$('inputSet1').style.backgroundColor = 'blue';
+					}		
 					if(switched==0)
 					 {
 					 	if($('currentSet').value=='') { $('currentSet').value=1; }
@@ -425,10 +463,15 @@ if(!$_GET['type']) {
 
 <?php
 if($_GET['type']=='input') {
+if(!$_GET['c'])
+{
+	echo '<input type="button" onclick="window.location.reload();" style="width:90%; height: 10%; font-size: 5em" value="Reload for K&ouml;ster">';	
+}
 ?>
+
 <div id="inputlocked" style="opacity: 0.9; display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
 	<table summary=""  width="100%" height="100%">
-		<td width="100%" height="100%" align="center" style='font-size: 2em'>this match is over<br><br><br>match control will soon place a new match on this court</td>
+		<td width="100%" height="100%" align="center" style='font-size: 2em'>this match is finished<br><br><br>match control will soon place a new match on this court</td>
 	</table>
 </div>
 
@@ -498,8 +541,8 @@ if($_GET['type']=='input') {
 	</tr>
 	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
 		<td id='kl'>
-			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 40%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 40%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
 			<input class='button' type="button" value="+" name="pointP2" id="pb3" style="display: none; width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
 			<input class='button' type="button" value="-" name="pointP2" id="pb4" style="display: none; width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
 		</td>
@@ -510,8 +553,8 @@ if($_GET['type']=='input') {
 			<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
 		</td>
 		<td id='kr'>
-			<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 40%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 40%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
 			<input class='button' type="button" value="+" name="pointP1" id="pb7" style="display: none; width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
 			<input class='button' type="button" value="-" name="pointP1" id="pb8" style="display: none; width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
 
@@ -532,14 +575,19 @@ if($_GET['type']=='output') {
 ?>
 <div id="sponsoren" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
 	<script type="text/javascript" src="js/crossfade.js"></script>
-	<ul id="gallery" style='list-style-type:none; margin: auto;'>
+	<ul id="gallery" style='list-style-type:none; margin: 300px auto;'>
 	<?php 
 	$fotos = scandir('img/sponsors/');
 	
 	foreach($fotos as $foto)
 	{
 		if(substr($foto,0,1) == '.' || $foto == '..' ) continue;
-		?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>'></li><?php
+		?><li style='align: center;'><img src='img/spacer.gif' style="width:1300px"></li><?php
+		if($_GET['style']==2) {
+			?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:1300px"></li><?php
+		} else {
+			?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:1800px"></li><?php	
+		}
 	}		
 	?>
 	</ul>

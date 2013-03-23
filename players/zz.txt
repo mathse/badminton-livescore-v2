@@ -1,6 +1,6 @@
 AAA welcome to the
 AAA main event
-AAA Wilson German Junior '11
+AAA Wilson German Junior '13
 AAA insert coin
 AAA to continue ...
 GER Zimmermann/Decker
@@ -30,3 +30,7 @@ AAA -lt-div style='position: absolute; top: 40px; font-size: 1.4em '-gt- SG EBT 
 AAA  -lt-br-gt-  -lt-div style='position: absolute; left:35%; bottom: 45%; font-size: 3em'-gt- 3:0 -lt-/div-gt-
 AAA Willkommen zu den -lt-br-gt--lt-br-gt--lt-br-gt- Deutschen U15 / U19
 AAA Mannschaftsmeister- -lt-br-gt--lt-br-gt--lt-br-gt- schaften 2011
+AAA hey M&#228;dels
+AAA alles schick?s
+AAA Semi-Final
+AAA Final

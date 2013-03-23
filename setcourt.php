@@ -98,7 +98,7 @@ if($_GET['player'])
 	$player2 = str_replace(' ','%20',substr(trim($plist[trim($parts_player2[1])]),$seperator+1));
 	
 	$s = $player1.";".$player2.";".trim($court[2]).";".trim($court[3]).";".trim($court[4]).";".trim($court[5]).";".trim($court[6]).";".trim($court[7]).";".$service.";";
-	$c = @file_get_contents("http://badminton-livescore.de/set.php?c=".$_GET['court']."&s=".$s);
+//	$c = @file_get_contents("http://badminton-livescore.de/set.php?c=".$_GET['court']."&s=".$s);
 	fclose($fd);
 }
 

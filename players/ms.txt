@@ -1,7 +1,105 @@
-DEN Kenneth Jonassen
-FIN Eetu Heino
-GER Kai Waldenberger
-GER Christian B&#246;hmer
-MAS Wong Choong Hann
-GER Marc Zwiebler
-GER Daniel Benz
+ENG Darren Adamson
+ENG Farid Akroum
+AUT Matthias Almer
+INA Julian Arbitama
+ENG Ollie Baczala
+SVK David Balucha
+POL Milosz Bochat
+THA Takdanai Boonrawd
+RUS Kirill Boyarskyi
+BEL Sam Van Den Broeck
+SWE Felix Burestedt
+FRA Pierrick Cajot
+NED Mark Caljouw
+POR Bruno Carvalho
+THA Kittiphon Chairojkanjana
+HKG Tak Ching Chang
+MAS June Wei Cheam
+KOR Sol Kyu Choi
+GER Matthias Deininger
+GER Fabian Demtr&#246;der
+FRA Jocelyn Deschamp
+RUS Andrey Dolotov
+DEN Joshua Eipe
+MEX Luis Ram&#243;n Garrido Esquivel
+DEN Rasmus Grill Gemke
+GER Hannes Gerberich
+GER Noah Gnalian
+AUT Wolfgang Gnedt
+LTU Michailas Golubevas
+FIN Ilkka Heino
+GER Samuel Hsiao
+CZE Jaromir Janacek
+EST Mikk J&#228;rveoja
+KOR Hyuk Jin Jeon
+NED Ruben Jille
+THA Thanadol Jumpanoi
+GER Florian Kaminski
+SUI Michael K&#228;ser
+KOR Ki Hoon Kim
+GER Bennet K&#246;hler
+FIN Kalle Koljonen
+FIN Joonas Korhonen
+GER Sandro Kulla
+EST Mihkel Laanes
+GER Mark Lamsfu&#223;
+BEL Stijn De Langhe
+HKG Cheuk Yiu Lee
+SWE Douglas Lidman
+MAS Chi Wing Lim
+LTU Tautvydas Liorancas
+FRA Antoine Lodiot
+PHI Joseph Lopez Ii
+CZE Adam Mendrek
+EST Sander Merits
+GER Daniel M&#252;ller
+DEN Mathias Mundbjerg
+HKG Ka Long Ng
+DEN Rasmus Grill Noes
+KOR Kyung Hoon Park
+ENG Sam Parsons
+GER David Peng
+GER Jonathan Persson
+GER Johannes Pistorius
+GER Sven Prey
+BEL Marijn Put
+EST Sten R&#228;&#228;bis
+INA Yohanes Tvy Rambitan
+LTU Ignas Reznikas
+GER Fabian Roth
+GER Lukas Rupp
+MAS Adam Hilmi Ruslan
+GER Lars Sch&#228;nzler
+GER Dominic Scherpen
+GER Marvin Seidel
+GER Daniel Seifert
+AUT Leon Seiwald
+KOR Seung Jae Seo
+AUT Andrej Serov
+LTU Renaldas Sileris
+MAS Teck Zhi Soo
+MAS Joo Ven Soong
+DEN Mads S&#248;rensen
+BEL Flor Spanhove
+LTU Laurynas Sparnauskis
+CRO Filip Spoljarec
+POL Dominik Stebnicki
+AUT Dominik Stipsits
+CZE Matej Svab
+CZE Michal Svetnicka
+POL Mateusz Swierczynski
+AUT Chrsitoph Syrch
+HKG Chun Man Tang
+NED Justin Teeuwen
+THA Sitthikom Thammasin
+THA Pannawit Thongnuam
+NED Alex Vlaar
+NED Vincent De Vries
+GER Stefan Waffler
+ENG Rhys Walker
+GER Simon Wang
+GER Max Wei&#223;kirchen
+GER Martin Winter
+ENG Tom Wolfenden
+GER Kim Zeber
+CRO Ivan Tucakovic
