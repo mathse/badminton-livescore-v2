@@ -1,41 +1,22 @@
-SWE|SWE Julia Ahlstrand &amp; Matilda Nygren-strandberg
-LTU|LTU Rebeka Alekseviciute &amp; Gabija Narvilaite
-FRA|FRA Marie Batomene &amp; Stacey Guerin
-GER|CZE Meike Behrens &amp; Ivana Zychova
-SUI|AUT Delia Biedermann &amp; Nathalie Ziesig
-THA|THA Puttita Suparjirakul &amp; Ruethaichanok Laisuan
-GER|GER Viviane Charoloy &amp; Anna Dollak
-NED|NED Alida Chen &amp; Cheryl Seinen
-HKG|HKG Ying Mei Cheung &amp; Sin Ying Yuen
-MAS|MAS Joyce Wai Choong &amp; Cheng Wen Yap
-GER|GER Nadine Cordes &amp; Luise Heim
-BEL|BEL Marie Demy &amp; Stephanie Van Wel
-RUS|RUS Viktoria Dergunova &amp; Evgeniya Kosetskaya
-GER|GER Anika D&#246;rr &amp; Franziska Volkmann
-GER|GER Linda Efler &amp; Ramona Hacks
-KOR|KOR Yeon Woo Eo &amp; Ji Young Kang
-AUT|AUT Jenny Ertl &amp; Janine Lais
-GER|GER Brenda Fernardin &amp; Yvonne Li
-DEN|DEN Julie Finne-ipsen &amp; Rikke S&#248;by Hansen
-LTU|LTU Vytaute Fomkinaite &amp; Ugne Grauzinyte
-NED|NED Myke Halkema &amp; Manon Sibbald
-KOR|KOR Ga Hee Han &amp; Hye Rin Kim
-MAS|MAS Yen Mei Ho &amp; Kisona S
-GER|GER Annika Horbach &amp; Theresa Wurm
-POL|POL Karolina Janowska &amp; Magdalena Witek
-GER|GER Eva Janssens &amp; Julia Kunkel
-ENG|GER Emily Jeffs &amp; Brid Stepper
-GER|BUL Anna Jungmann &amp; Maria Mitsova
-GER|GER Jennifer Karnott &amp; Lara K&#228;pplein
-KOR|KOR Na Young Kim &amp; Young Seo Ryu
-EST|EST Kristin Kuuba &amp; Helina R&#252;&#252;tel
-CZE|CZE Magdalena Lajdova &amp; Denisa Sikalova
-BEL|BEL Ine Lanckriet &amp; Flore Vandenhoucke
-FIN|FIN Mathilda Lindholm &amp; Jenny Nystrom
-EST|EST Kati Kreet Marran &amp; Sale Liis Teesalu
-ENG|ENG Jennifer Moore &amp; Viki Williams
-RUS|RUS Olga Morozova &amp; Natalia Rogova
-DEN|DEN Isabella Nielsen &amp; Maiken Fruergaard S&#248;rensen
-THA|THA Natcha Saengchote &amp; Sarita Suwanakijboriharn
-BUL|BUL Gabriela &amp; Stefani Stoeva
-CRO|CRO Katarina Galenic / Lucija Vlah
+GER|GER Anika Doerr / Lara Kaepplein 
+GER|GER Lisa Behme / Ulrike Siemer 
+GER|GER Fabienne Koehler / Laura Wich 
+GER|GER Patricia Kuhlmann / Keike Schroeder 
+GER|GER Jennifer Bloebaum / Nicole Nonn 
+GER|GER Julia Bantin / Yvonne Li 
+GER|GER Theresa Isenberg / Lena Schnepper 
+GER|GER Lena Bonnie / Lara-Carina Buchelt 
+GER|GER Annika Oliwa / Natalie Paul 
+GER|GER Laura Kaiser / Luana Marino 
+GER|GER Annika Horbach / Janice Kaulitzky 
+GER|GER Anna Dollak / Theresa Wurm 
+GER|GER Kathleen Ebersbach / Tanja Paulsen 
+GER|GER Nadine Cordes / Lisa Woidich 
+GER|GER Melanie Hellhorst / Marie Schweitzer 
+GER|GER Nathalie Burger / Viviane Charoloy 
+GER|GER Lea-Lyn Stremlau / Selina Weinzettel 
+GER|GER Corinne Beutler / Laura Gredner 
+GER|GER Vanessa Poyatos / Franziska Willenbacher 
+GER|GER Anja Buchert / Julia Boemelburg 
+GER|GER Katarina Schmidt / Lisa Seliger 
+GER|GER Barbara Bellenberg / Christina Kunzmann 

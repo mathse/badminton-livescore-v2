@@ -1,52 +1,29 @@
-ENG|ENG Darren Adamson &amp; Ollie Baczala
-ENP|ENP Farid Akroum &amp; Bruno Carvalho
-DEN|DEN Kasper Antonsen &amp; Oliver Babic
-INA|INA Julian Arbitama &amp; Yohanes Tvy Rambitan
-POL|POL Milosz Bochat &amp; Mateusz Swierczynski
-RUS|RUS Kirill Boyarskyi &amp; Andrey Dolotov
-BEL|BEL Sam Van Den Broeck &amp; Nick Marcoen
-SWE|SWE Felix Burestedt &amp; Jonathan Marcus Forsberg
-GER|GER Mark Byerly &amp; Mark Lamsfu&#223;
-NED|NED Mark Caljouw &amp; Justin Teeuwen
-DEN|DEN Mads Soeremsen &amp; Mikkel Trussel Mortensen
-THA|THA Kittiphon Chairojkanjana &amp; Sutichon Polgul
-HKG|HKG Tak Ching Chang &amp; Cheuk Yiu Lee
-MAS|MAS June Wei Cheam &amp; Chi Wing Lim
-KOR|KOR Sol Kyu Choi &amp; Se Woong Park
-DEN|DEN Mathias Christiansen &amp; David Daugaard
-MAS|MAS Khek Wie Chua &amp; Mun Choon Woon
-FRA|FRA Jordan Corvee &amp; Bastian Kersaudy
-POL|POL Maciej Dabrowski &amp; Dominik Stebnicki
-GER|AUT Matthias Deininger &amp; Andrej Serov
-GER|GER Fabian Demtr&#246;der &amp; Sandro Kulla
-MAS|MAS Darren Isaac Devadass &amp; Yew Sin Ong
-GER|GER Bjarne Geiss &amp; Daniel Seifert
-GER|GER Hannes Gerberich &amp; Lukas Rupp
-GER|GER Noah Gnalian &amp; Stefan Waffler
-AUT|AUT Wolfgang Gnedt &amp; Leon Seiwald
-CZE|CZE Jaromir Janacek &amp; Matej Svab
-KOR|KOR Hyuk Jin Jeon &amp; Seung Jae Seo
-NED|NED Ruben Jille &amp; Alex Vlaar
-THA|THA Thanadol Jumpanoi &amp; Natpapon Kitphaibool
-GER|GER Florian Kaminski &amp; Bennet K&#246;hler
-RUS|RUS Rodion Kargaev &amp; Alexandr Zinchenko
-THA|THA Kittinupong Kedren &amp; Dechapol Puavaranukroh
-KOR|KOR Ki Hoon Kim &amp; Kyung Hoon Park
-BEL|BEL Stijn De Langhe &amp; Flor Spanhove
-LTU|LTU Tautvydas Liorancas &amp; Ignas Reznikas
-FRA|FRA Antoine Lodiot &amp; Julien Maio
-CZE|CZE Adam Mendrek &amp; Michal Svetnicka
-EST|EST Sander Merits &amp; Sten R&#228;&#228;bis
-GER|GER Daniel M&#252;ller &amp; Jonathan Persson
-NED|NED Russell Muns &amp; Vincent De Vries
-ENG|ENG Sam Parsons &amp; Rhys Walker
-GER|GER David Peng &amp; Lars Sch&#228;nzler
-GER|GER Johannes Pistorius &amp; Marvin Seidel
-GER|GER Sven Prey &amp; Martin Winter
-GER|GER Dominic Scherpen &amp; Max Wei&#223;kirchen
-LTU|LTU Renaldas Sileris &amp; Laurynas Sparnauskis
-MAS|MAS Teck Zhi Soo &amp; Joo Ven Soong
-AUT|AUT Dominik Stipsits &amp; Chrsitoph Syrch
-GER|GER Simon Wang &amp; Kim Zeber
-CZE|CZE Michailas Golubevas / Matej Svab
-CRO|CRO Filip Spoljarec / Ivan Tucakobvic
+GER|GER Peter Lang / Thomas Legleitner
+GER|GER Patrick Roth / Sebastian Roth
+GER|GER Julien Gupta / Niclas Lohau
+GER|GER Alexander Mernke / Jonathan Persson 
+GER|GER Matthias Deininger / Andreas Schneider 
+GER|GER Nico Coldewe / Marc Flato 
+GER|GER Florian Knuppertz / Timon Ufermann 
+GER|GER Christian Bald / Fabian Stoppel 
+GER|GER Marco Hamann / Niklas Koenig 
+GER|GER Andreas Pistorius / Fabian Specht 
+GER|GER Tobias Guettinger / Michael Teuber 
+GER|GER Jens Kamburg / Nils Rotter 
+GER|GER Robin Fiedler / Ciaran Fitzgerald 
+GER|GER Patrick Beier / Marco Weese 
+GER|GER Sebastian Haardt / Malte Laibacher 
+GER|GER Mirko Ewert / Yannik Joop 
+GER|GER Till Felsner / Christopher Klein 
+GER|GER Tim Porps / Rene Rother 
+GER|GER Florian Kaminski / Bennet Koehler 
+GER|GER Johannes Pistorius / Florian Waffler 
+GER|GER Andreas Geisenhofer / Christoph Mangstl 
+GER|GER Jan Borsutzki / Rasmus Zander 
+GER|GER Matthias Fix / Mirko Parschau 
+GER|GER Jens Lamsfuss / Thilo Mund 
+GER|GER Jan Huyhsen / Julian Reuther 
+GER|GER Joschka Braun / Tim Lehbrink
+GER|GER Richard Domke / Bjoern Hagemeister
+GER|GER Fabian Demtroeder / Alexander Mernke
+GER|GER Jens Kamburg / Marco Weese

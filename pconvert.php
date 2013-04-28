@@ -1,5 +1,5 @@
 <?php
-$tID = '8F5B349C-B2D1-4AEB-A1B5-21389BF6D327';
+$tID = 'BBC3BEE9-82F0-4928-8396-6A3EC19E7684';
 
 $types = array("ms", "ws", "md", "wd", "xd");
 
@@ -7,6 +7,7 @@ foreach($types as $key => $type) {
 	$buffer = null;
 	echo "... importing ".$type."<br>";
 	$file = file_get_contents('http://www.tournamentsoftware.com/sport/event.aspx?id='.$tID.'&event='.($key+1));
+	echo $file;
 	if($key>1) {
 		$x = explode("<td>Player</td><td>Partner</td><td>Seed</td>",$file); //for mix and doubles
 		$regex = "/\[(\w+)\] ([\'\w,&#;\- ]+), ([\'\w,&#;\- ]+)\[(\w+)\] ([\'\w,&#;\- ]+), ([\'a-zA-Z0-9,&#;\- ]+[a-z])([0-9\/]*)/";

@@ -1,70 +1,30 @@
-ENG|ENG Darren Adamson &amp; Emily Jeffs
-DEN|DEN Kasper Antonsen &amp; Julie Finne-ipsen
-ENG|ENG Ollie Baczala &amp; Viki Williams
-SVK|SVK David Balucha &amp; Martina Repiska
-POL|POL Milosz Bochat &amp; Magdalena Witek
-THA|THA Takdanai Boonrawd &amp; Natcha Saengchote
-GER|GER Mark Byerly &amp; Linda Efler
-KOR|KOR Sol Kyu Choi &amp; Hye Rin Kim
-DEN|DEN Mathias Christiansen &amp; Rikke S&#248;by Hansen
-MAS|MAS K. Wie Chua &amp; C. Wen Yap
-FRA|FRA J. Corvee &amp; M. Batomene
-POL|POL Maciej Dabrowski &amp; Karolina Janowska
-DEN|DEN David Daugaard &amp; Isabella Nielsen
-GER|GER Matthias Deininger &amp; Viviane Charoloy
-GER|GER Fabian Demtr&#246;der &amp; Anna Dollak
-FRA|FRA Jocelyn Deschamp &amp; Stacey Guerin
-MAS|MAS Darren Isaac Devadass &amp; Joyce Wai Choong
-SWE|SWE J. Forsberg &amp; J. Ahlstrand
-GER|GER Bjarne Geiss &amp; Yvonne Li
-GER|GER Hannes Gerberich &amp; Brid Stepper
-LTU|LTU Michailas Golubevas &amp; Vytaute Fomkinaite
-FIN|FIN Ilkka Heino &amp; Mathilda Lindholm
-CZE|CZE Jaromir Janacek &amp; Denisa Sikalova
-EST|EST Mikk J&#228;rveoja &amp; Helina R&#252;&#252;tel
-KOR|KOR Hyuk Jin Jeon &amp; Na Young Kim
-NED|NED Ruben Jille &amp; Alida Chen
-THA|THA J. Thanadol &amp; L. Ruethaichanok
-RUS|RUS Rodion Kargaev &amp; Viktoria Dergunova
-SUI|SUI Michael K&#228;ser &amp; Delia Biedermann
-FRA|FRA Bastian Kersaudy &amp; Anne Tran
-KOR|KOR Ki Hoon Kim &amp; Ga Hee Han
-GER|GER Bennet K&#246;hler &amp; Brenda Fernardin
-FIN|FIN Joonas Korhonen &amp; Jenny Nystrom
-EST|EST Mihkel Laanes &amp; Kristin Kuuba
-GER|GER Mark Lamsfu&#223; &amp; Franziska Volkmann
-SWE|SWE Douglas Lidman &amp; Lovisa Johansson
-LTU|LTU Tautvydas Liorancas &amp; Rebeka Alekseviciute
-BEL|BEL Nick Marcoen &amp; Stephanie Van Wel
-EST|EST Sander Merits &amp; Sale Liis Teesalu
-GER|GER Daniel M&#252;ller &amp; Theresa Wurm
-NED|NED Russell Muns &amp; Cheryl Seinen
-HKG|HKG Ka Long Ng &amp; Sin Ying Yuen
-MAS|MAS Yew Sin Ong &amp; Kisona S
-KOR|KOR Kyung Hoon Park &amp; Yeon Woo Eo
-KOR|KOR Se Woong Park &amp; Ji Young Kang
-GER|GER Jonathan Persson &amp; Nadine Cordes
-GER|GER Johannes Pistorius &amp; Ramona Hacks
-THA|THA Sutichon Polgul &amp; Sureeporn Chaithongwongwatana
-THA|THA Dechapol Puavaranukroh &amp; Puttita Supajirakul
-INA|INA Yohanes Tvy Rambitan &amp; Leoninal Josphine
-LTU|LTU Ignas Reznikas &amp; Gabija Narvilaite
-GER|GER Fabian Roth &amp; Jennifer Karnott
-GER|GER Dominic Scherpen &amp; Annika Horbach
-GER|GER Marvin Seidel &amp; Lara K&#228;pplein
-AUT|AUT Leon Seiwald &amp; Jenny Ertl
-KOR|KOR Seung Jae Seo &amp; Young Seo Ryu
-CRO|CRO Filip Spoljarec &amp; Lucija Vlah
-AUT|AUT Dominik Stipsits &amp; Nathalie Ziesig
-CZE|CZE Matej Svab &amp; Ivana Zychova
-CZE|CZE M.Svetnicka / D.Sikalova
-AUT|AUT Chrsitoph Syrch &amp; Janine Lais
-NED|NED M. Caljouw &amp; M. Halkema
-HKG|HKG Chun Man Tang &amp; Wing Yung Ng
-GER|GER Noah Gnalian &amp; Julia Kunkel
-GER|GER Simon Wang &amp; Luise Heim
-GER|GER Max Wei&#223;kirchen &amp; Eva Janssens
-GER|GER Martin Winter &amp; Laura Kaiser
-ENG|ENG Tom Wolfenden &amp; Jennifer Moore
-MAS|MAS Mun Choon Woon &amp; Yen Mei Ho
-RUS|RUS Alexandr Zinchenko &amp; Olga Morozova
+GER|GER Fabian Stoppel / Fabienne Koehler 
+GER|GER Jan Borsutzki / Anja Buchert 
+GER|GER Fabian Demtroeder / Theresa Isenberg 
+GER|GER Matthias Deininger / Viviane Charoloy 
+GER|GER Martin Kroll / Anna Joerg 
+GER|GER Sebastian Roth / Franziska Willenbacher 
+GER|GER Thomas Legleitner / Lara Kaepplein 
+GER|GER Marc Flato / Yvonne Li 
+GER|GER Simon Weigel / Pinar Keskin 
+GER|GER Florian Waffler / Annika Oliwa 
+GER|GER Julien Gupta / Lena Bonnie 
+GER|GER Yannik Joop / Lisa Behme 
+GER|GER Andreas Schneider / Nathalie Burger 
+GER|GER Jonathan Persson / Nadine Cordes 
+GER|GER Moritz Predel / Katarina Schmidt 
+GER|GER Peter Lang / Christina Kunzmann 
+GER|GER Jens Lamsfuss / Annika Horbach 
+GER|GER Michael Teuber / Barbara Bellenberg 
+GER|GER Rasmus Zander / Tanja Paulsen 
+GER|GER Johannes Pistorius / Theresa Wurm 
+GER|GER Jens Kamburg / Anna Dollak 
+GER|GER Florian Knuppertz / Janice Kaulitzky 
+GER|GER Tobias Guettinger / Natalie Paul 
+GER|GER Alexander Mernke / Kathleen Ebersbach 
+GER|GER Niclas Lohau / Lara-Carina Buchelt 
+GER|GER Patrick Roth / Laura Kaiser 
+GER|GER Till Felsner / Vanessa Poyatos 
+GER|GER Timon Uferermann / Melanie Hellhorst
+GER|GER Julian Reuther / Luana Marino
+GER|GER Niklas König / Nadine Cordes

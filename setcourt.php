@@ -61,6 +61,7 @@ if($_GET['newgame'])
 	fputs($fd, $_GET['p1']."\n".$_GET['p2']."\n0\n0\n0\n0\n0\n0\n");
 	fclose($fd);
 }
+
 if($_GET['player'])
 {
 	$court = file('sessions/courts/'.$_GET['court']);
@@ -100,6 +101,14 @@ if($_GET['player'])
 	$s = $player1.";".$player2.";".trim($court[2]).";".trim($court[3]).";".trim($court[4]).";".trim($court[5]).";".trim($court[6]).";".trim($court[7]).";".$service.";";
 //	$c = @file_get_contents("http://badminton-livescore.de/set.php?c=".$_GET['court']."&s=".$s);
 	fclose($fd);
+	
+#	if($_GET['court']==6){
+	 $fd_matchcard=fopen('sessions/matchcards/'.date("Y-m-d",time())."-".str_replace("/","_",$parts_player1[0].'-court'.$_GET['court'].'-'.$player1.'-'.$player2).'.txt','a+');
+	 fputs($fd_matchcard,time().";".$_GET['player'].";".urlencode($_GET['value'])."\n");
+	 fclose($fd_matchcard);
+# }
 }
+
+
 
 ?>

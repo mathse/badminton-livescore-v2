@@ -471,7 +471,7 @@ if(!$_GET['c'])
 
 <div id="inputlocked" style="opacity: 0.9; display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
 	<table summary=""  width="100%" height="100%">
-		<td width="100%" height="100%" align="center" style='font-size: 2em'>this match is finished<br><br><br>match control will soon place a new match on this court</td>
+		<td width="100%" height="100%" align="center" style='font-size: 2em'>this match is finished<br><br><br>match control will place a new match on this court soon</td>
 	</table>
 </div>
 
@@ -541,10 +541,10 @@ if(!$_GET['c'])
 	</tr>
 	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
 		<td id='kl'>
-			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 40%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 40%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="+" name="pointP2" id="pb3" style="display: none; width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP2" id="pb4" style="display: none; width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP2" id="pb3" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP2" id="pb4" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
 		</td>
 		<td id="km" style="">
 			Set:<br>
@@ -553,10 +553,10 @@ if(!$_GET['c'])
 			<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
 		</td>
 		<td id='kr'>
-			<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 40%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 40%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="+" name="pointP1" id="pb7" style="display: none; width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP1" id="pb8" style="display: none; width: 40%; height: 2em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP1" id="pb8" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP1" id="pb7" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
 
 		</td>	
 	</tr>	

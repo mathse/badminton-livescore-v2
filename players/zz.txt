@@ -1,8 +1,8 @@
 AAA welcome to the
 AAA main event
 AAA Wilson German Junior '13
-AAA insert coin
-AAA to continue ...
+AAA -lt-img src='img/retro_mushroom_super_3.png' -gt- -lt-br-gt--lt-br-gt- insert coin
+AAA to continue ...-lt-br-gt--lt-br-gt-  -lt-img src='img/retro_coin.png' -gt-
 GER Zimmermann/Decker
 GER Herzberg / Kuzuarow
 AAA Siegerehrung
@@ -16,6 +16,9 @@ AAA 8.-11. M&#228;rz 2012
 AAA SG EBT Berlin
 AAA TV Refrath
 AAA Hannover 96 
+AAA spiel
+AAA folgt
+AAA Union
 AAA Champions League? -lt-br style='margin-bottom: 20px'-gt- muss das sein!!
 AAA -lt-div style='font-size: 0.9em'-gt- -lt-div style='text-align: left; float:left'-gt- 1. Abbach -lt-br style='margin-bottom: 20px'-gt- 2. Neum&#252;nster -lt-br style='margin-bottom: 20px'-gt- 3. Beuel -lt-br style='margin-bottom: 20px'-gt- 4. H&#246;velhof -lt-/div-gt- -lt-div style='text-align: right'-gt-  -lt-br style='margin-bottom: 20px'-gt-  -lt-/div-gt- -lt-/div-gt- 
 AAA -lt-div style='font-size: 0.9em'-gt- -lt-div style='text-align: left; float:left'-gt- 1. Dortelweil -lt-br style='margin-bottom: 20px'-gt- 2. Refrath -lt-br style='margin-bottom: 20px'-gt- 3. Hohenlimburg -lt-br style='margin-bottom: 20px'-gt- 4. Fischbach -lt-/div-gt- -lt-div style='text-align: right'-gt-  -lt-br style='margin-bottom: 20px'-gt-  -lt-/div-gt- -lt-/div-gt-
@@ -33,4 +36,4 @@ AAA Mannschaftsmeister- -lt-br-gt--lt-br-gt--lt-br-gt- schaften 2011
 AAA hey M&#228;dels
 AAA alles schick?s
 AAA Semi-Final
-AAA Final
+AAA Finale
