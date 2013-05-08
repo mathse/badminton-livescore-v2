@@ -43,9 +43,10 @@ var switched=0;
 //var dialogShown=false;
 
 if (navigator.userAgent.match(/Android/i)) {
-	 document.height=530;
+	 document.height=630;
     window.scrollTo(0,1);
   }
+
 
 function pushButton(v,disappear)
 {
@@ -149,7 +150,15 @@ function pushButton(v,disappear)
 	}
 	if(v.name=='pointP1' || v.name=='pointP2')
 	{
-		
+		a = (eval($('pl').innerText+v.value+"1"));
+		b = (eval($('pr').innerText+v.value+"1"));
+		if(switched==0) {
+			if(v.name=='pointP1') {	$('pl').innerText = a; }
+			if(v.name=='pointP2') {	$('pr').innerText = b; }
+		} else {
+			if(v.name=='pointP2') {	$('pl').innerText = a; }
+			if(v.name=='pointP1') {	$('pr').innerText = b; }
+		}
 	}
 	if(v.name=='set')
 	{
@@ -459,6 +468,12 @@ if(!$_GET['type']) {
 <a href="?type=input"><input class='button' type="button" value="input" style="width: 30%; height: 30%; font-size: 200%"></a>
 <a href="?type=output"><input class='button' type="button" value="output" style="width: 30%; height: 30%; font-size: 200%"></a>
 <a href="?type=control"><input class='button' type="button" value="control" style="width: 30%; height: 30%; font-size: 200%"></a>
+<br><br><br><br><?php 
+for($i=1;$i<$courts+1;$i++) {
+?>
+	<a href="?type=input&c=<?php echo $i; ?>"><input class='button' type="button" value="<?php echo $i; ?>" style="width: 10%; height: 10%; font-size: 200%"></a>
+<?php } ?>
+
 <?php } ?>
 
 <?php

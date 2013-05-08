@@ -42,8 +42,8 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 	
 	$seperator = strpos(trim($plist[trim($parts_player1[1])])," ");
 	
-	$player1 = substr(trim($plist[trim($parts_player1[1])]),$seperator+1);
-	$player2 = substr(trim($plist[trim($parts_player2[1])]),$seperator+1);
+	$player1 = str_replace("&","&amp;",substr(trim($plist[trim($parts_player1[1])]),$seperator+1));
+	$player2 = str_replace("&","&amp;",substr(trim($plist[trim($parts_player2[1])]),$seperator+1));
 	$flag1 = substr(trim($plist[trim($parts_player1[1])]),0,$seperator);
 	$flag2 = substr(trim($plist[trim($parts_player2[1])]),0,$seperator);
 	
@@ -99,6 +99,7 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 		$flag2 = $f2[0];
 	}
 	
+	if($flag1=='O35' || $flag1=='O40' || $flag1=='O45' || $flag1=='O50' || $flag1=='O55' || $flag1=='O60' || $flag1=='O65' || $flag1=='O70' || $flag1=='O75' || $flag1=='U15' || $flag1=='U19') $flag1 = 'AAA'; $flag2 = 'AAA';
 }
 ?>
 <r>

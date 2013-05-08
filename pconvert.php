@@ -1,5 +1,5 @@
 <?php
-$tID = 'BBC3BEE9-82F0-4928-8396-6A3EC19E7684';
+$tID = '8F5B349C-B2D1-4AEB-A1B5-21389BF6D327';
 
 $types = array("ms", "ws", "md", "wd", "xd");
 
@@ -7,7 +7,6 @@ foreach($types as $key => $type) {
 	$buffer = null;
 	echo "... importing ".$type."<br>";
 	$file = file_get_contents('http://www.tournamentsoftware.com/sport/event.aspx?id='.$tID.'&event='.($key+1));
-	echo $file;
 	if($key>1) {
 		$x = explode("<td>Player</td><td>Partner</td><td>Seed</td>",$file); //for mix and doubles
 		$regex = "/\[(\w+)\] ([\'\w,&#;\- ]+), ([\'\w,&#;\- ]+)\[(\w+)\] ([\'\w,&#;\- ]+), ([\'a-zA-Z0-9,&#;\- ]+[a-z])([0-9\/]*)/";
@@ -17,6 +16,7 @@ foreach($types as $key => $type) {
 	}
 	$lines = str_replace("\r\n\r\n","\n",str_replace("	","",strip_tags($x[1])));
 	preg_match_all ($regex, $lines, $output); 
+	print_r($output);
 	for($i=0;$i<count($output[1]);$i++) {
 		if($key>1) {
 			$flags[] = $output[1][$i];
@@ -29,7 +29,8 @@ foreach($types as $key => $type) {
 		$buffer .= "\n";
 	}
 	$fd = fopen('./players/'.$type.'.txt','w');
-	fwrite($fd,$buffer);
+	echo $buffer;
+	//fwrite($fd,$buffer);
 	fclose($fd);
 }
 
