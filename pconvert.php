@@ -1,5 +1,5 @@
 <?php
-$tID = '8F5B349C-B2D1-4AEB-A1B5-21389BF6D327';
+$tID = '329A5E09-5B17-4B3D-A43A-191D3B42DB35';
 
 $types = array("ms", "ws", "md", "wd", "xd");
 
@@ -16,7 +16,7 @@ foreach($types as $key => $type) {
 	}
 	$lines = str_replace("\r\n\r\n","\n",str_replace("	","",strip_tags($x[1])));
 	preg_match_all ($regex, $lines, $output); 
-	print_r($output);
+	#print_r($output);
 	for($i=0;$i<count($output[1]);$i++) {
 		if($key>1) {
 			$flags[] = $output[1][$i];
@@ -30,7 +30,7 @@ foreach($types as $key => $type) {
 	}
 	$fd = fopen('./players/'.$type.'.txt','w');
 	echo $buffer;
-	//fwrite($fd,$buffer);
+	fwrite($fd,$buffer);
 	fclose($fd);
 }
 

@@ -82,12 +82,12 @@ if($_GET['player'])
 	fputs($fd, 
 		trim($court[0])."\n".
 		trim($court[1])."\n".
-		trim($court[2])."\n".
-		trim($court[3])."\n".
-		trim($court[4])."\n".
-		trim($court[5])."\n".
-		trim($court[6])."\n".
-		trim($court[7])."\n".
+		trim(abs($court[2]))."\n".
+		trim(abs($court[3]))."\n".
+		trim(abs($court[4]))."\n".
+		trim(abs($court[5]))."\n".
+		trim(abs($court[6]))."\n".
+		trim(abs($court[7]))."\n".
 		$service."\n"		
 	);
 

@@ -1,0 +1,40 @@
+BRA|BRA Iago Alves &amp; Gild&#234;nia Almeida
+IND|IND Sanidhya Bandoont &amp; Mahima Agarwal
+DEN|DEN Mathias Bay-smidt &amp; Marie Louise Steffensen
+DEN|DEN Alexander Spanggaard Bond &amp; Ditte S&#248;by Hansen
+KOR|KOR Jong Woo Choi &amp; Hyang Im Kim
+HKG|HKG Yonny Chung &amp; Tsz Yau Ng
+ROM|ROM Collins-valentine Filimon &amp; Ioana Ionica
+GER|GER Gustaf Firdaus &amp; Nadine Cordes
+GER|GER Bjarne Geiss &amp; Yvonne Li
+GER|GER Hannes Gerberich &amp; Julia Kunkel
+LAT|LAT Kristaps Janis Gulbis &amp; Jekaterina Romanova
+S_G|S_G Kamod Rashmitha Halambage &amp; Vanessa Seele
+POL|POL Krzysztof Jakowczuk &amp; Magda Konieczna
+NED|NED Ruben Jille &amp; Alida Chen
+KOR|KOR Hyung Seok Kang &amp; Yong Joo Han
+KOR|KOR Do Hyung Kim &amp; Keun Hye Park
+KOR|KOR Jae Hwan Kim &amp; Hye Jeong Kim
+KOR|KOR Jung Ho Kim &amp; Hee Yong Kong
+EST|EST Mihkel Laanes &amp; Kristin Kuuba
+BRA|BRA Carlos Marinho &amp; Andreza Miranda
+KOR|KOR Kyung Hoon Park &amp; Ga Eun Kim
+BRA|BRA Guilherme Pereira &amp; Railanny Aguiar
+INA|INA Galang Decky Ramadhan &amp; Rahmadhani Hastiyanti Putri
+INA|INA Andika Ramadiansyah &amp; Marsheilla Gischa Islami
+GER|GER Lukas Rupp &amp; Annabella J&#228;ger
+GER|GER Lukas Scherf &amp; Laura Kaiser
+GER|GER Marvin Emil Seidel &amp; Jennifer Karnott
+GER|GER Daniel Seifert &amp; Judith Petrikowski
+DEN|DEN Frederik S&#248;gaard &amp; Sara Lundgaard
+POL|POL Przemyslaw Szydlowski &amp; Joanna Stanisz
+IND|IND Chandrabhushan Tripathi &amp; Anushka Kuvelkar
+ENG|ENG Sean Vendy &amp; Lydia Powell
+NED|NED Alex Vlaar &amp; Cheryl Seinen
+POL|POL Piotr Wasiluk &amp; Karolina Janowska
+GER|GER Max Wei&#223;kirchen &amp; Eva Janssens
+GER|GER Benjamin Winter &amp; Brid Stepper
+HKG|HKG Shing Choi Yeung &amp; Yi Ting Wu
+EST|EST Heiko Zoober &amp; Helina R&#252;&#252;tel
+G_C|G_C Johannes Pistorius &amp; Maja Pavalinic
+SLO|SLO Zan Laznik &amp; Katarina Beton

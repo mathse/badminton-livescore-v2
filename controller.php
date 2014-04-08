@@ -16,6 +16,10 @@ if(file_exists('sessions/connections/'.$deviceid))
 {
 	echo "200";	
 } else {
-	echo "400";	
+	if($_GET['debugid']) {
+		echo "200";
+	} else {
+		echo "400";	
+	}
 }	
 ?>

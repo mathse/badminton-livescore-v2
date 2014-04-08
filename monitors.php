@@ -6,7 +6,8 @@ $files = scandir('sessions');
 
 foreach($files as $file)
 {
-	if(substr($file,0,1) == '.' || $file == '..' || $file == 'connections' || $file == 'courts' || $file == 'controller') continue;	
+	 
+	if(substr($file,0,1) == '.' || $file == '..' || $file == 'connections' || $file == 'courts' || $file == 'controller' || substr($file,-2,1)=="_") continue;	
 	echo "<tr><td>";
 	$now = time();
 	$session = file_get_contents('sessions/'.$file);
@@ -17,7 +18,7 @@ foreach($files as $file)
 		
 		if(file_exists('sessions/connections/'.$file))
 		{
-			
+				
 				$monitorconnection = file_get_contents('sessions/connections/'.$file);
 				if(($i+1)==$monitorconnection) { $bg = 'background-color: blue'; }
 				if($bg) { $enabled=true; }

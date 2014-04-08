@@ -1,4 +1,7 @@
 <html>
+   <meta name="apple-mobile-web-app-capable" content="yes" />
+   <meta name="viewport" content=" user-scalable=0;" />
+   <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <style type="text/css">
 <!--
 * { 
@@ -7,10 +10,17 @@ if($_GET['type']=='output' && !$_GET['style']) {
 	echo "cursor: none; font-size: 112%;";  
 } 
 if($_GET['type']=='output' && $_GET['style']==2) { 
-	echo "cursor: none; font-size: 108%;";  
+	echo "cursor: none; font-size: 80%; ";  
 }	
 ?> color: white; scrolling: no; font-family: Arial; }
 body { background: black; text-align: center; padding: 0; margin: 0; overflow:hidden; }
+img {
+<?php
+if($_GET['type']=='output' && $_GET['style']==2) { 
+	echo "height: 10%; ";  
+}	
+?>
+}
 a { text-decoration: none }
 input, select { font-size: 1em;  background: black; border: 5px solid white; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;}
 select { font-size: 1.1em; }
@@ -18,7 +28,7 @@ select { font-size: 1.1em; }
 #main { height: 100%; }
 
 #input { height: 80%; margin: 15px auto; width: 90%; text-align: center }
-#pl, #pm, #pr { font-size: 1500%; width: 30%; line-height:80%}
+#pl, #pm, #pr { font-size: 1400%; width: 30%; line-height:80%}
 .settingslabel { font-size: 2em }
 #inputName1, #inputName2 { -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
 #output { height: 100%; width: 98%; font-size: 1300%; padding: 0px; text-align: center; line-height: 80%; }
@@ -295,8 +305,26 @@ new PeriodicalExecuter(function(pe) {
 					if(item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue > 0) $('set1p'+item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue).style.border = '10px solid #f00';
 					if(item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue > 0) $('set2p'+item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue).style.border = '10px solid #f00';
 					if(item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) $('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.border = '10px solid #f00';
+			//		if(item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) $('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.backgroundColor = '#f00';
 					
-					//
+			//		if(item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue == item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue || item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) {
+			//			$('set1p'+item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue).style.backgroundColor = '#700';
+			//			$('set2p'+item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue).style.backgroundColor = '#700';
+			//			$('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.backgroundColor = '#700';
+						
+			//		} 
+			//		if(item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue == 0) {
+			//			alert("a");
+			//			$('set1p1').style.backgroundColor = '#111';
+			//			$('set2p1').style.backgroundColor = '#111';
+			//			$('set3p1').style.backgroundColor = '#111';
+			//			$('set1p2').style.backgroundColor = '#111';
+			//			$('set2p2').style.backgroundColor = '#111';
+				//		$('set3p2').style.backgroundColor = '#111';
+						
+						
+				//		}
+					
 					
 
 				}		
@@ -473,14 +501,15 @@ for($i=1;$i<$courts+1;$i++) {
 ?>
 	<a href="?type=input&c=<?php echo $i; ?>"><input class='button' type="button" value="<?php echo $i; ?>" style="width: 10%; height: 10%; font-size: 200%"></a>
 <?php } ?>
-
+<a href="dual.html"><input class='button' type="button" value="dual" style="width: 30%; height: 30%; font-size: 200%"></a>
+<a href="d.apk"><input class='button' type="button" value="dolphin" style="width: 30%; height: 30%; font-size: 200%"></a>
 <?php } ?>
 
 <?php
 if($_GET['type']=='input') {
 if(!$_GET['c'])
 {
-	echo '<input type="button" onclick="window.location.reload();" style="width:90%; height: 10%; font-size: 5em" value="Reload for K&ouml;ster">';	
+	echo '<input type="button" onclick="window.location.reload();" style="width:90%; height: 10%; font-size: 5em" value="Reload for Lischen">';	
 }
 ?>
 
@@ -512,8 +541,12 @@ if(!$_GET['c'])
 			<?php
 			for($i=1;$i<$courts+1;$i++)
 			{
+				
+				$changetime = @filemtime("sessions/courts/".$i);
+				 
+				
 				?>
-				<input type="button" value='<?php echo $i; ?>' name='court' style="width: 3em; height: 1.5em; font-size: 200%" onclick="javascript:pushButton(this,false)">
+				<input type="button" value='<?php echo $i; ?>' name='court' style="width: 3em; height: 1.5em; font-size: 200%; <?php if((time()-$changetime)<120) { echo 'color: black;'; } ?>" onclick="javascript:pushButton(this,false)">
 				<?php
 			}
 			?>
@@ -541,19 +574,7 @@ if(!$_GET['c'])
 
 </div>
 <table id='input' style='height: 90%;'>
-	<tr>
-		<td id='pl'>-</td>
-		<td id="pm" style="">:</td>
-		<td id='pr'>-</td>	
-	</tr>	
-	<tr>
-		<td id="inputName1" style='font-weight: bold'></td>
-		<td>
-			<input class='button' type="button" value="switch" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true)"><br>to switch players<br>
-			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:$('settings').show()">
-		</td>
-		<td id="inputName2" style='font-weight: bold'></td>
-	</tr>
+ <?php if($_GET['c']==2) { ?>
 	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
 		<td id='kl'>
 			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
@@ -575,6 +596,41 @@ if(!$_GET['c'])
 
 		</td>	
 	</tr>	
+ <?php } ?>
+	<tr>
+		<td id='pl'>-</td>
+		<td id="pm" style="">:</td>
+		<td id='pr'>-</td>	
+	</tr>	
+	<tr>
+		<td id="inputName1" style='font-weight: bold'></td>
+		<td>
+			<input class='button' type="button" value="switch" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true)"><br>to switch players<br>
+			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:$('settings').show()">
+		</td>
+		<td id="inputName2" style='font-weight: bold'></td>
+	</tr> <?php if($_GET['c']!=2) { ?>
+	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
+		<td id='kl'>
+			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP2" id="pb3" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP2" id="pb4" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+		</td>
+		<td id="km" style="">
+			Set:<br>
+			<input class='button' type="button" value="1" id='inputSet1' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
+			<input class='button' type="button" value="2" id='inputSet2' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
+			<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
+		</td>
+		<td id='kr'>
+			<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="-" name="pointP1" id="pb8" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+			<input class='button' type="button" value="+" name="pointP1" id="pb7" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+
+		</td>	
+	</tr>	 <?php } ?>
 	<tr style="display: none">
 		<td colspan='3' style='color: gray'>
 			Court: <input id='currentCourt' type='text' value='<?php echo $_GET['c']; ?>' style='width: 4%'> - Event: <input id='currentEvent' type='text' value='' style='width: 4%'> - Players: <input id='currentPlayers' type='text' value=''> - Set: <input id='currentSet' type='text' value='' style='width: 4%'> 
@@ -614,7 +670,7 @@ if($_GET['type']=='output') {
 photos
 </div>
 
-<div id="misc" style=" position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
+<div id="misc" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
 	<table style='height:100%'>
 		<td>
 			<center>

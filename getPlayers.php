@@ -43,7 +43,7 @@ if(!$_GET['nation'])
 			$nation = $line[0];
 			if($nation != $_GET['nation']) continue;
 
-			if($_GET['event']=='ms' || $_GET['event']=='ws' || $_GET['event']=='zz' )
+			if(strtolower($_GET['event'])=='ms' || strtolower($_GET['event'])=='de' || strtolower($_GET['event'])=='he' || strtolower($_GET['event'])=='ws' || $_GET['event']=='zz' )
 			{
 				$players_list[$i] = substr($player,4);
 			//	$players_list[$i] = $line[2].' '.$line[1];

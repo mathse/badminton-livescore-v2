@@ -16,8 +16,8 @@ AAA 8.-11. M&#228;rz 2012
 AAA SG EBT Berlin
 AAA TV Refrath
 AAA Hannover 96 
-AAA spiel
-AAA folgt
+AAA Spiel folgt
+AAA Next Match follows
 AAA Union
 AAA Champions League? -lt-br style='margin-bottom: 20px'-gt- muss das sein!!
 AAA -lt-div style='font-size: 0.9em'-gt- -lt-div style='text-align: left; float:left'-gt- 1. Abbach -lt-br style='margin-bottom: 20px'-gt- 2. Neum&#252;nster -lt-br style='margin-bottom: 20px'-gt- 3. Beuel -lt-br style='margin-bottom: 20px'-gt- 4. H&#246;velhof -lt-/div-gt- -lt-div style='text-align: right'-gt-  -lt-br style='margin-bottom: 20px'-gt-  -lt-/div-gt- -lt-/div-gt- 
@@ -42,8 +42,8 @@ AAA lustig!!!
 U19 Gruppe A
 U19 Gruppe B
 U19 -lt-table width="100%"-gt--lt-td style="font-size: 60px; border-right: 10px solid white; padding-right: 50px"-gt--lt-table-gt--lt-tr-gt--lt-td-gt-1.-lt-/td-gt--lt-td-gt-1. bc bischmisheim-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td-gt-2.-lt-/td-gt--lt-td-gt-name 2-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td-gt-3.-lt-/td-gt--lt-td-gt-name 3-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td-gt-4.-lt-/td-gt--lt-td-gt-name 4-lt-/td-gt--lt-/tr-gt--lt-/table-gt--lt-/td-gt--lt-td style="font-size: 90px"-gt--lt-table-gt--lt-tr-gt--lt-td align="center"-gt-tv m-bcb-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-4:0-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-C-D-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-1:3-lt-/td-gt--lt-/tr-gt--lt-/table-gt--lt-/td-gt--lt-/table-gt-
-AAA -lt-span style="font-size: 400px"-gt- Guten -lt-/span-gt-
-AAA -lt-span style="font-size: 400px"-gt- Morgen -lt-/span-gt-
+AAA -lt-span style="font-size: 200px"-gt- Deutscher Meister -lt-br-gt--lt-br-gt-2012 / 2013-lt-br-gt--lt-br-gt--lt-br-gt--lt-b-gt-SG EBT Berlin-lt-/b-gt- -lt-/span-gt-
+AAA -lt-span style="font-size: 200px"-gt -lt-br-gt--lt-br-gt--lt-/span-gt-
 AAA -lt-br-gt-Willkommen bei den
 AAA Deutschen-lt-br-gt--lt-br-gt-Mannschaftsmeisterschaften-lt-br-gt--lt-br-gt-2013
 AAA BC Phönix Hövelhof -lt-br-gt--lt-br-gt- TSV Trittau
@@ -58,3 +58,15 @@ U19 Finale U19
 U19 -lt-table width="100%"-gt--lt-td style="font-size: 130px"-gt--lt-table width="100%"-gt--lt-tr-gt--lt-td   align="center"-gt-Refrath	- Sterkrade-Nord	-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-5:2-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-Trittau - Freystadt-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-                5:3-lt-/td-gt--lt-/tr-gt--lt-/table-gt--lt-/td-gt--lt-/table-gt-
 U15 Finale U15
 U15 -lt-table width="100%"-gt--lt-td style="font-size: 110px"-gt--lt-table width="100%"-gt--lt-tr-gt--lt-td   align="center"-gt-Rosenheim 	- Dortelweil	-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-5:1-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-Schwanheim - Heessel-lt-/td-gt--lt-/tr-gt--lt-tr-gt--lt-td align="center"-gt-                2,5:5,5-lt-/td-gt--lt-/tr-gt--lt-/table-gt--lt-/td-gt--lt-/table-gt-
+AAA next practise at 5pm
+AAA KOREA
+AAA SRI LANKA
+AAA Brazil
+AAA England
+AAA Latvia + Lithuania
+AAA Poland
+AAA Welcome to the
+AAA YONEX German Junior 2014
+GER Not
+GER Elend
+AAA Quarter Final

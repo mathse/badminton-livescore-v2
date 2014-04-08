@@ -1,21 +1,78 @@
-GER Michael Kleibert
-GER Andreas Schl&uuml;ter
-GER Thorsten Hukriede
-GER Alexander Schulz
-GER Marcus Barsch
-GER Marc G&ouml;tze
-GER Stephan Sartoris
-GER Rolf Theisinger
-GER Andreas Bernwald
-GER Andr&eacute; Bertko
-GER J&ouml;rg Feierabend
-GER Patric Freitag
-GER Steffen Geissler
-GER Stephan Grauel
-GER Michael Heins
-GER Florian K&ouml;rber
-GER Thorsten Krams
-GER J&ouml;rg Mohrmann
-GER Arthur Schacht
-GER Bj&ouml;rn Schneider
-GER Gerd Sch&ouml;nharting
+BRA Iago Alves
+POL Mateusz Biernacki
+GER Lukas B&#246;lke
+MAS June Wei Cheam
+IND Rahul Yadav Chittaboina
+BRA Ygor Coelho De Oliveira
+IND Vighnesh Devlekar
+SRI Sachin Dias
+DEN Mathias Weber Estrup
+ROM Collins-Valentine Filimon
+GER Gustaf Firdaus
+GER Ciaran Fitzgerald
+DEN Rasmus Gemke
+GER Hannes Gerberich
+AUT Wolfgang Gnedt
+SRI Buwaneka Goonethilleke
+LAT Kristaps Janis Gulbis
+SRI Kamod Rashmitha Halambage
+GER Samuel Hsiao
+POL Krzysztof Jakowczuk
+NED Ruben Jille
+GER Florian Kaminski
+KOR Hyung Seok Kang
+KOR Do Hyung Kim
+KOR Hui Tae Kim
+GER Bennet K&#246;hler
+EST Mihkel Laanes
+HKG Cheuk Yiu Lee
+KOR Jun Su Lee
+CHN Guipu Lin
+IND Kanishq M
+BRA Carlos Marinho
+ZAM Chongo Mulenga
+GER Lukas Naujoks
+SIN Zin Rei Ryan Ng
+BUL Daniel Nikolov
+SWE Kevin Nilsson
+GER Kenny Nothnagel
+SIN Soon Yang Bernard Ong
+GER David Peng
+BRA Guilherme Pereira
+SRB Dragoslav Petrovic
+GER Noel Raffloer
+MAS Satheishtharan Ramachandran
+INA Muhamad Zulkifli Ramadhani
+IND Kaustubh Rawat
+INA Muhammad Revindra Raynaldi
+INA Rinov Rivaldy
+GER Fabian Roth
+GER Lukas Rupp
+IND Daniel Farid S
+GER Lars Sch&#228;nzler
+GER Patrick Scheiel
+GER Lukas Scherf
+GER Daniel Seifert
+AUT Leon Seiwald
+IND Lakshay Sen
+KOR Seung Jae Seo
+AUT Andrej Serov
+CHN Yuqi Shi
+BUL Vladimir Shishkov
+SIN Shi Xuan Dominic Soh
+CHN Feixiang Sun
+ENG Sean Vendy
+NED Alex Vlaar
+GER Simon Wang
+POL Piotr Wasiluk
+GER Max Wei&#223;kirchen
+GER Benjamin Winter
+CHN Binghong Ye
+GER Kim Zeber
+CHN Junpeng Zhao
+CHN Zeqi Zhou
+POL Dominik Zietek
+EST Heiko Zoober
+CRO croatian player
+SLO Zan Laznik
+SLO Andraz Krapez

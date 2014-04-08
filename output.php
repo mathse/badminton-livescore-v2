@@ -23,8 +23,11 @@ $winnerSet1 = 0;
 $winnerSet2 = 0;
 $winnerSet3 = 0;
 
-$monitorconnection = @file_get_contents('sessions/connections/'.$deviceid);
-
+if($_GET['debugid']) {
+	$monitorconnection = $_GET['debugid'];
+} else {
+	$monitorconnection = @file_get_contents('sessions/connections/'.$deviceid);
+}
 // override for input screen
 if($_GET['input']==1 && $_GET['court'])
 {
@@ -99,7 +102,7 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 		$flag2 = $f2[0];
 	}
 	
-	if($flag1=='O35' || $flag1=='O40' || $flag1=='O45' || $flag1=='O50' || $flag1=='O55' || $flag1=='O60' || $flag1=='O65' || $flag1=='O70' || $flag1=='O75' || $flag1=='U15' || $flag1=='U19') $flag1 = 'AAA'; $flag2 = 'AAA';
+#	if($flag1=='O35' || $flag1=='O40' || $flag1=='O45' || $flag1=='O50' || $flag1=='O55' || $flag1=='O60' || $flag1=='O65' || $flag1=='O70' || $flag1=='O75' || $flag1=='U15' || $flag1=='U19') $flag1 = 'AAA'; $flag2 = 'AAA';
 }
 ?>
 <r>
