@@ -1,0 +1,1 @@
+<?php echo count(scandir('../sessions/matchcards/'))-1; ?>
