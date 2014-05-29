@@ -700,6 +700,8 @@ photos
 		<td colspan="3" id="namePlayer2">&nbsp;</td>	
 	</tr>
 </table>
+			<span style="font-size: 5em; position: absolute; right: 10px; bottom: 10px; opacity:0.1"><?php if($ips[3]!=69) { echo $ips[3]; } else { echo $_GET['debugid']; }?></span>
+
 <?php } ?>
 
 <?php 

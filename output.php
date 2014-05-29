@@ -24,10 +24,11 @@ $winnerSet2 = 0;
 $winnerSet3 = 0;
 
 if($_GET['debugid']) {
-	$monitorconnection = $_GET['debugid'];
+	$monitorconnection = @file_get_contents('sessions/connections/'.$deviceid);
 } else {
 	$monitorconnection = @file_get_contents('sessions/connections/'.$deviceid);
 }
+//echo $monitorconnection;
 // override for input screen
 if($_GET['input']==1 && $_GET['court'])
 {
@@ -106,6 +107,7 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 }
 ?>
 <r>
+	<a><?php echo $monitorconnection; ?></a>
 	<names>
 <?php if($flag1!='AAA') { ?>
 	<player1><?php echo $player1; ?></player1>
