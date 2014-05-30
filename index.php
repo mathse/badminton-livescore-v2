@@ -501,8 +501,13 @@ for($i=1;$i<$courts+1;$i++) {
 ?>
 	<a href="?type=input&c=<?php echo $i; ?>"><input class='button' type="button" value="<?php echo $i; ?>" style="width: 5%; height: 10%; font-size: 200%"></a>
 <?php } ?><br><br><br><br>
-<a href="dual.html"><input class='button' type="button" value="dual" style="width: 30%; height: 30%; font-size: 200%"></a>
-<a href="d.apk"><input class='button' type="button" value="dolphin" style="width: 30%; height: 30%; font-size: 200%"></a>
+<a href="dual.html"><input class='button' type="button" value="dual view" style="width: 15%; height: 30%; font-size: 200%"></a>
+<a href="d.apk"><input class='button' type="button" value="dolphin download" style="width: 15%; height: 30%; font-size: 200%"></a>
+<a href="info-draw"><input class='button' type="button" value="info view" style="width: 15%; height: 30%; font-size: 200%"></a>
+<a href="info-game-number"><input class='button' type="button" value="match number" style="width: 15%; height: 30%; font-size: 200%"></a>
+<a href="overview-12courts.html"><input class='button' type="button" value="12er overview" style="width: 15%; height: 30%; font-size: 200%"></a>
+<a href="overview-6courts.html"><input class='button' type="button" value="6er overview" style="width: 15%; height: 30%; font-size: 200%"></a>
+
 <?php } ?>
 
 <?php

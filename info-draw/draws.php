@@ -1,7 +1,23 @@
 <?php
+$tID = '74EFFA13-D03E-4F75-8C55-9A4227C63312';
 if(!$_GET['draw']) { $_GET['draw']=1; }
 $next = $_GET['draw']+1;
-if($next == 6) { $next =''; }
+
+// forward
+
+if($next == 3) { $next = 6; }
+if($next == 8) { $next = 11; }
+if($next == 13) { $next = 16; }
+if($next == 18) { $next = 21; }
+if($next == 23) { $next = 26; }
+if($next == 28) { $next = 31; }
+if($next == 33) { $next = 36; }
+if($next == 38) { $next = 41; }
+
+
+// reset to start
+
+#if($next == 6) { $next = ''; }
 
 function file_get_cached_contents($url) {
 	$cache_file = "cache/".md5($url);
@@ -14,9 +30,16 @@ function file_get_cached_contents($url) {
 	return $file;
 }
 
-$f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/draw.aspx?id=329A5E09-5B17-4B3D-A43A-191D3B42DB35&draw=".$_GET['draw']);
+$f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/draw.aspx?id=".$tID."&draw=".$_GET['draw']);
 $f = str_replace("/VisualResource.ashx","./VisualResource.css",$f);
 $f = str_replace("All matches...","",$f);
+?><div id="myheader" style="position: absolute; top: 0px; left: 0px; background: rgba(0,0,0,0.7);; width: 100%; ">
+<h1 style="padding: 10px; font-size: 2em">27. Deutsche Meisterschaften - Freitag <?php echo date("d.m.Y",time()); ?> - <?php
+$caption = explode("caption>",$f);
+echo $caption[1];
+
+?></h1>
+</div><?php
 echo $f
 ?><script type="text/javascript">
 
@@ -59,9 +82,11 @@ function scrollwindow(){
 			old = currentpos
 		}
 		window.scroll(0,currentpos)
+		document.getElementById("myheader").style.top = window.pageYOffset;
 	}else{
 		currentpos=0
 		window.scroll(0,currentpos)
+		//document.getElementById("header").style.top = window.pageYOffset;
 	}
 }
 

@@ -1,6 +1,7 @@
 <meta http-equiv="refresh" content="180; URL=matches.php">
 
 <?php
+$tID = '74EFFA13-D03E-4F75-8C55-9A4227C63312';
 $day = date("Ymd",time());
 if($day == "20140305") { $day = "20140306"; }
 
@@ -15,7 +16,7 @@ function file_get_cached_contents($url) {
 	return $file;
 }
 
-$f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/matches.aspx?id=329A5E09-5B17-4B3D-A43A-191D3B42DB35&d=".$day);
+$f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/matches.aspx?id=".$tID."&d=".$day);
 $f = str_replace("/VisualResource.ashx","./VisualResource_m.css",$f);
 $f = str_replace("Tournament days","",$f);
 //echo $f;

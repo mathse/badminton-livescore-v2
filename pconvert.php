@@ -1,5 +1,5 @@
 <?php
-$tID = '329A5E09-5B17-4B3D-A43A-191D3B42DB35';
+$tID = '74EFFA13-D03E-4F75-8C55-9A4227C63312';
 
 $types = array("ms", "ws", "md", "wd", "xd");
 
