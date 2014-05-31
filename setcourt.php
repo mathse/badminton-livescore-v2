@@ -60,6 +60,9 @@ if($_GET['newgame'])
 	$fd=fopen('sessions/courts/'.$_GET['court'],'w');
 	fputs($fd, $_GET['p1']."\n".$_GET['p2']."\n0\n0\n0\n0\n0\n0\n");
 	fclose($fd);
+	$fd_matchcard=fopen('sessions/matchcards/'.date("Y-m-d",time())."-".str_replace("/","_",$parts_player1[0].'-court'.$_GET['court'].'-'.$player1.'-'.$player2).'-'.time().'.txt','a+');
+	 fputs($fd_matchcard,time().";".$_GET['player'].";".urlencode($_GET['value'])."\n");
+	 fclose($fd_matchcard);
 }
 
 if($_GET['player'])
@@ -103,9 +106,9 @@ if($_GET['player'])
 	fclose($fd);
 	
 #	if($_GET['court']==6){
-	 $fd_matchcard=fopen('sessions/matchcards/'.date("Y-m-d",time())."-".str_replace("/","_",$parts_player1[0].'-court'.$_GET['court'].'-'.$player1.'-'.$player2).'.txt','a+');
-	 fputs($fd_matchcard,time().";".$_GET['player'].";".urlencode($_GET['value'])."\n");
-	 fclose($fd_matchcard);
+#	 $fd_matchcard=fopen('sessions/matchcards/'.date("Y-m-d",time())."-".str_replace("/","_",$parts_player1[0].'-court'.$_GET['court'].'-'.$player1.'-'.$player2).'.txt','a+');
+#	 fputs($fd_matchcard,time().";".$_GET['player'].";".urlencode($_GET['value'])."\n");
+#	 fclose($fd_matchcard);
 # }
 }
 

@@ -16,7 +16,7 @@ function file_get_cached_contents($url) {
 	return $file;
 }
 
-$f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/matches.aspx?id=".$tID."&d=".$day);
+$f = file_get_cached_contents("http://www.turnier.de/sport/matches.aspx?id=".$tID."&d=".$day);
 $f = str_replace("/VisualResource.ashx","./VisualResource_m.css",$f);
 $f = str_replace("Tournament days","",$f);
 //echo $f;
@@ -26,17 +26,22 @@ $xmlDoc->loadHTML($f);
 $xmlDoc->preserveWhiteSpace = false; 
 //print_r($xmlDoc);
 
-$now = date("H",time());
+$now = date("H",time())-1;
 
-for($i=10;$i<$now;$i++) {
-	#echo $i;	
-	$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td align="right">'.$i.'/','<tr style="display: none"><td></td><td align="right">+++',$f);
-}
-if($now > 12) {
+#for($i=9;$i<$now;$i++) {
+#	echo $i;	
+#	$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">[0-9]*'.$i.'/','<tr style="display: none"><td></td><td align="right">+++',$f);
+#}
+$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">[0-9]+:[0-9]+<\/td><td><a href="[a-zA-Z0-9\.\/?=\-&]+">.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+<a href=".+">Sportforum - Feld [0-9]+<\/a><\/td>/','<tr style="display: none">',$f);
+$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">[0-9]+:[0-9]+<\/td><td><a href="[a-zA-Z0-9\.\/?=\-&]+">.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+Walkover<\/span><\/td>/','<tr style="display: none">',$f);
+
+
+// <tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">[0-9]+:[0-9]+<\/td><td><a href="[a-zA-Z0-9\.\/?=\-&]+">.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+<a href=".+">Sportforum - Feld [0-9]+<\/a><\/td>
+if($now > 25) {
 	$now = date("g",time());
 	for($i=0;$i<$now;$i++) {
 		#echo $i;	
-		$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td align="right">'.$i.'/','<tr style="display: none"><td></td><td align="right">+++',$f);
+		$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">'.$i.'/','<tr style="display: none"><td></td><td align="right">+++',$f);
 	}
 }
 echo $f;

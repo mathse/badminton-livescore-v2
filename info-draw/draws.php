@@ -5,19 +5,22 @@ $next = $_GET['draw']+1;
 
 // forward
 
-if($next == 3) { $next = 6; }
-if($next == 8) { $next = 11; }
-if($next == 13) { $next = 16; }
-if($next == 18) { $next = 21; }
-if($next == 23) { $next = 26; }
-if($next == 28) { $next = 31; }
-if($next == 33) { $next = 36; }
-if($next == 38) { $next = 41; }
+
+if($next == 1) { $next = 3; }
+if($next == 5) { $next = 8; }
+if($next == 10) { $next = 13; }
+if($next == 15) { $next = 18; }
+if($next == 20) { $next = 23; }
+if($next == 25) { $next = 28; }
+if($next == 30) { $next = 33; }
+if($next == 35) { $next = 38; }
+
+
 
 
 // reset to start
 
-#if($next == 6) { $next = ''; }
+if($next == 44) { $next = 3; }
 
 function file_get_cached_contents($url) {
 	$cache_file = "cache/".md5($url);
@@ -34,11 +37,11 @@ $f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/draw.aspx
 $f = str_replace("/VisualResource.ashx","./VisualResource.css",$f);
 $f = str_replace("All matches...","",$f);
 ?><div id="myheader" style="position: absolute; top: 0px; left: 0px; background: rgba(0,0,0,0.7);; width: 100%; ">
-<h1 style="padding: 10px; font-size: 2em">27. Deutsche Meisterschaften - Freitag <?php echo date("d.m.Y",time()); ?> - <?php
+<h1 style="padding: 10px; font-size: 2em">27. Deutsche Meisterschaften - Samstag <?php echo date("d.m.Y",time()); ?> - <?php
 $caption = explode("caption>",$f);
 echo $caption[1];
 
-?></h1>
+?></h1><div id="infoheader" style="opacity: 0.4"></div>
 </div><?php
 echo $f
 ?><script type="text/javascript">
@@ -48,7 +51,9 @@ var speed=2
 var currentpos=0,alt=1,curpos1=-1,curpos2=-1
 
 function initialize(){
+	starttime = new Date().getTime();
 	startit()
+	
 }
 old = 0
 function scrollwindow(){
@@ -74,7 +79,7 @@ function scrollwindow(){
 			currentpos = window.pageYOffset + speed
 		}
 		//alert(currentpos)
-		if (old==currentpos && speed != 0 ) {
+		if (old==currentpos && speed != 0 && runtime > 10000) {
 			speed=0
 			//alert("ende"+temp)
 			window.location.href = "draws.php?draw=<?php echo $next; ?>"
@@ -83,6 +88,9 @@ function scrollwindow(){
 		}
 		window.scroll(0,currentpos)
 		document.getElementById("myheader").style.top = window.pageYOffset;
+		nowtime = new Date().getTime();
+		runtime = nowtime - starttime;
+		//document.getElementById("infoheader").innerHTML = ;
 	}else{
 		currentpos=0
 		window.scroll(0,currentpos)
