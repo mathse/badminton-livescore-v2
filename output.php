@@ -35,6 +35,11 @@ if($_GET['input']==1 && $_GET['court'])
 	$monitorconnection = $_GET['court'];
 }
 
+//if($_GET['direct'])
+//{
+//	$monitorconnection = $_GET['debugid'];
+//}
+
 if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection))
 {
 	$court = file('sessions/courts/'.$monitorconnection);

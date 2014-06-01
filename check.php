@@ -3,18 +3,23 @@
 <?php
 $time = (time() - filemtime('sessions/courts/'.$_GET['c']));
 if($time < 45) {
- $color = "black";	
-	} else {
- $color = "red";		
-		}
-		$f = file('sessions/courts/'.$_GET['c']);
-	if($f[7]==0) { $color = "black"; }
+	$color = "black";	
+} else {
+	$color = "red";		
+}
+
+$f = file('sessions/courts/'.$_GET['c']);
+if($f[7]==0) { 
+	$color = "black"; 
+}
+
+
 ?>
 
 <body style="background: <?php echo $color; ?>; color: white">
-<span style="font-size: 4em">
+<span style="font-size: 1em">
 <?php 
-#echo $time; 
+echo $_GET['c']; 
 ?>
 </span>
 </body>

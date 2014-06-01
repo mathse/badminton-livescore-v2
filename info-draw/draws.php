@@ -6,21 +6,21 @@ $next = $_GET['draw']+1;
 // forward
 
 
-if($next == 1) { $next = 3; }
-if($next == 5) { $next = 8; }
-if($next == 10) { $next = 13; }
-if($next == 15) { $next = 18; }
-if($next == 20) { $next = 23; }
-if($next == 25) { $next = 28; }
-if($next == 30) { $next = 33; }
-if($next == 35) { $next = 38; }
+if($next == 1) { $next = 5; }
+if($next == 6) { $next = 10; }
+if($next == 11) { $next = 15; }
+if($next == 16) { $next = 20; }
+if($next == 21) { $next = 25; }
+if($next == 26) { $next = 30; }
+if($next == 31) { $next = 35; }
+if($next == 36) { $next = 40; }
 
 
 
 
 // reset to start
 
-if($next == 44) { $next = 3; }
+if($next == 44) { $next = 5; }
 
 function file_get_cached_contents($url) {
 	$cache_file = "cache/".md5($url);
@@ -37,7 +37,7 @@ $f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/draw.aspx
 $f = str_replace("/VisualResource.ashx","./VisualResource.css",$f);
 $f = str_replace("All matches...","",$f);
 ?><div id="myheader" style="position: absolute; top: 0px; left: 0px; background: rgba(0,0,0,0.7);; width: 100%; ">
-<h1 style="padding: 10px; font-size: 2em">27. Deutsche Meisterschaften - Samstag <?php echo date("d.m.Y",time()); ?> - <?php
+<h1 style="padding: 10px; font-size: 2em">27. Deutsche Meisterschaften - Sonntag <?php echo date("d.m.Y",time()); ?> - <?php
 $caption = explode("caption>",$f);
 echo $caption[1];
 

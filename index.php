@@ -28,7 +28,11 @@ select { font-size: 1.1em; }
 #main { height: 100%; }
 
 #input { height: 80%; margin: 15px auto; width: 90%; text-align: center }
+<?php if($_GET['c']==12) { ?>
+#pl, #pm, #pr { font-size: 1000%; width: 30%; line-height:80%}
+<?php } else { ?>
 #pl, #pm, #pr { font-size: 1400%; width: 30%; line-height:80%}
+<?php } ?>
 .settingslabel { font-size: 2em }
 #inputName1, #inputName2 { -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
 #output { height: 100%; width: 98%; font-size: 1300%; padding: 0px; text-align: center; line-height: 80%; }
@@ -99,6 +103,7 @@ function pushButton(v,disappear)
 		new Ajax.Request("getPlayers.php?event="+$('currentEvent').value+"&nation="+$('selectNation1').value,{
 				onSuccess: function(r) {
 					$('selectPlayer1').innerHTML = r.responseText;
+					<?php if($sameNationTrigger) { echo "$('selectPlayer2').innerHTML = r.responseText;"; } ?>
 				}
 			}
 		);
@@ -247,7 +252,7 @@ new PeriodicalExecuter(function(pe) {
 
 	
 	
-	new Ajax.Request("output.php?debugid=<?php echo $_GET['debugid']; ?>",{
+	new Ajax.Request("output.php?debugid=<?php echo $_GET['debugid']; ?>&direct=<?php echo $_GET['direct']; ?>",{
 			onSuccess: function(r) {
 				var root = r.responseXML;
 				for(var i = 0; i < root.childNodes.length; i++)
@@ -505,8 +510,7 @@ for($i=1;$i<$courts+1;$i++) {
 <a href="d.apk"><input class='button' type="button" value="dolphin download" style="width: 15%; height: 30%; font-size: 200%"></a>
 <a href="info-draw"><input class='button' type="button" value="info view" style="width: 15%; height: 30%; font-size: 200%"></a>
 <a href="info-game-number"><input class='button' type="button" value="match number" style="width: 15%; height: 30%; font-size: 200%"></a>
-<a href="overview-12courts.html"><input class='button' type="button" value="12er overview" style="width: 15%; height: 30%; font-size: 200%"></a>
-<a href="overview-6courts.html"><input class='button' type="button" value="6er overview" style="width: 15%; height: 30%; font-size: 200%"></a>
+<a href="overview-courts.php"><input class='button' type="button" value="overview" style="width: 15%; height: 30%; font-size: 200%"></a>
 
 <?php } ?>
 
@@ -551,7 +555,7 @@ if(!$_GET['c'])
 				 
 				
 				?>
-				<input type="button" value='<?php echo $i; ?>' name='court' style="width: 3em; height: 1.5em; font-size: 200%; <?php if((time()-$changetime)<120) { echo 'color: black;'; } ?>" onclick="javascript:pushButton(this,false)">
+				<input type="button" value='<?php echo $i; ?>' name='court' style="width: 3em; height: 1.5em; font-size: 200%; <?php if((time()-$changetime)<120) { echo 'color: white;'; } ?>" onclick="javascript:pushButton(this,false)">
 				<?php
 			}
 			?>
@@ -566,7 +570,7 @@ if(!$_GET['c'])
 	<tr id='player2' style='display: none'>
 		<td class="settingslabel">players:</td><td align="right">
 			<select id='selectPlayer2' name='selectPlayer2' onchange="pushButton(this,false)"></select>
-			<select id='selectNation2' name='selectNation2' onchange="pushButton(this,false)"></select>
+			<select id='selectNation2' name='selectNation2' onchange="pushButton(this,false)" <?php if($sameNationTrigger) { echo "style='display: none'"; } ?>></select>
 		</td><td><img src="img/symbol_check.png" id='playerCheck2' style="height:32px; width:32px; display: none"></td>
 	</tr>
 	<tr>
