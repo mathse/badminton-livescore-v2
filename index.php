@@ -5,15 +5,19 @@
 <style type="text/css">
 <!--
 * { 
-<?php 
-if($_GET['type']=='output' && !$_GET['style']) { 
-	echo "cursor: none; font-size: 112%;";  
-} 
-if($_GET['type']=='output' && $_GET['style']==2) { 
-	echo "cursor: none; font-size: 80%; ";  
-}	
-?> color: white; scrolling: no; font-family: Arial; }
-body { background: black; text-align: center; padding: 0; margin: 0; overflow:hidden; }
+	cursor: none;
+	//font-size: 112%;	
+	color: white;
+	scrolling: no;
+	font-family: Arial;
+}
+body {
+	background: black;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	overflow:hidden;
+}
 img {
 <?php
 if($_GET['type']=='output' && $_GET['style']==2) { 
@@ -262,26 +266,27 @@ new PeriodicalExecuter(function(pe) {
 					serv = 0;
 					try
 					  {
-					  serv = item.getElementsByTagName("service")[0].firstChild.nodeValue;
+							serv = item.getElementsByTagName("service")[0].firstChild.nodeValue;
 					  }
 					catch(err)
 					  {
 					  //Handle errors here
+					  
 					  }
 					
 					
 					 if(item.getElementsByTagName("flag1")[0].firstChild.nodeValue!='AAA')
 					 {
-					 $('namePlayer1').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag1")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player1")[0].firstChild.nodeValue;
+					 	$('namePlayer1').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag1")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player1")[0].firstChild.nodeValue;
 					 } else {
-					 $('namePlayer1').innerHTML = item.getElementsByTagName("player1")[0].firstChild.nodeValue.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
+					 	$('namePlayer1').innerHTML = item.getElementsByTagName("player1")[0].firstChild.nodeValue.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
 					 }
 					 
 					 if(item.getElementsByTagName("flag2")[0].firstChild.nodeValue!='AAA')
 					 {
-					 $('namePlayer2').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag2")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player2")[0].firstChild.nodeValue;
+						 $('namePlayer2').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag2")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player2")[0].firstChild.nodeValue;
 					 } else {
-					 $('namePlayer2').innerHTML = item.getElementsByTagName("player2")[0].firstChild.nodeValue.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
+						 $('namePlayer2').innerHTML = item.getElementsByTagName("player2")[0].firstChild.nodeValue.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
 					 }
 					 
 					// $('namePlayer2').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag2")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player2")[0].firstChild.nodeValue;
@@ -302,36 +307,17 @@ new PeriodicalExecuter(function(pe) {
 						
 					}
 
-					
 					// set one green border to show how is servicing at the moment
 					$('set'+item.getElementsByTagName("currentSet")[0].firstChild.nodeValue+'p'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '10px solid #0f0'; 
 					
-					// 
+					// set colored borders on finished games 
 					if(item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue > 0) $('set1p'+item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue).style.border = '10px solid #f00';
 					if(item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue > 0) $('set2p'+item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue).style.border = '10px solid #f00';
 					if(item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) $('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.border = '10px solid #f00';
-			//		if(item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) $('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.backgroundColor = '#f00';
-					
-			//		if(item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue == item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue || item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) {
-			//			$('set1p'+item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue).style.backgroundColor = '#700';
-			//			$('set2p'+item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue).style.backgroundColor = '#700';
-			//			$('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.backgroundColor = '#700';
-						
-			//		} 
-			//		if(item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue == 0) {
-			//			alert("a");
-			//			$('set1p1').style.backgroundColor = '#111';
-			//			$('set2p1').style.backgroundColor = '#111';
-			//			$('set3p1').style.backgroundColor = '#111';
-			//			$('set1p2').style.backgroundColor = '#111';
-			//			$('set2p2').style.backgroundColor = '#111';
-				//		$('set3p2').style.backgroundColor = '#111';
-						
-						
-				//		}
-					
-					
 
+					// set dynamic font-size
+					document.getElementsByTagName("body")[0].style.fontSize = item.getElementsByTagName("fontsize")[0].firstChild.nodeValue;
+					
 				}		
 			}
 		}

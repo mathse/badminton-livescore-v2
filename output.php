@@ -113,6 +113,7 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 ?>
 <r>
 	<a><?php echo $monitorconnection; ?></a>
+	<fontsize>150%</fontsize>
 	<names>
 <?php if($flag1!='AAA') { ?>
 	<player1><?php echo $player1; ?></player1>
