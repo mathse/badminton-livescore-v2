@@ -28,14 +28,16 @@ $sameNationTrigger=true;
    #############
     matchcontol
 */
-/*
+
 $courtlayout = array(
  array(10,7,4,1),
  array(11,8,5,2),
  array(12,9,6,3),
 );
-*/
+
+/*
 $courtlayout = array(
  array(7,4),
  array(8,5),
 );
+*/
