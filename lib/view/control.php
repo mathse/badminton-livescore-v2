@@ -1,9 +1,8 @@
 <?php
 include('../../settings.php');
 ?>
-
-<script type="text/javascript" src="../../js/prototype.js"></script>
-<script type="text/javascript" src="../../js/scriptaculous.js?load=effects"></script>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/jquery-ui.js"></script>
 
 <style type="text/css">
 * {
@@ -38,7 +37,7 @@ new PeriodicalExecuter(function(pe) {
 	new Ajax.Request("../controller/connections.php",{
 		onSuccess: function(r) {
 			var root = r.responseXML;
-			$('displays').innerHTML = "";
+			$('#displays').innerHTML = "";
 			//alert();
 			for(var i = 0; i < root.getElementsByTagName("connection").length; i++)
 			{
@@ -56,16 +55,21 @@ new PeriodicalExecuter(function(pe) {
 				div.className = "display";
 				
 				if (court == 0) {
-					$('displays').appendChild(div);	
+					$('#displays').appendChild(div);	
 				} else {
-					$('courtID'+court).innerHTML = '';
-					$('courtID'+court).appendChild(div);
+					$('#courtID'+court).innerHTML = '';
+					$('#courtID'+court).appendChild(div);
 				}
 					
 			}	
 		}
 	});
 },1);
+
+  $(function() {
+
+$('#displays').draggable();
+} );
 </script>
 
 
