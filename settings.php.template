@@ -1,6 +1,6 @@
 <?php
 // the number of courts
-$courts=13;
+$courts=12;
 $updateInterval = '1';
 $width['android'] = 1100;
 $height['android'] = 800;
@@ -12,7 +12,7 @@ $maxpoints=21;
 // autoswitch "flag" - altersklassen bei meisterschaften
 $sameNationTrigger=true;
 
-/*
+/* this is how a venue could look like from above
 #### #### #### #### 
 #10# # 7# # 4# # 1# 
 #### #### #### #### 
@@ -28,13 +28,15 @@ $sameNationTrigger=true;
    #############
     matchcontol
 */
-/*
+
+/* 
 $courtlayout = array(
  array(10,7,4,1),
  array(11,8,5,2),
  array(12,9,6,3),
 );
 */
+
 $courtlayout = array(
  array(7,4),
  array(8,5),

@@ -4,3 +4,4 @@ mkdir -p ./sessions/controller
 mkdir -p ./sessions/courts
 mkdir -p ./players
 chmod a+w -R ./sessions
+cp settings.php.template settings.php
