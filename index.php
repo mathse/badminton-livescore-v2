@@ -5,7 +5,7 @@
 <style type="text/css">
 <!--
 * { 
-	cursor: none;
+	//cursor: none;
 	//font-size: 112%;	
 	color: white;
 	scrolling: no;
