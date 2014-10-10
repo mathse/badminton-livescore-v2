@@ -1,10 +1,10 @@
 <?php
 header("Content-type: text/xml");
 include('settings.php');
-
+error_reporting(E_ERROR | E_PARSE);
 if(!$_GET['input'])
 {
-	$fd=fopen('sessions/'.$deviceid,'w');
+	$fd=@fopen('sessions/'.$deviceid,'w');
 	fputs($fd, time());
 	fclose($fd);
 }
