@@ -4,6 +4,7 @@ include('../../settings.php');
 <script type="text/javascript" src="../../js/jquery-2.1.1.js"></script>
 <script type="text/javascript" src="../../js/jquery-ui.js"></script>
 <script type="text/javascript" src="../../js/jquery.periodic.js"></script>
+<script type="text/javascript" src="../../js/jquery.ui.touch-punch.min.js"></script>
 
 <style type="text/css">
 * {
@@ -30,8 +31,9 @@ include('../../settings.php');
 	//margin-left: auto; margin-right: auto;
 }
 .display {
-	padding: 1%;
+	padding: 4%;
 	margin: 1%;
+    /*height: 10%;*/
 	/*border: 2px dotted gray;*/
 	float: left;	
 }

@@ -484,9 +484,10 @@ if(!$_GET['type']) {
 
 
 
-<a href="?type=input"><input class='button' type="button" value="input" style="width: 30%; height: 30%; font-size: 200%"></a>
-<a href="?type=output"><input class='button' type="button" value="output" style="width: 30%; height: 30%; font-size: 200%"></a>
-<a href="?type=control"><input class='button' type="button" value="control" style="width: 30%; height: 30%; font-size: 200%"></a>
+<a href="?type=input"><input class='button' type="button" value="input" style="width: 20%; height: 30%; font-size: 200%"></a>
+<a href="?type=output"><input class='button' type="button" value="output" style="width: 20%; height: 30%; font-size: 200%"></a>
+<a href="lib/view/control.php"><input class='button' type="button" value="control" style="width: 20%; height: 30%; font-size: 200%"></a>
+<a href="?type=control"><input class='button' type="button" value="old control" style="width: 20%; height: 30%; font-size: 200%"></a>
 <br><br><br><br><?php 
 for($i=1;$i<$courts+1;$i++) {
 ?>
