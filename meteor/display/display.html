@@ -1,0 +1,47 @@
+<head>
+    <title>Display</title>
+</head>
+
+<body>
+    {{> singleTable}}
+</body>
+
+<template name="emptyTable">
+    <div>i am empty</div>
+</template>
+
+<template name="singleTable">
+
+    {{#if court}}
+    <table class="output">
+        <tr>
+            <td class="names" colspan="3"><img src="http://192.168.1.49/badminton-livescore-v2/img/flags/{{court.p1flag}}.png"> {{court.p1}}</td>
+        </tr>
+        <tr id="scoresp1">
+            <td class="scoreboard {{court.framep1s1}}">{{court.set1p1}}</td>
+            <td class="scoreboard {{court.framep1s2}}">{{court.set2p1}}</td>
+            <td class="scoreboard {{court.framep1s3}}">{{court.set3p1}}</td>
+        </tr>
+        <tr id="scoresp2">
+            <td class="scoreboard {{court.framep2s1}}">{{court.set1p2}}</td>
+            <td class="scoreboard {{court.framep2s2}}">{{court.set2p2}}</td>
+            <td class="scoreboard {{court.framep2s3}}">{{court.set3p2}}</td>
+        </tr>
+        <tr>
+            <td class="names" colspan="3"><img src="http://192.168.1.49/badminton-livescore-v2/img/flags/{{court.p2flag}}.png"> {{court.p2}}</td>
+        </tr>
+    </table>
+
+    {{else}}
+    <div>no data found</div>
+
+    {{/if}}
+    <div id="debug-data">
+    {{#if connection}}
+        {{connection}}
+    {{/if}}
+    </div>
+
+</template>
+
+
