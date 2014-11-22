@@ -1,5 +1,8 @@
 <?php
 // the number of courts
+error_reporting(-1);
+ini_set('display_errors', 'Off');
+
 $courts=2;
 $updateInterval = '1';
 $width['android'] = 1100;

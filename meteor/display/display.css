@@ -10,6 +10,6 @@ table td img { border: 1px solid white; height: 50%; display: none}
 #debug-data { display: none; }
 .names { font-size: 40%;  text-align: center; height: 20%}
 .names img { width: 150px; height: auto; }
-.redframe { border: 10px solid #ff0000; }
-.greenframe { border: 10px solid lime; }
+.redframe { border-left: 10px solid #ff0000; border-bottom: 10px solid #ff0000;  border-right: 10px solid #550000; border-top: 10px solid #550000; }
+.greenframe {  border-left: 10px solid lime; border-bottom: 10px solid lime;  border-right: 10px solid #005500; border-top: 10px solid #005500; }
 .grayframe { border: 10px solid #111; }
