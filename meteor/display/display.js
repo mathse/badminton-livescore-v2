@@ -148,19 +148,21 @@ if (Meteor.isServer) {
         } else {
             clientAddress = '-' + clientAddress.split('.')[3];
         }
-        return Meteor.http.call("GET","http://192.168.2.104/badminton-livescore-v2/output.php?debugid=Meteor" + clientAddress);
+        serverAddress = this.connection.httpHeaders["x-forwarded-for"]
+        return Meteor.http.call("GET","http://"+serverAddress+"/badminton-livescore-v2/output.php?debugid=Meteor" + clientAddress);
+        //return Meteor.http.call("GET","http://192.168.2.104/badminton-livescore-v2/output.php?debugid=Meteor" + clientAddress);
     } });
 
     Meteor.methods({getCourt: function() {
-
         var clientAddress = this.connection.clientAddress;
         if (clientAddress == '127.0.0.1') {
             clientAddress = '-Server';
         } else {
             clientAddress = '-' + clientAddress.split('.')[3];
         }
-        return Connections.findOne({_id: "device-192.168.2.104-Meteor"+clientAddress}).court;
-
+        serverAddress = this.connection.httpHeaders["x-forwarded-for"]
+        return Connections.findOne({_id: "device-"+serverAddress+"-Meteor"+clientAddress}).court;
+        //return Connections.findOne({_id: "device-192.168.2.104-Meteor"+clientAddress}).court;
     } });
 
 }
