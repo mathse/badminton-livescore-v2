@@ -15,7 +15,7 @@
 
     {{#if court}}
     <table class="output">
-        <tr>
+        <tr><!-- TODO: replace ip address -->
             <td class="names" colspan="3"><img src="http://192.168.1.49/badminton-livescore-v2/img/flags/{{court.p1flag}}.png"> {{court.p1}}</td>
         </tr>
         <tr id="scoresp1">
@@ -35,7 +35,11 @@
     </table>
 
     {{else}}
-    <div>no data found</div>
+    <div style="height: 100%">
+        <table style="width: 100%; height: 100%"><td valign="middle" align="center"><img src="/ebt_logo.jpg"/>no court assigned </td></table>
+
+
+    </div>
 
     {{/if}}
     <div id="debug-data">

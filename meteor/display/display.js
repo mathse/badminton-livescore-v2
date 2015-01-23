@@ -32,8 +32,12 @@ if (Meteor.isClient) {
         Connections.find().forEach(function(row) {
              r = r + " " + row.time;
         });
-
         return r;
+    }
+
+    Template.singleTable.hostAddress = function() {
+        //console.log(location.hostname);
+        return location.hostname;
     }
 
     Template.singleTable.control = function() {
@@ -134,7 +138,7 @@ if (Meteor.isServer) {
     //Connections.remove({});
     Control.remove({});
     Control.insert({value:"0",_id:"BackgroundTime"});
-
+    //Control.insert({_id: "hostAddress", "value": ""});
 
     for(var i = 0; i < Connections.find().count(); i++)
     {
@@ -155,7 +159,12 @@ if (Meteor.isServer) {
             Connections.update({_id: "device-Meteor" + clientAddress}, {$set: {color: colors[colorCounter]}});
             colorCounter++;
         }
-        var serverAddress = this.connection.httpHeaders["host"].replace(":3000","");
+        var serverAddress = this.connection.httpHeaders["host"].replace(":3000","");  //TODO: replace 3000 to meteor port
+
+        try { // TODO: does this really needs to be here?
+            Control.insert({_id: "hostAddress", "value": serverAddress});
+        }
+        catch (e) {}
         return Meteor.http.call("GET","http://"+serverAddress+"/badminton-livescore-v2/output.php?debugid=Meteor" + clientAddress);
         
     } });
