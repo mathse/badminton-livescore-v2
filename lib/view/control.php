@@ -39,8 +39,21 @@ include('../../settings.php');
 }
 </style>
 
+<script type="text/javascript">
+    function toggleColor() {
+//       alert($('#state').val());
+        if($('#state').val() == "true") {
+            $.ajax({url: '../controller/meteorApi.php?bgtime={"value":"0"}'});
+            $('#state').val("false");
+
+        } else {
+            $.ajax({url: '../controller/meteorApi.php?bgtime={"value":"1"}'});
+            $('#state').val("true");
+        }
+    }
 
 
+</script>
 
 <div style="margin-left: auto; margin-right: auto; " id="courts">
 <?php
@@ -61,6 +74,7 @@ foreach ($courtlayout as $r) {
 	<div class="displays" id="displays">
 
 	</div>
+    <div style="position: absolute; right: 20px; bottom: 20px"><button style="height: 30px" onclick="toggleColor()">background-color</button><input style="display: none" type="text" id="state" value="false"></div>
 </div>
 
 <script type="text/javascript">
@@ -89,12 +103,12 @@ foreach ($courtlayout as $r) {
             }
 
 
-
             for(var i = 0; i < root.getElementsByTagName("connection").length; i++)
             {
                 if(root.getElementsByTagName("connection")[i].nodeType != 1) continue;
                 var item = root.getElementsByTagName("connection")[i];
                 var name = item.getElementsByTagName("name")[0].firstChild.nodeValue;
+                // get the color somehow
                 if (item.getElementsByTagName("court")[0].childNodes.length == 0)	{
                     var court = 0;
                 } else {
@@ -112,13 +126,13 @@ foreach ($courtlayout as $r) {
                 //console.log(document.getElementById(name));
 
                 display_name = name.replace(/192.168.1./,'').replace(/-$/,'');
-
+                var color = $.ajax({url: '../controller/meteorApi.php?colorForDevice=device-' + name, async: false}).responseText;
                 if(document.getElementById(name) == null) {
                     jQuery('<div/>', {
                         text: display_name,
                         id: name,
                         class: 'display'
-                    }).appendTo(appendto).draggable( {  stop: function(ev,ui) { console.log(ev); } });
+                    }).css('backgroundColor','black').css('border','5px dotted ' + color).appendTo(appendto).draggable( {  stop: function(ev,ui) { console.log(ev); } }); //replace the color here
                 }
             }
         });
