@@ -24,3 +24,13 @@ function sendToMeteorDB($collection,$object,$data) {
 if($_GET['bgtime']!="") {
     sendToMeteorDB('control', 'BackgroundTime', $_GET['bgtime']);
 }
+
+if($_GET['colorForDevice']!="") {
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_URL, "http://localhost:3000/collectionapi/connections/".$_GET['colorForDevice']);
+    curl_setopt($ch,CURLOPT_HTTPHEADER, array('X-Auth-Token: 97f0ad9e24ca5e0408a269748d7fe0a0'));
+    curl_setopt($ch,CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+    echo json_decode(curl_exec($ch))[0]->color;
+    curl_close($ch);
+}
