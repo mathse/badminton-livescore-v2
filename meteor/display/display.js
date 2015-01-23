@@ -177,7 +177,7 @@ if (Meteor.isServer) {
         }
         catch(e) {
             //Connections.update({_id:Connections.findOne({_id: "device-Meteor" + clientAddress})},{ $set: {court: 0}});
-            Connections.insert({_id: "device-Meteor" + clientAddress, "court":"0"})
+            Connections.insert({_id: "device-Meteor" + clientAddress, "court":"0", "color":""});
             console.log("new connection found -> 0");
             return 0;
         }
