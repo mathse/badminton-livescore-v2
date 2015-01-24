@@ -127,6 +127,9 @@ foreach ($courtlayout as $r) {
 
                 display_name = name.replace(/192.168.1./,'').replace(/-$/,'');
                 var color = $.ajax({url: '../controller/meteorApi.php?colorForDevice=device-' + name, async: false}).responseText;
+                if(color == "") {
+                    color = "black";
+                }
                 if(document.getElementById(name) == null) {
                     jQuery('<div/>', {
                         text: display_name,
