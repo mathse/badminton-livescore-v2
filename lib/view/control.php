@@ -21,8 +21,8 @@ include('../../settings.php');
 	margin: 1%;
 }
 #displays { 
-	width: 96%;
-	height: 10%;
+	/*width: 50px;*/
+	height: 50px;
     background-color: darkslategray;
 
     /*border: 2px dashed gray;*/
@@ -31,8 +31,13 @@ include('../../settings.php');
 	//margin-left: auto; margin-right: auto;
 }
 .display {
-	padding: 4%;
-	margin: 1%;
+	width: 80px;
+
+	/*height: 50px;*/
+    text-align: center;
+    margin: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     /*height: 10%;*/
 	/*border: 2px dotted gray;*/
 	float: left;	
@@ -135,7 +140,7 @@ foreach ($courtlayout as $r) {
                         text: display_name,
                         id: name,
                         class: 'display'
-                    }).css('backgroundColor','black').css('border','5px dotted ' + color).appendTo(appendto).draggable( {  stop: function(ev,ui) { console.log(ev); } }); //replace the color here
+                    }).css('backgroundColor', color).css('border','5px dotted black').appendTo(appendto).draggable( {  stop: function(ev,ui) { console.log(ev); } }); //replace the color here
                 }
             }
         });
