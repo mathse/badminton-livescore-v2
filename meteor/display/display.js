@@ -30,7 +30,7 @@ if (Meteor.isClient) {
 
         var r = "";
         Connections.find().forEach(function(row) {
-             r = r + " " + row.time;
+            r = r + " " + row.time;
         });
         return r;
     }
@@ -67,7 +67,7 @@ if (Meteor.isClient) {
         var maxpoints = 21;
 
         var c = Courts.findOne({_id: 'court'+thisCourt});
-
+        console.log(c);
         var currentSet = 0;
 
         if(c != undefined) {
@@ -84,18 +84,18 @@ if (Meteor.isClient) {
             // set borders for won sets
             for(var i=0;i<9;i++)
             {
-              if(c.set1p1==(maxpoints+i) && c.set1p2<(maxpoints-1+i)) { c.framep1s1 = 'redframe'; }
-              if(c.set1p2==(maxpoints+i) && c.set1p1<(maxpoints-1+i)) { c.framep2s1 = 'redframe'; }
+                if(c.set1p1==(maxpoints+i) && c.set1p2<(maxpoints-1+i)) { c.framep1s1 = 'redframe'; }
+                if(c.set1p2==(maxpoints+i) && c.set1p1<(maxpoints-1+i)) { c.framep2s1 = 'redframe'; }
             }
             for(var i=0;i<9;i++)
             {
-              if(c.set2p1==(maxpoints+i) && c.set2p2<(maxpoints-1+i)) { c.framep1s2 = 'redframe'; }
-              if(c.set2p2==(maxpoints+i) && c.set2p1<(maxpoints-1+i)) { c.framep2s2 = 'redframe'; }
+                if(c.set2p1==(maxpoints+i) && c.set2p2<(maxpoints-1+i)) { c.framep1s2 = 'redframe'; }
+                if(c.set2p2==(maxpoints+i) && c.set2p1<(maxpoints-1+i)) { c.framep2s2 = 'redframe'; }
             }
             for(var i=0;i<9;i++)
             {
-              if(c.set3p1==(maxpoints+i) && c.set3p2<(maxpoints-1+i)) { c.framep1s3 = 'redframe'; }
-              if(c.set3p2==(maxpoints+i) && c.set3p1<(maxpoints-1+i)) { c.framep2s3 = 'redframe'; }
+                if(c.set3p1==(maxpoints+i) && c.set3p2<(maxpoints-1+i)) { c.framep1s3 = 'redframe'; }
+                if(c.set3p2==(maxpoints+i) && c.set3p1<(maxpoints-1+i)) { c.framep2s3 = 'redframe'; }
             }
             if(c.set1p1==30) c.framep1s1 = 'redframe';
             if(c.set1p2==30) c.framep2s1 = 'redframe';
@@ -106,8 +106,8 @@ if (Meteor.isClient) {
 
             // get rid of 3rd set if its unused
             if(c.set3p1 == 0 && c.set3p2 ==0) {
-              c.set3p1 = '';
-              c.set3p2 = '';
+                c.set3p1 = '';
+                c.set3p2 = '';
             }
 
             if(c.set1p1 == undefined && c.set1p2 == undefined) {
@@ -127,26 +127,35 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
+    Meteor.startup(function () {
 
-    // code to run on server at startup
-    collectionApi = new CollectionAPI({ authToken: '97f0ad9e24ca5e0408a269748d7fe0a0' });
-    collectionApi.addCollection(Courts, 'courts');
-    collectionApi.addCollection(Connections, 'connections');
-    collectionApi.addCollection(Control, 'control');
-    collectionApi.start();
-    //Connections.remove({});
-    Control.remove({});
-    Control.insert({value:"0",_id:"BackgroundTime"});
-    //Control.insert({_id: "hostAddress", "value": ""});
+        // code to run on server at startup
+        collectionApi = new CollectionAPI({ authToken: '97f0ad9e24ca5e0408a269748d7fe0a0' });
+        collectionApi.addCollection(Courts, 'courts');
+        collectionApi.addCollection(Connections, 'connections');
+        collectionApi.addCollection(Control, 'control');
+        collectionApi.start();
+        //Connections.remove({});
+        Control.remove({});
+        Control.insert({value:"0",_id:"BackgroundTime"});
 
-    for(var i = 0; i < Connections.find().count(); i++)
-    {
-        if(Connections.find().fetch()[i]._id.substr(0,7)=="device-") {
-            Connections.update({_id:Connections.find().fetch()[i]._id},{ $set: {color: ''}});
+        //Control.insert({_id: "hostAddress", "value": ""});
+
+        for(var i = 1; i < 12; i++)
+        {
+            try {
+                Courts.insert({_id:"court"+i});
+            }
+            catch (e) {}
         }
-    }
-  });
+
+        for(var i = 0; i < Connections.find().count(); i++)
+        {
+            if(Connections.find().fetch()[i]._id.substr(0,7)=="device-") {
+                Connections.update({_id:Connections.find().fetch()[i]._id},{ $set: {color: ''}});
+            }
+        }
+    });
 
     Meteor.methods({registerMonitor: function() {
 
@@ -154,11 +163,16 @@ if (Meteor.isServer) {
         clientAddress = '-' + clientAddress.split('.')[3];
 
         // every connection needs to have a color for better visualisation
-        if(Connections.findOne({_id: "device-Meteor" + clientAddress}).color == "") {
-            console.log('give connection a color ' + clientAddress + ' -> ' + colors[colorCounter]);
-            Connections.update({_id: "device-Meteor" + clientAddress}, {$set: {color: colors[colorCounter]}});
-            colorCounter++;
+        try {
+            if(Connections.findOne({_id: "device-Meteor" + clientAddress}).color == "") {
+                console.log('give connection a color ' + clientAddress + ' -> ' + colors[colorCounter]);
+                Connections.update({_id: "device-Meteor" + clientAddress}, {$set: {color: colors[colorCounter]}});
+                colorCounter++;
+            }
+        } catch (e) {
+            Connections.update({_id: "device-Meteor" + clientAddress}, {$set: {color: ""}});
         }
+
         var serverAddress = this.connection.httpHeaders["host"].replace(":3000","");  //TODO: replace 3000 to meteor port
 
         try { // TODO: does this really needs to be here?
@@ -166,7 +180,7 @@ if (Meteor.isServer) {
         }
         catch (e) {}
         return Meteor.http.call("GET","http://"+serverAddress+"/badminton-livescore-v2/output.php?debugid=Meteor" + clientAddress);
-        
+
     } });
 
     Meteor.methods({getCourt: function() {
