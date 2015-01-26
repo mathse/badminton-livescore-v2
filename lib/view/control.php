@@ -28,7 +28,7 @@ include('../../settings.php');
     /*border: 2px dashed gray;*/
 	margin: 1%;
     padding: 1%;
-	//margin-left: auto; margin-right: auto;
+	/*//margin-left: auto; margin-right: auto;*/
 }
 .display {
 	width: 80px;
@@ -76,9 +76,20 @@ foreach ($courtlayout as $r) {
 	?><div style="clear: both"></div><?php
 }
 ?>
-	<div class="displays" id="displays">
+    <div class="court" style="float: left; height: 50px; width: 15%">2x
+        <div id="courtID-2"></div>
+    </div>
+    <div class="court" style="float: left; height: 50px; width: 15%">6x
+        <div id="courtID-6"></div>
+    </div>
+    <div class="court" style="float: left; height: 50px; width: 15%">12x
+        <div id="courtID-12"></div>
+    </div>
+    <div class="displays" style="float: left; width: 20%" id="displays">
 
-	</div>
+    </div>
+    <div style="clear: both"></div>
+
     <div style="position: absolute; right: 20px; bottom: 20px"><button style="height: 30px" onclick="toggleColor()">background-color</button><input style="display: none" type="text" id="state" value="false"></div>
 </div>
 

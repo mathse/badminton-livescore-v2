@@ -68,6 +68,20 @@ if (Meteor.isClient) {
 
         var c = Courts.findOne({_id: 'court'+thisCourt});
         console.log(c);
+        if(thisCourt > 0) {
+            c.isSingleCourt = true;
+        }
+        if(thisCourt == -2) {
+            c.isTwoCourts = true;
+        }
+        if(thisCourt == -6) {
+            c.isSixCourts = true;
+        }
+        if(thisCourt == -12) {
+            c.isTwelfeCourts = true;
+        }
+
+
         var currentSet = 0;
 
         if(c != undefined) {
@@ -144,7 +158,8 @@ if (Meteor.isServer) {
         for(var i = 1; i < 12; i++)
         {
             try {
-                Courts.insert({_id:"court"+i});
+                //Courts.insert({_id:"court"+i});
+                Courts.insert({_id:"court"+i,"p1":Math.random().toString(36).substring(7),"p2":Math.random().toString(36).substring(7)}); // adding sample data
             }
             catch (e) {}
         }
