@@ -66,21 +66,33 @@ if (Meteor.isClient) {
 
         var maxpoints = 21;
 
-        var c = Courts.findOne({_id: 'court'+thisCourt});
-        console.log(c);
+
+        console.log(thisCourt);
         if(thisCourt > 0) {
+            var c = Courts.findOne({_id: 'court'+thisCourt});
             c.isSingleCourt = true;
         }
-        if(thisCourt == -2) {
+        if(thisCourt == "-2") {
+            var c = [];
+            for(var i = 1; i < 2; i++) {
+                c[i] = Courts.findOne({_id: 'court'+i});
+            }
             c.isTwoCourts = true;
         }
-        if(thisCourt == -6) {
+        if(thisCourt == "-6") {
+            var c = [];
+            for(var i = 1; i < 6; i++) {
+                c[i] = Courts.findOne({_id: 'court'+i});
+            }
             c.isSixCourts = true;
         }
-        if(thisCourt == -12) {
+        if(thisCourt == "-12") {
+            var c = [];
+            for(var i = 1; i < 12; i++) {
+                c[i] = Courts.findOne({_id: 'court'+i});
+            }
             c.isTwelfeCourts = true;
         }
-
 
         var currentSet = 0;
 
