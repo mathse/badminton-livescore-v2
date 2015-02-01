@@ -73,11 +73,13 @@ if (Meteor.isClient) {
         var displayCourtCount = 1;
         var c = {};
         var displayContent = [];
-
+console.log(thisCourt);
         if(thisCourt > 0) {
+
             displayContent[0] = Courts.findOne({_id: 'court'+thisCourt});
             c.courts = displayContent;
             c.isSingleCourt = true;
+            console.log(c);
         }
         if(thisCourt == "-2") {
             for(var i = 0; i < 2; i++) {
@@ -100,14 +102,14 @@ if (Meteor.isClient) {
                 displayContent[i] = Courts.findOne({_id: 'court'+(i+1)});
             }
             c.courts = displayContent;
-            c.isTwelfeCourts = true;
+            c.isTwelveCourts = true;
+            //c.isTwelveCourts
             displayCourtCount = 12;
         }
 
         for(var displayCourt = 0; displayCourt < displayCourtCount; displayCourt++ ) {
             var currentSet = 0;
 
-        //if(c != undefined) {
             // set gray borders -> no bumping around
             c.courts[displayCourt].framep1s1 = 'grayframe'; c.courts[displayCourt].framep1s2 = 'grayframe'; c.courts[displayCourt].framep1s3 = 'grayframe';
             c.courts[displayCourt].framep2s1 = 'grayframe'; c.courts[displayCourt].framep2s2 = 'grayframe'; c.courts[displayCourt].framep2s3 = 'grayframe';
@@ -181,7 +183,7 @@ if (Meteor.isServer) {
 
         //Control.insert({_id: "hostAddress", "value": ""});
 
-        for(var i = 1; i < 12; i++)
+        for(var i = 1; i <= 12; i++)
         {
             try {
                 //Courts.insert({_id:"court"+i});

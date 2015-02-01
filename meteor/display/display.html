@@ -38,27 +38,12 @@
     {{#if court}}
         {{#if court.isSingleCourt}}
             {{#each court.courts}}
-                <table class="output">
-                    <tr>
-                        <td class="names" colspan="3"><img src="http://{{hostAddress}}/badminton-livescore-v2/img/flags/{{this.p1flag}}.png"> {{this.p1}}</td>
-                    </tr>
-                    <tr id="scoresp1">
-                        <td class="scoreboard {{court.courts[1].framep1s1}}">{{this.set1p1}}</td>
-                        <td class="scoreboard {{court.courts[1].framep1s2}}">{{court.courts[1].set2p1}}</td>
-                        <td class="scoreboard {{court.courts[1].framep1s3}}">{{court.courts[1].set3p1}}</td>
-                    </tr>
-                    <tr id="scoresp2">
-                        <td class="scoreboard {{court.courts[1].framep2s1}}">{{court.courts[1].set1p2}}</td>
-                        <td class="scoreboard {{court.courts[1].framep2s2}}">{{court.courts[1].set2p2}}</td>
-                        <td class="scoreboard {{court.courts[1].framep2s3}}">{{court.courts[1].set3p2}}</td>
-                    </tr>
-                    <tr>
-                        <td class="names" colspan="3"><img src="http://{{hostAddress}}/badminton-livescore-v2/img/flags/{{court.courts[1].p2flag}}.png"> {{court.courts[1].p2}}</td>
-                    </tr>
-                    <tr><td colspan="3" style=" height: 2px"></td></tr>
-                </table>
-        {{/each}}
+                <div style="width: 100%; height: 100%; float: left; ">
+                    {{> courtTable}}
+                </div>
+            {{/each}}
         {{/if}}
+
         {{#if court.isSixCourts}}
             {{#each court.courts}}
                 <div style=" width: 33%; height: 50%; float: left; zoom: 0.33">
@@ -66,9 +51,10 @@
                 </div>
             {{/each}}
         {{/if}}
+
         {{#if court.isTwelveCourts}}
             {{#each court.courts}}
-                <div style=" width: 25%; height: 33%; float: left; zoom: 0.33">
+                <div style=" width: 25%; height: 33%; float: left; zoom: 0.33;">
                     {{> courtTable}}
                 </div>
             {{/each}}
@@ -79,7 +65,7 @@
     </div>
 
     {{/if}}
-    <div id="debug-data">{{court.courts}}
+    <div id="debug-data">
     {{#if connection}}
         {{connection}}
     {{/if}}
