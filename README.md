@@ -18,6 +18,16 @@ Tablets can be anything (Android Tablets, iPad, iPhone, iPod-Touch, Windows-Tabl
 - my monitors/tv's will soon be running of a raspberry pi in kiosk mode (see https://github.com/mathse/rpi-sdcard-automation)
 - my tablets are at the moment 4 Touchlet X2 and 8 Coby Kyros with a dolphin browser in full screen mode
 
+What is needed
+--------------
+
+apache/httpd
+php5 php5-curl
+
+on ubuntu: apt-get intall apache2 php5 php5-curl
+
+
+
 How do i set it up?
 ===================
 clone the project to your apache's document root and run "bash ./setup.sh"
