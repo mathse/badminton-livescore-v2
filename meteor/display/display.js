@@ -35,6 +35,11 @@ if (Meteor.isClient) {
         return r;
     }
 
+    Template.courtTable.hostAddress = function() {
+        //console.log(location.hostname);
+        return location.hostname;
+    }
+
     Template.singleTable.hostAddress = function() {
         //console.log(location.hostname);
         return location.hostname;
@@ -65,90 +70,99 @@ if (Meteor.isClient) {
 
 
         var maxpoints = 21;
+        var displayCourtCount = 1;
+        var c = {};
+        var displayContent = [];
 
-
-        console.log(thisCourt);
         if(thisCourt > 0) {
-            var c = Courts.findOne({_id: 'court'+thisCourt});
+            displayContent[0] = Courts.findOne({_id: 'court'+thisCourt});
+            c.courts = displayContent;
             c.isSingleCourt = true;
         }
         if(thisCourt == "-2") {
-            var c = [];
-            for(var i = 1; i < 2; i++) {
-                c[i] = Courts.findOne({_id: 'court'+i});
+            for(var i = 0; i < 2; i++) {
+                displayContent[i] = Courts.findOne({_id: 'court'+(i+1)});
             }
+            c.courts = displayContent;
             c.isTwoCourts = true;
+            displayCourtCount = 2;
         }
         if(thisCourt == "-6") {
-            var c = [];
-            for(var i = 1; i < 6; i++) {
-                c[i] = Courts.findOne({_id: 'court'+i});
+            for(var i = 0; i < 6; i++) {
+                displayContent[i] = Courts.findOne({_id: 'court'+(i+1)});
             }
+            c.courts = displayContent;
             c.isSixCourts = true;
+            displayCourtCount = 6;
         }
         if(thisCourt == "-12") {
-            var c = [];
-            for(var i = 1; i < 12; i++) {
-                c[i] = Courts.findOne({_id: 'court'+i});
+            for(var i = 0; i < 12; i++) {
+                displayContent[i] = Courts.findOne({_id: 'court'+(i+1)});
             }
+            c.courts = displayContent;
             c.isTwelfeCourts = true;
+            displayCourtCount = 12;
         }
 
-        var currentSet = 0;
+        for(var displayCourt = 0; displayCourt < displayCourtCount; displayCourt++ ) {
+            var currentSet = 0;
 
-        if(c != undefined) {
+        //if(c != undefined) {
             // set gray borders -> no bumping around
-            c.framep1s1 = 'grayframe'; c.framep1s2 = 'grayframe'; c.framep1s3 = 'grayframe';
-            c.framep2s1 = 'grayframe'; c.framep2s2 = 'grayframe'; c.framep2s3 = 'grayframe';
+            c.courts[displayCourt].framep1s1 = 'grayframe'; c.courts[displayCourt].framep1s2 = 'grayframe'; c.courts[displayCourt].framep1s3 = 'grayframe';
+            c.courts[displayCourt].framep2s1 = 'grayframe'; c.courts[displayCourt].framep2s2 = 'grayframe'; c.courts[displayCourt].framep2s3 = 'grayframe';
 
             // set green markers for service
-            if(c.set1p1>0 || c.set1p2>0) currentSet = 1;
-            if(c.set2p1>0 || c.set2p2>0) currentSet = 2;
-            if(c.set3p1>0 || c.set3p2>0) currentSet = 3;
-            eval('c.framep' + c.service + 's' + currentSet + ' = "greenframe";');
+            if(c.courts[displayCourt].set1p1>0 || c.courts[displayCourt].set1p2>0) currentSet = 1;
+            if(c.courts[displayCourt].set2p1>0 || c.courts[displayCourt].set2p2>0) currentSet = 2;
+            if(c.courts[displayCourt].set3p1>0 || c.courts[displayCourt].set3p2>0) currentSet = 3;
+            eval('c.courts[displayCourt].framep' + c.courts[displayCourt].service + 's' + currentSet + ' = "greenframe";');
 
             // set borders for won sets
             for(var i=0;i<9;i++)
             {
-                if(c.set1p1==(maxpoints+i) && c.set1p2<(maxpoints-1+i)) { c.framep1s1 = 'redframe'; }
-                if(c.set1p2==(maxpoints+i) && c.set1p1<(maxpoints-1+i)) { c.framep2s1 = 'redframe'; }
+                if(c.courts[displayCourt].set1p1==(maxpoints+i) && c.courts[displayCourt].set1p2<(maxpoints-1+i)) { c.courts[displayCourt].framep1s1 = 'redframe'; }
+                if(c.courts[displayCourt].set1p2==(maxpoints+i) && c.courts[displayCourt].set1p1<(maxpoints-1+i)) { c.courts[displayCourt].framep2s1 = 'redframe'; }
             }
             for(var i=0;i<9;i++)
             {
-                if(c.set2p1==(maxpoints+i) && c.set2p2<(maxpoints-1+i)) { c.framep1s2 = 'redframe'; }
-                if(c.set2p2==(maxpoints+i) && c.set2p1<(maxpoints-1+i)) { c.framep2s2 = 'redframe'; }
+                if(c.courts[displayCourt].set2p1==(maxpoints+i) && c.courts[displayCourt].set2p2<(maxpoints-1+i)) { c.courts[displayCourt].framep1s2 = 'redframe'; }
+                if(c.courts[displayCourt].set2p2==(maxpoints+i) && c.courts[displayCourt].set2p1<(maxpoints-1+i)) { c.courts[displayCourt].framep2s2 = 'redframe'; }
             }
             for(var i=0;i<9;i++)
             {
-                if(c.set3p1==(maxpoints+i) && c.set3p2<(maxpoints-1+i)) { c.framep1s3 = 'redframe'; }
-                if(c.set3p2==(maxpoints+i) && c.set3p1<(maxpoints-1+i)) { c.framep2s3 = 'redframe'; }
+                if(c.courts[displayCourt].set3p1==(maxpoints+i) && c.courts[displayCourt].set3p2<(maxpoints-1+i)) { c.courts[displayCourt].framep1s3 = 'redframe'; }
+                if(c.courts[displayCourt].set3p2==(maxpoints+i) && c.courts[displayCourt].set3p1<(maxpoints-1+i)) { c.courts[displayCourt].framep2s3 = 'redframe'; }
             }
-            if(c.set1p1==30) c.framep1s1 = 'redframe';
-            if(c.set1p2==30) c.framep2s1 = 'redframe';
-            if(c.set2p1==30) c.framep1s2 = 'redframe';
-            if(c.set2p2==30) c.framep2s2 = 'redframe';
-            if(c.set3p1==30) c.framep1s3 = 'redframe';
-            if(c.set3p2==30) c.framep2s3 = 'redframe';
+            if(c.courts[displayCourt].set1p1==30) c.courts[displayCourt].framep1s1 = 'redframe';
+            if(c.courts[displayCourt].set1p2==30) c.courts[displayCourt].framep2s1 = 'redframe';
+            if(c.courts[displayCourt].set2p1==30) c.courts[displayCourt].framep1s2 = 'redframe';
+            if(c.courts[displayCourt].set2p2==30) c.courts[displayCourt].framep2s2 = 'redframe';
+            if(c.courts[displayCourt].set3p1==30) c.courts[displayCourt].framep1s3 = 'redframe';
+            if(c.courts[displayCourt].set3p2==30) c.courts[displayCourt].framep2s3 = 'redframe';
 
             // get rid of 3rd set if its unused
-            if(c.set3p1 == 0 && c.set3p2 ==0) {
-                c.set3p1 = '';
-                c.set3p2 = '';
+            if(c.courts[displayCourt].set3p1 == 0 && c.courts[displayCourt].set3p2 ==0) {
+                c.courts[displayCourt].set3p1 = '';
+                c.courts[displayCourt].set3p2 = '';
             }
 
-            if(c.set1p1 == undefined && c.set1p2 == undefined) {
+            if(c.courts[displayCourt].set1p1 == undefined && c.courts[displayCourt].set1p2 == undefined) {
                 console.log("disabled scoreboard");
-                $("#scoresp1").hide();
+                //$("#scoresp1").hide();
                 $("#vs").show();
-                $("#scoresp2").hide();
+                //$("#scoresp2").hide();
             } else {
                 console.log("enabled scoreboard");
                 $("#scoresp1").show();
                 $("#vs").hide();
                 $("#scoresp2").show();
             }
-            return c;
+            //return c;
+            //console.log(c.courts[displayCourt]);
         }
+        console.log(c);
+        return c;
     };
 }
 
@@ -171,7 +185,7 @@ if (Meteor.isServer) {
         {
             try {
                 //Courts.insert({_id:"court"+i});
-                Courts.insert({_id:"court"+i,"p1":Math.random().toString(36).substring(7),"p2":Math.random().toString(36).substring(7)}); // adding sample data
+                Courts.insert({_id:"court"+i,"p1flag":"AAA","p2flag":"AAA","p1":Math.random().toString(36).substring(7),"p2":Math.random().toString(36).substring(7)}); // adding sample data
             }
             catch (e) {}
         }
