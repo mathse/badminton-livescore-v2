@@ -73,7 +73,7 @@ if (Meteor.isClient) {
         var displayCourtCount = 1;
         var c = {};
         var displayContent = [];
-console.log(thisCourt);
+
         if(thisCourt > 0) {
 
             displayContent[0] = Courts.findOne({_id: 'court'+thisCourt});
@@ -103,13 +103,14 @@ console.log(thisCourt);
             }
             c.courts = displayContent;
             c.isTwelveCourts = true;
+
             //c.isTwelveCourts
             displayCourtCount = 12;
         }
 
         for(var displayCourt = 0; displayCourt < displayCourtCount; displayCourt++ ) {
             var currentSet = 0;
-
+            c.courts[displayCourt].thisCourtId = displayCourt;
             // set gray borders -> no bumping around
             c.courts[displayCourt].framep1s1 = 'grayframe'; c.courts[displayCourt].framep1s2 = 'grayframe'; c.courts[displayCourt].framep1s3 = 'grayframe';
             c.courts[displayCourt].framep2s1 = 'grayframe'; c.courts[displayCourt].framep2s2 = 'grayframe'; c.courts[displayCourt].framep2s3 = 'grayframe';
@@ -150,20 +151,14 @@ console.log(thisCourt);
             }
 
             if(c.courts[displayCourt].set1p1 == undefined && c.courts[displayCourt].set1p2 == undefined) {
-                console.log("disabled scoreboard");
-                //$("#scoresp1").hide();
-                $("#vs").show();
-                //$("#scoresp2").hide();
+                c.courts[displayCourt].scoreBoardEnabled = false;
             } else {
-                console.log("enabled scoreboard");
-                $("#scoresp1").show();
-                $("#vs").hide();
-                $("#scoresp2").show();
+                c.courts[displayCourt].scoreBoardEnabled = true;
             }
+
             //return c;
             //console.log(c.courts[displayCourt]);
         }
-        console.log(c);
         return c;
     };
 }
@@ -205,15 +200,11 @@ if (Meteor.isServer) {
         var clientAddress = this.connection.clientAddress;
         clientAddress = '-' + clientAddress.split('.')[3];
 
-        // every connection needs to have a color for better visualisation
-        try {
-            if(Connections.findOne({_id: "device-Meteor" + clientAddress}).color == "") {
-                console.log('give connection a color ' + clientAddress + ' -> ' + colors[colorCounter]);
-                Connections.update({_id: "device-Meteor" + clientAddress}, {$set: {color: colors[colorCounter]}});
-                colorCounter++;
-            }
-        } catch (e) {
-            Connections.update({_id: "device-Meteor" + clientAddress}, {$set: {color: ""}});
+        console.log("boing");
+        for(var i = 0; i < Connections.find().count(); i++)
+        {
+                console.log('give connection a color ' + Connections.find().fetch()[i]._id + ' -> ' + colors[i]);
+                Connections.update({_id: Connections.find().fetch()[i]._id}, {$set: {color: colors[i]}});
         }
 
         var serverAddress = this.connection.httpHeaders["host"].replace(":3000","");  //TODO: replace 3000 to meteor port
@@ -228,16 +219,11 @@ if (Meteor.isServer) {
 
     Meteor.methods({getCourt: function() {
         var clientAddress = this.connection.clientAddress;
-        //console.log(clientAddress);
-        //if (clientAddress == 'titan') {
-        //    clientAddress = '-Server';
-        //} else {
         clientAddress = '-' + clientAddress.split('.')[3];
-        //}
-        //var serverAddress = this.connection.httpHeaders["host"].replace(":3000","");
-        //console.log(this.connection.httpHeaders["host"].replace(":3000",""));
-        //console.log(this.connection.httpHeaders["x-forwarded-for"]);
-        //var serverAddress = this.connection.httpHeaders["x-forwarded-for"];
+//        console.log("runnig getcourt function" +clientAddress);
+        // every connection needs to have a color for better visualisation
+
+
         try {
             return Connections.findOne({_id: "device-Meteor" + clientAddress}).court;
         }
@@ -254,9 +240,6 @@ if (Meteor.isServer) {
         var clientAddress = this.connection.clientAddress;
         clientAddress = '-' + clientAddress.split('.')[3];
 
-        //var serverAddress = this.connection.httpHeaders["host"].replace(":3000","");
-        //var serverAddress = this.connection.httpHeaders["x-forwarded-for"];
-        //console.log("devid:" + "device-Meteor" + clientAddress);
         return "device-Meteor" + clientAddress;
     } });
 

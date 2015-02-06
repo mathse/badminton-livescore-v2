@@ -9,7 +9,8 @@ $width['android'] = 1100;
 $height['android'] = 800;
 
 if(@$_GET['debugid']) {
-	$deviceid = str_replace("127.0.0.1-","",$_SERVER['REMOTE_ADDR'].'-'.@$_GET['debugid']);
+	//$deviceid = str_replace("127.0.0.1-","",$_SERVER['REMOTE_ADDR'].'-'.@$_GET['debugid']);
+	$deviceid = $_GET['debugid'];
 } else {
 	$deviceid = $_SERVER['REMOTE_ADDR'];
 }

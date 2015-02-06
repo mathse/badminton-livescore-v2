@@ -11,20 +11,26 @@
 </template>
 
 <template name="courtTable">
-    <table class="output" >
+    <table class="output" border="1">
         <tr>
             <td class="names" colspan="3"><img src="http://{{hostAddress}}/badminton-livescore-v2/img/flags/{{this.p1flag}}.png"> {{this.p1}}</td>
         </tr>
-        <tr id="scoresp1">
+        {{#if this.scoreBoardEnabled}}
+        <tr>
             <td class="scoreboard {{this.framep1s1}}">{{this.set1p1}}</td>
             <td class="scoreboard {{this.framep1s2}}">{{this.set2p1}}</td>
             <td class="scoreboard {{this.framep1s3}}">{{this.set3p1}}</td>
         </tr>
-        <tr id="scoresp2">
+        <tr>
             <td class="scoreboard {{this.framep2s1}}">{{this.set1p2}}</td>
             <td class="scoreboard {{this.framep2s2}}">{{this.set2p2}}</td>
             <td class="scoreboard {{this.framep2s3}}">{{this.set3p2}}</td>
         </tr>
+        {{else}}
+        <tr>
+            <td class="names" colspan="3">vs</td>
+        </tr>
+        {{/if}}
         <tr>
             <td class="names" colspan="3"><img src="http://{{hostAddress}}/badminton-livescore-v2/img/flags/{{this.p2flag}}.png"> {{this.p2}}</td>
         </tr>
