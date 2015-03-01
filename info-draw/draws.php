@@ -37,8 +37,11 @@ function file_get_cached_contents($url) {
 $f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/draw.aspx?id=".$tID."&draw=".$_GET['draw']);
 $f = str_replace("/VisualResource.ashx","./VisualResource.css",$f);
 $f = str_replace("All matches...","",$f);
+$re = '/<title>[ \r\n\t\w\d\.\ ]+ - ([\w\d\.\ ]+) - [ \r\n\t\w\d\.\ ]+<\/title>/';
+preg_match($re, $f, $matches);
+//print_r($matches);
 ?><div id="myheader" style="position: absolute; top: 0px; left: 0px; background: rgba(0,0,0,0.7);; width: 100%; ">
-<h1 style="padding: 10px; font-size: 2em">27. Deutsche Meisterschaften - Sonntag <?php echo date("d.m.Y",time()); ?> - <?php
+<h1 style="padding: 10px; font-size: 2em"><?php echo $matches[1]; ?> - <?php echo date("l d.m.Y",time()); ?> - <?php
 $caption = explode("caption>",$f);
 echo $caption[1];
 
