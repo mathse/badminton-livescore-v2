@@ -23,3 +23,5 @@ players/*.txt
 settings.php
 .idea
 players/zz.txt
+info-draw/cache
+tmp
