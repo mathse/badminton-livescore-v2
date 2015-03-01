@@ -1,7 +1,7 @@
 <meta http-equiv="refresh" content="180; URL=matches.php">
 
 <?php
-$tID = '74EFFA13-D03E-4F75-8C55-9A4227C63312';
+include('../settings.php');
 $day = date("Ymd",time());
 if($day == "20140305") { $day = "20140306"; }
 

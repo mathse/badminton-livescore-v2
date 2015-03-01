@@ -1,5 +1,6 @@
 <?php
-$tID = '74EFFA13-D03E-4F75-8C55-9A4227C63312';
+include('../settings.php');
+
 if(!$_GET['draw']) { $_GET['draw']=1; }
 $next = $_GET['draw']+1;
 
