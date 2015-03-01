@@ -40,32 +40,67 @@ include('../../settings.php');
     padding-bottom: 15px;
     /*height: 10%;*/
 	/*border: 2px dotted gray;*/
-	float: left;	
+	float: left;
+    z-index: 1000;
 }
 </style>
 
 <script type="text/javascript">
     function toggleColor() {
-//       alert($('#state').val());
-        if($('#state').val() == "true") {
+        if($('#colorState').val() == "true") {
             $.ajax({url: '../controller/meteorApi.php?bgtime={"value":"0"}'});
-            $('#state').val("false");
+            $('#colorState').val("false");
 
         } else {
             $.ajax({url: '../controller/meteorApi.php?bgtime={"value":"1"}'});
-            $('#state').val("true");
+            $('#colorState').val("true");
+        }
+    }
+    function toggleAds() {
+        if($('#adsState').val() == "true") {
+            $.ajax({url: '../controller/meteorApi.php?showAds={"value":"none"}'});
+            $('#adsState').val("false");
+
+        } else {
+            $.ajax({url: '../controller/meteorApi.php?showAds={"value":"show"}'});
+            $('#adsState').val("true");
         }
     }
 
+    function setPoint(court, player, set, value) {
+        $.ajax({url: '../../setcourt.php?court='+court+'&player='+player+'&set='+set+'&value='+value});
+    }
 
+    function changeText() {
+        $.ajax({url: '../controller/meteorApi.php?textToShow={"value":"'+$('#adsText').val().replace(/"/g,"'").replace(/\n/g,"<br>")+'"}'});
+    }
 </script>
 
 <div style="margin-left: auto; margin-right: auto; " id="courts">
 <?php
 foreach ($courtlayout as $r) {
 	foreach ($r as $c) {
-		?><div class="court" style="float: left">Court <?php echo $c; ?>
+		?><div class="court" style="float: left; position: relative">Court <?php echo $c; ?>
 			<div id="courtID<?php echo $c; ?>"></div>
+            <div style="position: absolute; bottom: 10px; right: 10px; ">
+                <table style="background-color: transparent">
+                    <tr>
+                        <?php for($p=1;$p<3;$p++) {
+                            for($s=1;$s<4;$s++) {
+                                ?>
+                                <td style="background-color: transparent">
+                                    <button style="width: 25px" onclick="setPoint(<?php echo $c; ?>,<?php echo $p; ?>,<?php echo $s; ?>,'+')">+</button>
+                                    <br>
+                                    <button style="width: 25px" onclick="setPoint(<?php echo $c; ?>,<?php echo $p; ?>,<?php echo $s; ?>,'-')">-</button>
+                                </td>
+                                <?php
+                                }
+                                ?></tr><tr><?php
+                            }
+                        ?>
+                    </tr>
+                </table>
+            </div>
 		</div>
         <script type="javascript">
 
@@ -87,10 +122,15 @@ foreach ($courtlayout as $r) {
     </div>
     <div class="displays" style="float: left; width: 20%" id="displays">
 
-    </div>
-    <div style="clear: both"></div>
+    </div>    <div style="clear: both"></div>
 
-    <div style="position: absolute; right: 20px; bottom: 20px"><button style="height: 30px" onclick="toggleColor()">background-color</button><input style="display: none" type="text" id="state" value="false"></div>
+    <div style="position: absolute; right: 20px; bottom: 20px">
+        <textarea  id="adsText"  onkeyup="changeText()" style="width: 100%; height: 100px"></textarea><br>
+        <button style="height: 30px" onclick="toggleAds()">Werbung / Text</button>
+        <input style="display: none" type="text" id="adsState" value="false">
+        <button style="height: 30px" onclick="toggleColor()">Displays einf&auml;rben</button>
+        <input style="display: none" type="text" id="colorState" value="false">
+    </div>
 </div>
 
 <script type="text/javascript">
