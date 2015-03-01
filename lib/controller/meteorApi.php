@@ -34,3 +34,11 @@ if($_GET['colorForDevice']!="") {
     echo json_decode(curl_exec($ch))[0]->color;
     curl_close($ch);
 }
+
+if($_GET['showAds']!="") {
+    sendToMeteorDB('control', 'showAds', $_GET['showAds']);
+}
+
+if($_GET['textToShow']) {
+    sendToMeteorDB('control', 'textToShow', urldecode($_GET['textToShow']));
+}
