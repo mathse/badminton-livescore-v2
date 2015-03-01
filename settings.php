@@ -19,6 +19,9 @@ $maxpoints=21;
 // autoswitch "flag" - altersklassen bei meisterschaften
 $sameNationTrigger=false;
 
+// tournament ID
+$tID = '770AE676-7E31-4F10-A61E-E8B6C2F8B00F';
+
 /*
 #### #### #### #### 
 #10# # 7# # 4# # 1# 
