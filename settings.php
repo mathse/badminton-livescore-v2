@@ -3,7 +3,7 @@
 error_reporting(-1);
 ini_set('display_errors', 'Off');
 
-$courts=2;
+$courts=6;
 $updateInterval = '1';
 $width['android'] = 1100;
 $height['android'] = 800;
@@ -51,8 +51,15 @@ $courtlayout = array(
 
 
 $courtlayout = array(
- array(1,2),
+ array(6,4,2),
+ array(5,3,1),
 );
+
+
+
+//$courtlayout = array(
+// array(1,2),
+//);
 
 
 
