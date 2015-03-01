@@ -40,10 +40,19 @@
 
 <template name="singleTable">
 
-
     {{#if court}}
         {{#if court.isSingleCourt}}
             {{#each court.courts}}
+                <div style="display: {{this.showAds }}; background-color: black; position: absolute; width: 100%; height: 100%;" >
+                    <table style="width: 100%; height: 100%"><td valign="middle" align="center" style="font-size: 1000%">
+                    {{#if this.textToShow}}
+                        {{{this.textToShow}}}
+                    {{else}}
+
+                        <iframe src="http://{{hostAddress}}/badminton-livescore-v2/lib/view/sponsors.php" style="width: 1290px; height: 730px" frameborder="0"></iframe>
+                    {{/if}}
+                    </td></table>
+                </div>
                 <div style="width: 100%; height: 100%; float: left; ">
                     {{> courtTable}}
                 </div>
@@ -52,7 +61,8 @@
 
         {{#if court.isSixCourts}}
             {{#each court.courts}}
-                <div style=" width: 33%; height: 50%; float: left; zoom: 0.33">
+                <div style=" width: 33%; height: 50%; float: left; zoom: 0.33; position: relative">
+                    <div style="position: absolute; right: 50px; bottom: 20px; font-size: 2000%; z-index: -1; opacity: 0.2 ">{{this._id}}</div>
                     {{> courtTable}}
                 </div>
             {{/each}}

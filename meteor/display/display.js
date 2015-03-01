@@ -77,9 +77,10 @@ if (Meteor.isClient) {
         if(thisCourt > 0) {
 
             displayContent[0] = Courts.findOne({_id: 'court'+thisCourt});
+            displayContent[0].showAds = Control.findOne({_id: 'showAds'}).value;
+            displayContent[0].textToShow = Control.findOne({_id: 'textToShow'}).value;
             c.courts = displayContent;
             c.isSingleCourt = true;
-            console.log(c);
         }
         if(thisCourt == "-2") {
             for(var i = 0; i < 2; i++) {
@@ -90,8 +91,12 @@ if (Meteor.isClient) {
             displayCourtCount = 2;
         }
         if(thisCourt == "-6") {
-            for(var i = 0; i < 6; i++) {
-                displayContent[i] = Courts.findOne({_id: 'court'+(i+1)});
+            //for(var i = 0; i < 6; i++) {
+            var j = 0;
+            var str = "531420";
+            for(var i in str) {
+                displayContent[j] = Courts.findOne({_id: 'court'+(parseInt(str[i])+1)});
+                j++;
             }
             c.courts = displayContent;
             c.isSixCourts = true;
@@ -175,7 +180,9 @@ if (Meteor.isServer) {
         //Connections.remove({});
         Control.remove({});
         Control.insert({value:"0",_id:"BackgroundTime"});
-
+        Control.insert({value:"none",_id:"showAds"});
+        Control.insert({value:"0",_id:"nextAds"});
+        Control.insert({value:"",_id:"textToShow"});
         //Control.insert({_id: "hostAddress", "value": ""});
 
         for(var i = 1; i <= 12; i++)
