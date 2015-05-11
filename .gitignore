@@ -28,3 +28,4 @@ tmp
 img/sponsors/*
 .htaccess
 meteor
+settings.php
