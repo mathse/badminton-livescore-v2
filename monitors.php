@@ -7,7 +7,7 @@ $files = scandir('sessions');
 foreach($files as $file)
 {
 	 
-	if(substr($file,0,1) == '.' || $file == '..' || $file == 'connections' || $file == 'courts' || $file == 'controller' || substr($file,-2,1)=="__") continue;	
+	if(substr($file,0,1) == '.' || $file == '..' || $file == 'connections' || $file == 'courts' || $file == 'controller' || $file == 'matchcards' || substr($file,0,5) == 'zoom_' || substr($file,0,7) == 'direct-' || substr($file,-2,1)=="__") continue;
 	echo "<tr><td>";
 	$now = time();
 	$session = file_get_contents('sessions/'.$file);
@@ -46,5 +46,17 @@ foreach($files as $file)
 }
 ?>
 </table>
+court-zoom:
+<input name="zoomincrease" alt="courts" type="button" value="+" onclick="javascript:pushButton(this,false)">
+<input id="zoomvalue_courts" type="text" value="<?php echo file_get_contents("sessions/zoom_courts"); ?>">
+<input name="zoomdecrease" alt="courts" type="button" value="-" onclick="javascript:pushButton(this,false)">
+
+<br>
+
+spielnummern-zoom:
+<input name="zoomincrease" alt="gamenumber" type="button" value="+" onclick="javascript:pushButton(this,false)">
+<input id="zoomvalue_gamenumber" type="text" value="<?php echo file_get_contents("sessions/zoom_gamenumber"); ?>">
+<input name="zoomdecrease" alt="gamenumber" type="button" value="-" onclick="javascript:pushButton(this,false)">
+
 <!-- <br><br><input type="button" onclick="window.open('index.php?type=output&debugid=<?php echo time(); ?>','mywindow<?php echo time(); ?>','width=400,height=200')" value="open new debug monitor">
 -->
