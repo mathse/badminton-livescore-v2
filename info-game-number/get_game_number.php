@@ -1,1 +1,1 @@
-<?php echo count(scandir('../sessions/matchcards/'))-1; ?>
+<div style="font-size: <?php echo file_get_contents("../sessions/zoom_gamenumber"); ?>">n&auml;chstes Spiel:<br>#<?php echo count(scandir('../sessions/matchcards/'))-1; ?>
