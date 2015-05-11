@@ -160,7 +160,8 @@ if (Meteor.isClient) {
             } else {
                 c.courts[displayCourt].scoreBoardEnabled = true;
             }
-
+            c.courts[displayCourt].p1flag = c.courts[displayCourt].p1flag.substr(0,3);
+            c.courts[displayCourt].p2flag = c.courts[displayCourt].p2flag.substr(0,3);
             //return c;
             //console.log(c.courts[displayCourt]);
         }
