@@ -27,3 +27,4 @@ info-draw/cache
 tmp
 img/sponsors/*
 .htaccess
+meteor
