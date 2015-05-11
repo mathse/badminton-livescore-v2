@@ -10,6 +10,11 @@
 	color: white;
 	scrolling: no;
 	font-family: Arial;
+<?php
+if($_GET['type']=='output' && $_GET['style']==2) { 
+	echo "zoom: 0.75; ";  
+}	
+?>
 }
 body {
 	background: black;
@@ -190,7 +195,12 @@ function pushButton(v,disappear)
 		$('pb1').toggle(); $('pb2').toggle(); $('pb3').toggle(); $('pb4').toggle();
 		$('pb5').toggle(); $('pb6').toggle(); $('pb7').toggle(); $('pb8').toggle();
 	}
-	
+	if(v.name=='zoomincrease' || v.name=='zoomdecrease')
+    {
+        //console.log("setzoom.php?type=&zoom=");
+        new Ajax.Request("setzoom.php?type=" + v.alt + "&zoom=" + (parseInt($('zoomvalue_' + v.alt).value) + (parseInt(v.value+"1") *10)));
+
+    }
 		
 }
 
@@ -673,7 +683,7 @@ photos
 			<img src='img/astrop_black.png'>
 			<br><br>
 			unconnected monitor<br><br>
-			<span style="font-size: 10em; position: absolute; right: 10px; bottom: 10px; opacity:0.2"><?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $ips[3]; ?></span>
+			<span style="display: show; font-size: 10em; position: absolute; right: 10px; bottom: 10px; opacity:0.35"><?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $ips[3]; ?></span>
 			</center>
 		</td>
 	</table>
@@ -696,7 +706,7 @@ photos
 		<td colspan="3" id="namePlayer2">&nbsp;</td>	
 	</tr>
 </table>
-			<span style="font-size: 5em; position: absolute; right: 10px; bottom: 10px; opacity:0.7"><?php if($ips[3]!=69) { echo $ips[3]; } else { echo '<div style="border: 1px solid yellow; border-radius: 10px; padding: 2px; color: yellow">'.$_GET['debugid'].'</div>'; }?></span>
+			<span style="font-size: 5em; position: absolute; right: 10px; bottom: 10px; opacity:0.02"><?php if($ips[3]!=69) { echo $ips[3]; } else { echo '<div style="border: 1px solid yellow; border-radius: 10px; padding: 2px; color: yellow">'.$_GET['debugid'].'</div>'; }?></span>
 
 <?php } ?>
 
