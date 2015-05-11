@@ -1,5 +1,5 @@
 <?php
-header("Content-type: text/xml");
+header("Content-type: text/xml; charset=utf-8");
 include('settings.php');
 //echo '<'.'?xml version="1.0" encoding="UTF-8"?'.'>';
 if(!$_GET['event']) { echo "event is missing"; exit; }
