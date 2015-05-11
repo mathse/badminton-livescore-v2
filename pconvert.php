@@ -1,5 +1,5 @@
 <?php
-$tID = '74EFFA13-D03E-4F75-8C55-9A4227C63312';
+include('settings.php');
 
 $types = array("ms", "ws", "md", "wd", "xd");
 
@@ -29,8 +29,11 @@ foreach($types as $key => $type) {
 		$buffer .= "\n";
 	}
 	$fd = fopen('./players/'.$type.'.txt','w');
-	echo $buffer;
-	fwrite($fd,$buffer);
+	echo html_entity_decode($buffer);
+	$enc = mb_detect_encoding($data);
+	
+	$buffer = mb_convert_encoding($buffer, "UTF-8", $enc);
+	fwrite($fd,html_entity_decode($buffer));
 	fclose($fd);
 }
 
