@@ -1,5 +1,5 @@
 <?php
-header("Content-type: text/xml");
+header("Content-type: text/xml; charset=utf-8");
 include('settings.php');
 error_reporting(E_ERROR | E_PARSE);
 if(!$_GET['input'])
@@ -35,10 +35,10 @@ if($_GET['input']==1 && $_GET['court'])
 	$monitorconnection = $_GET['court'];
 }
 
-//if($_GET['direct'])
-//{
-//	$monitorconnection = $_GET['debugid'];
-//}
+if($_GET['direct'])
+{
+	$monitorconnection = $_GET['debugid'];
+}
 
 if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection))
 {
@@ -113,7 +113,7 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 ?>
 <r>
 	<a><?php echo $monitorconnection; ?></a>
-	<fontsize>150%</fontsize>
+	<fontsize><?php echo file_get_contents("sessions/zoom"); ?>%</fontsize>
 	<names>
 <?php if($flag1!='AAA') { ?>
 	<player1><?php echo $player1; ?></player1>
