@@ -32,7 +32,8 @@ $now = date("H",time())-1;
 #	echo $i;	
 #	$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">[0-9]*'.$i.'/','<tr style="display: none"><td></td><td align="right">+++',$f);
 #}
-$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">[0-9]+:[0-9]+<\/td><td><a href="[a-zA-Z0-9\.\/?=\-&]+">.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+<a href=".+">Sportforum - Feld [0-9]+<\/a><\/td>/','<tr style="display: none">',$f);
+#$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">[0-9]+:[0-9 APM]+<\/td><td><a href="[a-zA-Z0-9\.\/?=\-&]+">.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+<a href=".+">Sport[0-9a-z\- ]+<\/a><\/td>/','<tr style="display: none">',$f);
+$f = preg_replace('/<tr[^>]*>.*?[\d]+-[\d]+<\/span><\/span>/s','<tr style="display: none">',$f);
 $f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">[0-9]+:[0-9]+<\/td><td><a href="[a-zA-Z0-9\.\/?=\-&]+">.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+\n.+Walkover<\/span><\/td>/','<tr style="display: none">',$f);
 
 
