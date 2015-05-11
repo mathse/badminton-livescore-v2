@@ -25,3 +25,5 @@ settings.php
 players/zz.txt
 info-draw/cache
 tmp
+img/sponsors/*
+.htaccess
