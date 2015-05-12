@@ -26,6 +26,7 @@ players/zz.txt
 info-draw/cache
 tmp
 img/sponsors/*
+img/background.jpg
 .htaccess
 meteor
 settings.php
