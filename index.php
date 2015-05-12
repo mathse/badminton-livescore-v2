@@ -174,14 +174,15 @@ function pushButton(v,disappear)
 	}
 	if(v.name=='pointP1' || v.name=='pointP2')
 	{
-		a = (eval($('pl').innerText+v.value+"1"));
-		b = (eval($('pr').innerText+v.value+"1"));
+
+		var a = (eval($('pl').innerHTML+v.value+"1"));
+		var b = (eval($('pr').innerHTML+v.value+"1"));
 		if(switched==0) {
-			if(v.name=='pointP1') {	$('pl').innerText = a; }
-			if(v.name=='pointP2') {	$('pr').innerText = b; }
+			if(v.name=='pointP1') {	$('pl').innerHTML = "<span style='color: #C1B7F3'>" + a + "</span>"; }
+			if(v.name=='pointP2') {	$('pr').innerHTML = "<span style='color: #C1B7F3'>" + b + "</span>"; }
 		} else {
-			if(v.name=='pointP2') {	$('pl').innerText = a; }
-			if(v.name=='pointP1') {	$('pr').innerText = b; }
+			if(v.name=='pointP2') {	$('pl').innerHTML = "<span style='color: #C1B7F3'>" + a + "</span>"; }
+			if(v.name=='pointP1') {	$('pr').innerHTML = "<span style='color: #C1B7F3'>" + b + "</span>"; }
 		}
 	}
 	if(v.name=='set')
@@ -516,8 +517,11 @@ if(!$_GET['c'])
 {
 	echo '<input type="button" onclick="window.location.reload();" style="width:90%; height: 10%; font-size: 5em" value="Reload for Lischen">';	
 }
-if($_COOKIE['currentCourt']) {
+if($_COOKIE['currentCourt'] && $_GET['c']=='x') {
     $_GET['c'] = $_COOKIE['currentCourt'];
+    ?>
+    <div style="position:absolute; left: 45%; right: 45%;"><input type="button" value="" style=" border: 0px; background:#222;" onclick="location.href='setcookie.php?currentCourt=x'"></div>
+    <?php
 }
 if($_GET['c']=='x') {
     ?>
