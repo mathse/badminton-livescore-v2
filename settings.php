@@ -22,7 +22,7 @@ $maxpoints=21;
 $sameNationTrigger=true;
 
 // tournament ID
-$tID = '770AE676-7E31-4F10-A61E-E8B6C2F8B00F';
+$tID = '88CEA26F-E7B8-425E-A08B-54CF080FEBF7';
 
 /*
 #### #### #### #### 
