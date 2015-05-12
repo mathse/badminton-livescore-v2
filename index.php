@@ -496,8 +496,7 @@ if(!$_GET['type']) {
 
 <a href="?type=input"><input class='button' type="button" value="input" style="width: 20%; height: 30%; font-size: 200%"></a>
 <a href="?type=output"><input class='button' type="button" value="output" style="width: 20%; height: 30%; font-size: 200%"></a>
-<a href="lib/view/control.php"><input class='button' type="button" value="control" style="width: 20%; height: 30%; font-size: 200%"></a>
-<a href="?type=control"><input class='button' type="button" value="old control" style="width: 20%; height: 30%; font-size: 200%"></a>
+<a href="?type=control"><input class='button' type="button" value="control" style="width: 20%; height: 30%; font-size: 200%"></a>
 <br><br><br><br><?php 
 for($i=1;$i<$courts+1;$i++) {
 ?>
@@ -516,6 +515,20 @@ if($_GET['type']=='input') {
 if(!$_GET['c'])
 {
 	echo '<input type="button" onclick="window.location.reload();" style="width:90%; height: 10%; font-size: 5em" value="Reload for Lischen">';	
+}
+if($_COOKIE['currentCourt']) {
+    $_GET['c'] = $_COOKIE['currentCourt'];
+}
+if($_GET['c']=='x') {
+    ?>
+        <div style="background: #ff0000; position: absolute; width: 100%; height: 100%">
+            <?php
+            for($i=1;$i<=$courts;$i++) {
+                ?><a href="setcookie.php?currentCourt=<?php echo $i; ?>"><input  class='button' type="button" value="<?php echo $i; ?>" style="width: 25%; height: 30%;"></a><?
+            }
+            ?>
+        </div>
+    <?php
 }
 ?>
 
@@ -580,7 +593,7 @@ if(!$_GET['c'])
 
 </div>
 <table id='input' style='height: 90%;'>
- <?php if($_GET['c']==11) { ?>
+ <?php if($_GET['c']==18) { ?>
 	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
 		<td id='kl'>
 			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
@@ -615,7 +628,7 @@ if(!$_GET['c'])
 			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:$('settings').show()">
 		</td>
 		<td id="inputName2" style='font-weight: bold'></td>
-	</tr> <?php if($_GET['c']!=11) { ?>
+	</tr> <?php if($_GET['c']!=18) { ?>
 	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
 		<td id='kl'>
 			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
@@ -676,17 +689,17 @@ if($_GET['type']=='output') {
 photos
 </div>
 
-<div id="misc" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
+<div id="misc" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: url('img/background.jpg'); z-index: 3; background-size: 100%  auto;"><div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: rgba(0,0,0,0.3); ">
 	<table style='height:100%'>
 		<td>
-			<center>
-			<img src='img/astrop_black.png'>
-			<br><br>
-			unconnected monitor<br><br>
-			<span style="display: show; font-size: 10em; position: absolute; right: 10px; bottom: 10px; opacity:0.35"><?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $ips[3]; ?></span>
-			</center>
+			<!--<img src='img/astrop_black.png'>-->
+            <div style="background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 50px; ">
+			<span style="font-size: 4em;" nowrap>Unconnected&nbsp;Display</span>
+                </div>
+			<span style="display: show; font-size: 6em; position: absolute; right: -10px; bottom: 10px; background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $ips[3]; ?></span>
 		</td>
 	</table>
+        </div>
 </div>
 <table summary="" id="output">
 	<tr id="tblNames1">

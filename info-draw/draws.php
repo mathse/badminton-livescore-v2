@@ -7,8 +7,8 @@ $next = $_GET['draw']+1;
 // forward
 
 
-if($next == 1) { $next = 5; }
-if($next == 6) { $next = 10; }
+if($next == 5) { $next = 1; }
+if($next == 6) { $next = 1; }
 if($next == 11) { $next = 15; }
 if($next == 16) { $next = 20; }
 if($next == 21) { $next = 25; }

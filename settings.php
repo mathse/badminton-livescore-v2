@@ -19,7 +19,7 @@ if(@$_GET['debugid']) {
 $maxpoints=21;
 
 // autoswitch "flag" - altersklassen bei meisterschaften
-$sameNationTrigger=false;
+$sameNationTrigger=true;
 
 // tournament ID
 $tID = '770AE676-7E31-4F10-A61E-E8B6C2F8B00F';
