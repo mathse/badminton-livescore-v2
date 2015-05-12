@@ -113,7 +113,7 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 ?>
 <r>
 	<a><?php echo $monitorconnection; ?></a>
-	<fontsize><?php echo file_get_contents("sessions/zoom"); ?>%</fontsize>
+	<fontsize><?php echo file_get_contents("sessions/zoom_courts"); ?>%</fontsize>
 	<names>
 <?php if($flag1!='AAA') { ?>
 	<player1><?php echo $player1; ?></player1>
