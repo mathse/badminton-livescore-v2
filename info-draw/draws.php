@@ -1,27 +1,13 @@
 <?php
 include('../settings.php');
 
-if(!$_GET['draw']) { $_GET['draw']=1; }
-$next = $_GET['draw']+1;
+if(!$_GET['draw']) { $_GET['draw']=-1; }
+$next = $_GET['draw'];
 
 // forward
+$next = $nextSite[$next];
 
 
-if($next == 5) { $next = 1; }
-if($next == 6) { $next = 1; }
-if($next == 11) { $next = 15; }
-if($next == 16) { $next = 20; }
-if($next == 21) { $next = 25; }
-if($next == 26) { $next = 30; }
-if($next == 31) { $next = 35; }
-if($next == 36) { $next = 40; }
-
-
-
-
-// reset to start
-
-if($next == 44) { $next = 5; }
 
 function file_get_cached_contents($url) {
 	$cache_file = "cache/".md5($url);
@@ -34,14 +20,14 @@ function file_get_cached_contents($url) {
 	return $file;
 }
 
-$f = file_get_cached_contents("http://www.tournamentsoftware.com/sport/draw.aspx?id=".$tID."&draw=".$_GET['draw']);
+$f = file_get_cached_contents("http://www.".$tLink."/sport/draw.aspx?id=".$tID."&draw=".$_GET['draw']);
 $f = str_replace("/VisualResource.ashx","./VisualResource.css",$f);
 $f = str_replace("All matches...","",$f);
 $re = '/<title>[ \r\n\t\w\d\.\ ]+ - ([\w\d\.\ ]+) - [ \r\n\t\w\d\.\ ]+<\/title>/';
 preg_match($re, $f, $matches);
 //print_r($matches);
 ?><div id="myheader" style="position: absolute; top: 0px; left: 0px; background: rgba(0,0,0,0.7);; width: 100%; ">
-<h1 style="padding: 10px; font-size: 2em"><?php echo $matches[1]; ?> - <?php echo date("l d.m.Y",time()); ?> - <?php
+<h1 style="padding: 10px; font-size: 2em"><?php echo $tTitle; ?> - <?php echo date("l d.m.Y",time()); ?> - <?php
 $caption = explode("caption>",$f);
 echo $caption[1];
 
