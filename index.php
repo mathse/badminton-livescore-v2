@@ -73,7 +73,6 @@ if (navigator.userAgent.match(/Android/i)) {
 
 function pushButton(v,disappear)
 {
-  
 
 
 	for(var i = 0; i < document.getElementsByName(v.name).length; i++)
@@ -85,9 +84,23 @@ function pushButton(v,disappear)
 		new Effect.Highlight(v, { startcolor: '#0000ff', endcolor: '#000000' }); 
 	} else {	
 		$(v).style.backgroundColor = 'blue';
-	}	
-	
-	
+	}
+
+    if(v.value == 'settings')
+    {
+        $('settings').show()
+        new Ajax.Request("info-draw/matches.php?type=xml",{
+                onSuccess: function(r) {
+                    $('selectMatch').innerHTML = r.responseText;
+                    $('matchloading').hide();
+                    $('player1').show(); $('player2').show(); // show player selector
+                }
+            }
+        );
+    }
+
+
+
 	if(v.name == 'event')
 	{
 		new Ajax.Request("getPlayers.php?event="+v.value,{
@@ -101,6 +114,30 @@ function pushButton(v,disappear)
 		$('currentEvent').value = v.value;
 		$('eventCheck').show();
 	}
+
+//    if(v.name == 'selectMatch') {
+//        var event = v.value.substring(0,2);
+//        var flag = v.value.substring(3,6);
+//        var match = v.value.substring(7);
+//
+//        for(var i = 0; i < document.getElementsByName('event').length; i++) {
+//            if(document.getElementsByName('event').item(i).value == event) {
+//                document.getElementsByName('event').item(i).click();
+//            }
+//        }
+//
+////        for(var i = 0; i < 1000; i++) {
+////            console.log($('selectNation1').options.length);
+////            $('selectNation1').value = flag;
+////        }
+//        setTimeout(function () {
+//            $('selectNation1').value = flag;
+//        },0);
+////        $('selectNation2').value = flag;
+//
+//
+//    }
+
 	if(v.name == 'court')
 	{
 		$('currentCourt').value = v.value;
@@ -544,7 +581,12 @@ if($_GET['c']=='x') {
 
 <div id="settings" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
 <table style='height: 100%'>
-	
+<!--    <tr>-->
+<!--        <td class="settingslabel">match:</td>-->
+<!--        <td>-->
+<!--            <select id='selectMatch' name='selectMatch' onchange="pushButton(this,false)"></select>&nbsp;<img src='img/loading.gif' id='matchloading'>-->
+<!--        </td>-->
+<!--    </tr>-->
 	<tr>
 		<td class="settingslabel">event:</td><td>
 			<?php $events = scandir('players'); 
@@ -629,7 +671,7 @@ if($_GET['c']=='x') {
 		<td id="inputName1" style='font-weight: bold'></td>
 		<td>
 			<input class='button' type="button" value="switch" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true)"><br>to switch players<br>
-			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:$('settings').show()">
+			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true);">
 		</td>
 		<td id="inputName2" style='font-weight: bold'></td>
 	</tr> <?php if($_GET['c']!=18) { ?>
