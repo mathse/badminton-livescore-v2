@@ -1,9 +1,7 @@
-<meta http-equiv="refresh" content="180; URL=matches.php">
-
 <?php
 include('../settings.php');
 $day = date("Ymd",time());
-if($day == "20140305") { $day = "20140306"; }
+if($day == "20150513") { $day = "20150515"; }
 
 function file_get_cached_contents($url) {
 	$cache_file = "cache/".md5($url);
@@ -45,5 +43,17 @@ if($now > 25) {
 		$f = preg_replace('/<tr>[\n\r\t ]+<td><\/td><td class="[a-z]+" align="right">'.$i.'/','<tr style="display: none"><td></td><td align="right">+++',$f);
 	}
 }
-echo $f;
+if(@$_GET['type'] == 'xml') {
+    $re = '/draw=[\d]+">([A-Z0-9 ]+).+\n.+\n.+player=[\d]+">([\w\- ]+).+\n.+\n.+\n.+\n.+player=[\d]+">([\w\- ]+)/u';
+    preg_match_all($re, $f, $matches);
+    header("Content-type: text/xml; charset=utf-8");
+
+    for($i=0;$i<count($matches[1]);$i++) {
+        echo '<option>'.$matches[1][$i].' '.$matches[2][$i].' vs '.$matches[3][$i].'</option>';
+    }
+
+} else {
+    ?><meta http-equiv="refresh" content="180; URL=matches.php"><?php
+    echo $f;
+}
 ?>
