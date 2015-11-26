@@ -1,6 +1,8 @@
 <html>
    <meta name="apple-mobile-web-app-capable" content="yes" />
+   <?php if(@$_GET['type']!='control') { ?>
    <meta name="viewport" content=" user-scalable=0;" />
+   <?php } ?>
    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <style type="text/css">
 <!--
@@ -12,7 +14,7 @@
 	font-family: Arial;
 <?php
 if($_GET['type']=='output' && $_GET['style']==2) { 
-	echo "zoom: 0.75; ";  
+	echo "zoom: 0.9; cursor: none;";  
 }	
 ?>
 }
@@ -26,7 +28,7 @@ body {
 img {
 <?php
 if($_GET['type']=='output' && $_GET['style']==2) { 
-	echo "height: 10%; ";  
+	//echo "height: 40%; ";  
 }	
 ?>
 }
@@ -370,7 +372,7 @@ new PeriodicalExecuter(function(pe) {
 			}
 		}
 	);
-	
+
 <?php } ?>
 
 <?php if($_GET['type']=='input') { ?>
@@ -535,6 +537,7 @@ if(!$_GET['type']) {
 <a href="?type=input"><input class='button' type="button" value="input" style="width: 20%; height: 30%; font-size: 200%"></a>
 <a href="?type=output"><input class='button' type="button" value="output" style="width: 20%; height: 30%; font-size: 200%"></a>
 <a href="?type=control"><input class='button' type="button" value="control" style="width: 20%; height: 30%; font-size: 200%"></a>
+    <a href="?type=players"><input class='button' type="button" value="edit players" style="width: 20%; height: 30%; font-size: 200%"></a>
 <br><br><br><br><?php 
 for($i=1;$i<$courts+1;$i++) {
 ?>
@@ -581,12 +584,12 @@ if($_GET['c']=='x') {
 
 <div id="settings" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
 <table style='height: 100%'>
-<!--    <tr>-->
-<!--        <td class="settingslabel">match:</td>-->
-<!--        <td>-->
-<!--            <select id='selectMatch' name='selectMatch' onchange="pushButton(this,false)"></select>&nbsp;<img src='img/loading.gif' id='matchloading'>-->
-<!--        </td>-->
-<!--    </tr>-->
+    <tr>
+        <td class="settingslabel">match:</td>
+        <td>
+            <select id='selectMatch' name='selectMatch' onchange="pushButton(this,false)"></select>&nbsp;<img src='img/loading.gif' id='matchloading'>
+        </td>
+    </tr>
 	<tr>
 		<td class="settingslabel">event:</td><td>
 			<?php $events = scandir('players'); 
@@ -639,7 +642,7 @@ if($_GET['c']=='x') {
 
 </div>
 <table id='input' style='height: 90%;'>
- <?php if($_GET['c']==18) { ?>
+ <?php if($_GET['c']==12) { ?>
 	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
 		<td id='kl'>
 			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
@@ -674,7 +677,7 @@ if($_GET['c']=='x') {
 			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true);">
 		</td>
 		<td id="inputName2" style='font-weight: bold'></td>
-	</tr> <?php if($_GET['c']!=18) { ?>
+	</tr> <?php if($_GET['c']!=12) { ?>
 	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
 		<td id='kl'>
 			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
@@ -705,7 +708,30 @@ if($_GET['c']=='x') {
 
 
 <?php } ?>
+<?php if($_GET['type']=='players') {
+    if($_GET['file']) {
+        echo '<div>saving file '.$_GET['file'].'..<br></div>';
+        $fd = fopen('./players/'.$_GET['file'],'w');
+        fwrite($fd,htmlentities($_POST['players']));
+        fclose($fd);
+    }
 
+    foreach(scandir('./players/') as $file) {
+        if($file == '.' || $file == '..' || substr($file,-1,1) == '~') continue;
+        ?>
+        <div style="float:left">
+            <?php echo 'file: '.trim($file);?>
+            <form action="index.php?type=players&file=<?php echo $file; ?>" method="post">
+                <textarea name="players" style="color: black; width: 300px; height: 200px; margin: 5px;"><?php echo file_get_contents('./players/'.$file); ?></textarea>
+                <br>
+                <input type="submit" value="save">
+            </form>
+
+        </div>
+        <?php
+    }
+
+} ?>
 <?php
 if($_GET['type']=='output') {
 ?>
@@ -718,11 +744,11 @@ if($_GET['type']=='output') {
 	foreach($fotos as $foto)
 	{
 		if(substr($foto,0,1) == '.' || $foto == '..' ) continue;
-		?><li style='align: center;'><img src='img/spacer.gif' style="width:1300px"></li><?php
+		?><li style='align: center;'><img src='img/spacer.gif' style="width:700px"></li><?php
 		if($_GET['style']==2) {
-			?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:1300px"></li><?php
+			?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:700px"></li><?php
 		} else {
-			?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:1800px"></li><?php	
+			?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:700px"></li><?php	
 		}
 	}		
 	?>
@@ -742,7 +768,7 @@ photos
             <div style="background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 50px; ">
 			<span style="font-size: 4em;" nowrap>Unconnected&nbsp;Display</span>
                 </div>
-			<span style="display: show; font-size: 6em; position: absolute; right: -10px; bottom: 10px; background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $ips[3]; ?></span>
+			<span style="display: show; font-size: 6em; position: absolute; right: -10px; bottom: 10px; background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $deviceid; ?></span>
 		</td>
 	</table>
         </div>
@@ -765,7 +791,7 @@ photos
 		<td colspan="3" id="namePlayer2">&nbsp;</td>	
 	</tr>
 </table>
-			<span style="font-size: 5em; position: absolute; right: 10px; bottom: 10px; opacity:0.02"><?php if($ips[3]!=69) { echo $ips[3]; } else { echo '<div style="border: 1px solid yellow; border-radius: 10px; padding: 2px; color: yellow">'.$_GET['debugid'].'</div>'; }?></span>
+			<span style="font-size: 5em; position: absolute; right: 10px; bottom: 10px; opacity:0.02"><?php if($ips[3]!=69) { echo $deviceid; } else { echo '<div style="border: 1px solid yellow; border-radius: 10px; padding: 2px; color: yellow">'.$_GET['debugid'].'</div>'; }?></span>
 
 <?php } ?>
 
