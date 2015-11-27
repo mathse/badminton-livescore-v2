@@ -547,7 +547,7 @@ for($i=1;$i<$courts+1;$i++) {
 <a href="d.apk"><input class='button' type="button" value="dolphin download" style="width: 15%; height: 30%; font-size: 200%"></a>
 <a href="info-draw"><input class='button' type="button" value="info view" style="width: 15%; height: 30%; font-size: 200%"></a>
 <a href="info-game-number"><input class='button' type="button" value="match number" style="width: 15%; height: 30%; font-size: 200%"></a>
-<a href="overview-courts.php"><input class='button' type="button" value="overview" style="width: 15%; height: 30%; font-size: 200%"></a>
+<a href="overview.php"><input class='button' type="button" value="overview" style="width: 15%; height: 30%; font-size: 200%"></a>
 
 <?php } ?>
 
@@ -712,7 +712,11 @@ if($_GET['c']=='x') {
     if($_GET['file']) {
         echo '<div>saving file '.$_GET['file'].'..<br></div>';
         $fd = fopen('./players/'.$_GET['file'],'w');
-        fwrite($fd,htmlentities($_POST['players']));
+        if($_GET['file'] == 'overview.php') {
+            fwrite($fd, htmlspecialchars_decode($_POST['players']));
+        } else {
+            fwrite($fd, htmlentities($_POST['players']));
+        }
         fclose($fd);
     }
 
@@ -722,7 +726,10 @@ if($_GET['c']=='x') {
         <div style="float:left">
             <?php echo 'file: '.trim($file);?>
             <form action="index.php?type=players&file=<?php echo $file; ?>" method="post">
-                <textarea name="players" style="color: black; width: 300px; height: 200px; margin: 5px;"><?php echo file_get_contents('./players/'.$file); ?></textarea>
+                <?php
+                if($file == 'overview.php') { $width=600; } else { $width=300; }
+                ?>
+                <textarea name="players" style="color: black; width: <?php echo $width; ?>px; height: 200px; margin: 5px;"><?php echo file_get_contents('./players/'.$file); ?></textarea>
                 <br>
                 <input type="submit" value="save">
             </form>
