@@ -548,6 +548,7 @@ for($i=1;$i<$courts+1;$i++) {
 <a href="info-draw"><input class='button' type="button" value="info view" style="width: 15%; height: 30%; font-size: 200%"></a>
 <a href="info-game-number"><input class='button' type="button" value="match number" style="width: 15%; height: 30%; font-size: 200%"></a>
 <a href="overview.php"><input class='button' type="button" value="overview" style="width: 15%; height: 30%; font-size: 200%"></a>
+	<a href="overview-courts.php"><input class='button' type="button" value="all courts" style="width: 15%; height: 30%; font-size: 200%"></a>
 
 <?php } ?>
 
@@ -737,6 +738,52 @@ if($_GET['c']=='x') {
         </div>
         <?php
     }
+
+?>
+<div style="clear: both">
+<div>
+<table>
+<?php 
+$games = array("1. HD","DD","2. HD","DE","Mixed","1. HE","2. HE","3. HE");
+
+foreach($games as $game) { ?>
+<tr><td><?php echo $game; ?></td><td>
+<?php 
+switch ($game) {
+    case "1. HD":
+    case "2. HD":
+	$file = "HD";
+	break;
+    case "1. HE":
+    case "2. HE":
+    case "3. HE":
+	$file = "HE";
+	break;
+    case "Mixed":
+	$file = "MX";
+	break;
+    default:
+	$file = $game;
+	//break;
+}
+
+?>
+<select>
+<option>---</option>
+<?php
+$f = file('players/'.$file.'.txt');
+print_r($f);
+foreach($line as $f) {
+?><option><?php echo $line; ?></option><?php
+}
+?>
+</select>
+</td><td></td><td></td></tr>
+<?php } ?>
+</table>
+</div>
+<?php
+
 
 } ?>
 <?php
