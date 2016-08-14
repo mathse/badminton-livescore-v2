@@ -54,7 +54,7 @@ select { font-size: 1.1em; }
 -->
 </style>
 <?php
-include('settings.php');
+//include('settings.php');
 ?>
 
 <script type="text/javascript" src="js/prototype.js"></script>
@@ -90,7 +90,7 @@ function pushButton(v,disappear)
 
     if(v.value == 'settings')
     {
-        $('settings').show()
+        $('settings').show();
         new Ajax.Request("info-draw/matches.php?type=xml",{
                 onSuccess: function(r) {
                     $('selectMatch').innerHTML = r.responseText;
@@ -376,133 +376,133 @@ new PeriodicalExecuter(function(pe) {
 <?php } ?>
 
 <?php if($_GET['type']=='input') { ?>
-if($('currentCourt').value) {
-	new Ajax.Request("output.php?input=1&court="+$('currentCourt').value,{
-			onSuccess: function(r) {
-				var root = r.responseXML;
-				for(var i = 0; i < root.childNodes.length; i++)
-				{
-					
-					if(root.childNodes[i].nodeType != 1) continue;
-					var item = root.childNodes[i];					
-					
-					// controls are locked when a match finished - we need to unlock it once both players got 0 points
-					 
-					if($('pl').innerText=='-' && $('pr').innerText=='-')
+	if($('currentCourt').value) {
+		new Ajax.Request("output.php?input=1&court="+$('currentCourt').value,{
+				onSuccess: function(r) {
+					var root = r.responseXML;
+					for(var i = 0; i < root.childNodes.length; i++)
 					{
-					//	alert(1);
-						$('inputlocked').hide();
-						$('currentSet').value=1;
-						$('inputSet2').style.backgroundColor = '';
-						$('inputSet3').style.backgroundColor = '';
-						$('inputSet1').style.backgroundColor = 'blue';
-					}					
-					if($('pl').innerHTML=='-' && $('pr').innerHTML=='-')
-					{
-					//	alert(1);
-						$('inputlocked').hide();
-						$('currentSet').value=1;
-						$('inputSet2').style.backgroundColor = '';
-						$('inputSet3').style.backgroundColor = '';
-						$('inputSet1').style.backgroundColor = 'blue';
-					}		
-					if(switched==0)
-					 {
-					 	if($('currentSet').value=='') { $('currentSet').value=1; }
-					 	//alert(item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue);
-						//$('pl').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p1')[0].firstChild.nodeValue;
-						//$('pr').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p2')[0].firstChild.nodeValue;
-						$('pl').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue;
-						$('pr').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p2')[0].firstChild.nodeValue;
-						$('inputName1').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
-						$('inputName2').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue; 
 
-					 } else {
-						$('pr').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue;
-						$('pl').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p2')[0].firstChild.nodeValue;
-						$('inputName2').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
-						$('inputName1').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue; 
+						if(root.childNodes[i].nodeType != 1) continue;
+						var item = root.childNodes[i];
 
-					 }									
-//					alert(item.getElementsByTagName('player1')[0].firstChild.nodeValue);				
-					//= 
-					$('background').innerHTML = "court "+$('currentCourt').value;
-					
-					// set one green border to show how is servicing at the moment
-					$('inputName1').style.border = '0px';
-					$('inputName2').style.border = '0px';
-					 if(switched==0)
-					 {					 
-						$('inputName'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '5px solid #0f0'; 
-					 } else {
-						serve = item.getElementsByTagName("service")[0].firstChild.nodeValue;
-					 
-						if(serve==1) {$('inputName2').style.border = '5px solid #0f0';}
-						if(serve==2) {$('inputName1').style.border = '5px solid #0f0';}
-						 
-					 
-					 }
-					 
-					 	
-					 // when a set is over - show a dialog box
+						// controls are locked when a match finished - we need to unlock it once both players got 0 points
 
-					if(item.getElementsByTagName('winnerSet'+$('currentSet').value)[0].firstChild.nodeValue>0 && dialogShown==false) {
-												
-						
-						if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
+						if($('pl').innerText=='-' && $('pr').innerText=='-')
 						{
-							if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
-							if($('currentSet').value==2) { confirmtext='2nd set finished, switch to next match?'; }
-						} else {
-							if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
-							if($('currentSet').value==2) { confirmtext='2nd set finished, switch to 3rd set?'; }
-							if($('currentSet').value==3) { confirmtext='3rd set finished, switch to next match?'; }
-						}												 
-						if(confirm(confirmtext)) { //yes
-							if($('currentSet').value==3)
-							{
-								$('currentSet').value = 1;
-								$('inputSet1').style.backgroundColor = 'blue';						
-								$('inputSet3').style.backgroundColor = '';
-								dialogShown=true;
-								$('inputlocked').show();
-							}
+						//	alert(1);
+							$('inputlocked').hide();
+							$('currentSet').value=1;
+							$('inputSet2').style.backgroundColor = '';
+							$('inputSet3').style.backgroundColor = '';
+							$('inputSet1').style.backgroundColor = 'blue';
+						}
+						if($('pl').innerHTML=='-' && $('pr').innerHTML=='-')
+						{
+						//	alert(1);
+							$('inputlocked').hide();
+							$('currentSet').value=1;
+							$('inputSet2').style.backgroundColor = '';
+							$('inputSet3').style.backgroundColor = '';
+							$('inputSet1').style.backgroundColor = 'blue';
+						}
+						if(switched==0)
+						 {
+							if($('currentSet').value=='') { $('currentSet').value=1; }
+							//alert(item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue);
+							//$('pl').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p1')[0].firstChild.nodeValue;
+							//$('pr').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p2')[0].firstChild.nodeValue;
+							$('pl').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue;
+							$('pr').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p2')[0].firstChild.nodeValue;
+							$('inputName1').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
+							$('inputName2').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue;
 
-							if($('currentSet').value==2)
+						 } else {
+							$('pr').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue;
+							$('pl').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p2')[0].firstChild.nodeValue;
+							$('inputName2').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
+							$('inputName1').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue;
+
+						 }
+	//					alert(item.getElementsByTagName('player1')[0].firstChild.nodeValue);
+						//=
+						$('background').innerHTML = "court "+$('currentCourt').value;
+
+						// set one green border to show how is servicing at the moment
+						$('inputName1').style.border = '0px';
+						$('inputName2').style.border = '0px';
+						 if(switched==0)
+						 {
+							$('inputName'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '5px solid #0f0';
+						 } else {
+							serve = item.getElementsByTagName("service")[0].firstChild.nodeValue;
+
+							if(serve==1) {$('inputName2').style.border = '5px solid #0f0';}
+							if(serve==2) {$('inputName1').style.border = '5px solid #0f0';}
+
+
+						 }
+
+
+						 // when a set is over - show a dialog box
+
+						if(item.getElementsByTagName('winnerSet'+$('currentSet').value)[0].firstChild.nodeValue>0 && dialogShown==false) {
+
+
+							if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
 							{
-								if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
+								if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
+								if($('currentSet').value==2) { confirmtext='2nd set finished, switch to next match?'; }
+							} else {
+								if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
+								if($('currentSet').value==2) { confirmtext='2nd set finished, switch to 3rd set?'; }
+								if($('currentSet').value==3) { confirmtext='3rd set finished, switch to next match?'; }
+							}
+							if(confirm(confirmtext)) { //yes
+								if($('currentSet').value==3)
 								{
 									$('currentSet').value = 1;
 									$('inputSet1').style.backgroundColor = 'blue';
+									$('inputSet3').style.backgroundColor = '';
 									dialogShown=true;
-									$('inputlocked').show();	
-								} else {
-									$('currentSet').value = 3;
-									$('inputSet3').style.backgroundColor = 'blue';
-									
-								}	
-								$('inputSet2').style.backgroundColor = '';					
+									$('inputlocked').show();
+								}
+
+								if($('currentSet').value==2)
+								{
+									if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
+									{
+										$('currentSet').value = 1;
+										$('inputSet1').style.backgroundColor = 'blue';
+										dialogShown=true;
+										$('inputlocked').show();
+									} else {
+										$('currentSet').value = 3;
+										$('inputSet3').style.backgroundColor = 'blue';
+
+									}
+									$('inputSet2').style.backgroundColor = '';
+								}
+
+								if($('currentSet').value==1)
+								{
+									$('currentSet').value = 2;
+									$('inputSet2').style.backgroundColor = 'blue';
+									$('inputSet1').style.backgroundColor = '';
+
+								}
+
+							} else {
+								dialogShown = true;
 							}
-							
-							if($('currentSet').value==1)
-							{
-								$('currentSet').value = 2;
-								$('inputSet2').style.backgroundColor = 'blue';
-								$('inputSet1').style.backgroundColor = '';
-													
-							}
-							
-						} else {
-							dialogShown = true;
 						}
+
+						if(item.getElementsByTagName('winnerSet'+$('currentSet').value)[0].firstChild.nodeValue==0) { dialogShown=false; }
 					}
-					
-					if(item.getElementsByTagName('winnerSet'+$('currentSet').value)[0].firstChild.nodeValue==0) { dialogShown=false; }
-				}		
+				}
 			}
-		}
-	);
-}
+		);
+	}
 <?php } ?>	
 
 <?php if($_GET['type']=='control') { ?>
@@ -525,191 +525,188 @@ if($('currentCourt').value) {
 <div id='main' style=''>
 <center>
 <?php if($_GET['skipmain']) { ?>
-<a href="?"><input id='mainB' class='button' type="button" value="main menu" style="width: 20%; height: 10%; font-size: 200%"></a>
+	<a href="?"><input id='mainB' class='button' type="button" value="main menu" style="width: 20%; height: 10%; font-size: 200%"></a>
 <?php } ?>
 
 <?php
 if(!$_GET['type']) {
 ?>
-
-
-
-<a href="?type=input"><input class='button' type="button" value="input" style="width: 20%; height: 30%; font-size: 200%"></a>
-<a href="?type=output"><input class='button' type="button" value="output" style="width: 20%; height: 30%; font-size: 200%"></a>
-<a href="?type=control"><input class='button' type="button" value="control" style="width: 20%; height: 30%; font-size: 200%"></a>
-    <a href="?type=players"><input class='button' type="button" value="edit players" style="width: 20%; height: 30%; font-size: 200%"></a>
-<br><br><br><br><?php 
-for($i=1;$i<$courts+1;$i++) {
-?>
-	<a href="?type=input&c=<?php echo $i; ?>"><input class='button' type="button" value="<?php echo $i; ?>" style="width: 5%; height: 10%; font-size: 200%"></a>
-<?php } ?><br><br><br><br>
-<a href="dual.html"><input class='button' type="button" value="dual view" style="width: 15%; height: 30%; font-size: 200%"></a>
-<a href="d.apk"><input class='button' type="button" value="dolphin download" style="width: 15%; height: 30%; font-size: 200%"></a>
-<a href="info-draw"><input class='button' type="button" value="info view" style="width: 15%; height: 30%; font-size: 200%"></a>
-<a href="info-game-number"><input class='button' type="button" value="match number" style="width: 15%; height: 30%; font-size: 200%"></a>
-<a href="overview.php"><input class='button' type="button" value="overview" style="width: 15%; height: 30%; font-size: 200%"></a>
+	<a href="?type=input"><input class='button' type="button" value="input" style="width: 20%; height: 30%; font-size: 200%"></a>
+	<a href="?type=output"><input class='button' type="button" value="output" style="width: 20%; height: 30%; font-size: 200%"></a>
+	<a href="?type=control"><input class='button' type="button" value="control" style="width: 20%; height: 30%; font-size: 200%"></a>
+	<a href="?type=players"><input class='button' type="button" value="edit players" style="width: 20%; height: 30%; font-size: 200%"></a>
+	<br><br><br><br><?php
+	for($i=1;$i<$courts+1;$i++) {
+	?>
+		<a href="?type=input&c=<?php echo $i; ?>"><input class='button' type="button" value="<?php echo $i; ?>" style="width: 5%; height: 10%; font-size: 200%"></a>
+	<?php } ?><br><br><br><br>
+	<a href="dual.html"><input class='button' type="button" value="dual view" style="width: 15%; height: 30%; font-size: 200%"></a>
+	<a href="d.apk"><input class='button' type="button" value="dolphin download" style="width: 15%; height: 30%; font-size: 200%"></a>
+	<a href="info-draw"><input class='button' type="button" value="info view" style="width: 15%; height: 30%; font-size: 200%"></a>
+	<a href="info-game-number"><input class='button' type="button" value="match number" style="width: 15%; height: 30%; font-size: 200%"></a>
+	<a href="overview.php"><input class='button' type="button" value="overview" style="width: 15%; height: 30%; font-size: 200%"></a>
 	<a href="overview-courts.php"><input class='button' type="button" value="all courts" style="width: 15%; height: 30%; font-size: 200%"></a>
-
 <?php } ?>
 
 <?php
 if($_GET['type']=='input') {
-if(!$_GET['c'])
-{
-	echo '<input type="button" onclick="window.location.reload();" style="width:90%; height: 10%; font-size: 5em" value="Reload for Lischen">';	
-}
-if($_COOKIE['currentCourt'] && $_GET['c']=='x') {
-    $_GET['c'] = $_COOKIE['currentCourt'];
-    ?>
-    <div style="position:absolute; left: 45%; right: 45%;"><input type="button" value="" style=" border: 0px; background:#222;" onclick="location.href='setcookie.php?currentCourt=x'"></div>
-    <?php
-}
-if($_GET['c']=='x') {
-    ?>
-        <div style="background: #ff0000; position: absolute; width: 100%; height: 100%">
-            <?php
-            for($i=1;$i<=$courts;$i++) {
-                ?><a href="setcookie.php?currentCourt=<?php echo $i; ?>"><input  class='button' type="button" value="<?php echo $i; ?>" style="width: 25%; height: 30%;"></a><?
-            }
-            ?>
-        </div>
-    <?php
-}
-?>
-
-<div id="inputlocked" style="opacity: 0.9; display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
-	<table summary=""  width="100%" height="100%">
-		<td width="100%" height="100%" align="center" style='font-size: 2em'>this match is finished<br><br><br>match control will place a new match on this court soon</td>
-	</table>
-</div>
-
-<div id="settings" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
-<table style='height: 100%'>
-    <tr>
-        <td class="settingslabel">match:</td>
-        <td>
-            <select id='selectMatch' name='selectMatch' onchange="pushButton(this,false)"></select>&nbsp;<img src='img/loading.gif' id='matchloading'>
-        </td>
-    </tr>
-	<tr>
-		<td class="settingslabel">event:</td><td>
-			<?php $events = scandir('players'); 
-			foreach($events as $event)
-			{
-				if($event == '.' || $event == '..' || strpos($event,'~') != 0 || strpos($event,'_') != 0) continue;
-				$event = str_replace(".txt","",$event);
-				?>
-				<input type="button" value='<?php echo $event; ?>' name='event' style="width: 3.5em; height: 1.5em; font-size: 200%" onclick="javascript:pushButton(this,false)">
-				<?php	
-			}
-			?>
-		</td><td><img src="img/symbol_check.png" id='eventCheck' style="height:32px; width:32px; display: none"></td>
-	</tr>
-	<tr>
-		<td class="settingslabel">court:</td><td> 
-			<?php
-			for($i=1;$i<$courts+1;$i++)
-			{
-				
-				$changetime = @filemtime("sessions/courts/".$i);
-				 
-				
-				?>
-				<input type="button" value='<?php echo $i; ?>' name='court' style="width: 3em; height: 1.5em; font-size: 200%; <?php if((time()-$changetime)<120) { echo 'color: white;'; } ?>" onclick="javascript:pushButton(this,false)">
+	if(!$_GET['c'])
+	{
+		echo '<input type="button" onclick="window.location.reload();" style="width:90%; height: 10%; font-size: 5em" value="Reload">';
+	}
+	if($_COOKIE['currentCourt'] && $_GET['c']=='x') {
+		$_GET['c'] = $_COOKIE['currentCourt'];
+		?>
+		<div style="position:absolute; left: 45%; right: 45%;"><input type="button" value="" style=" border: 0px; background:#222;" onclick="location.href='setcookie.php?currentCourt=x'"></div>
+		<?php
+	}
+	if($_GET['c']=='x') {
+		?>
+			<div style="background: #ff0000; position: absolute; width: 100%; height: 100%">
 				<?php
-			}
-			?>
-		</td><td><img src="img/symbol_check.png" id='courtCheck' style="height:32px; width:32px; display: none"></td>
-	</tr>
-	<tr id='player1' style='display: none'>
-		<td class="settingslabel"></td><td>
-			<select id='selectNation1' name='selectNation1' onchange="pushButton(this,false)"></select>
-			<select id='selectPlayer1' name='selectPlayer1' onchange="pushButton(this,false)"></select>
-		</td><td><img src="img/symbol_check.png" id='playerCheck1' style="height:32px; width:32px; display: none"></td>
-	</tr>	
-	<tr id='player2' style='display: none'>
-		<td class="settingslabel">players:</td><td align="right">
-			<select id='selectPlayer2' name='selectPlayer2' onchange="pushButton(this,false)"></select>
-			<select id='selectNation2' name='selectNation2' onchange="pushButton(this,false)" <?php if($sameNationTrigger) { echo "style='display: none'"; } ?>></select>
-		</td><td><img src="img/symbol_check.png" id='playerCheck2' style="height:32px; width:32px; display: none"></td>
-	</tr>
-	<tr>
-		<td colspan='3' align='center'>
-			<input type="button" name='closeSettings' id='closeSettings' value='close' style="display:none; width: 40%; height: 1.5em; font-size: 200%" onclick="javascript:pushButton(this,false)">
-		</td>
-	</tr>	
-	<tr><td></td><td class="settingslabel" id='settingsinfo'>please select event, court and players</td></tr>	
-</table>
+				for($i=1;$i<=$courts;$i++) {
+					?><a href="setcookie.php?currentCourt=<?php echo $i; ?>"><input  class='button' type="button" value="<?php echo $i; ?>" style="width: 25%; height: 30%;"></a><?php
+				}
+				?>
+			</div>
+		<?php
+	}
+	?>
 
-</div>
-<table id='input' style='height: 90%;'>
- <?php if($_GET['c']==12) { ?>
-	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
-		<td id='kl'>
-			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="+" name="pointP2" id="pb3" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP2" id="pb4" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-		</td>
-		<td id="km" style="">
-			Set:<br>
-			<input class='button' type="button" value="1" id='inputSet1' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
-			<input class='button' type="button" value="2" id='inputSet2' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
-			<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
-		</td>
-		<td id='kr'>
-			<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP1" id="pb8" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="+" name="pointP1" id="pb7" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+	<div id="inputlocked" style="opacity: 0.9; display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
+		<table summary=""  width="100%" height="100%">
+			<td width="100%" height="100%" align="center" style='font-size: 2em'>this match is finished<br><br><br>match control will place a new match on this court soon</td>
+		</table>
+	</div>
 
-		</td>	
-	</tr>	
- <?php } ?>
-	<tr>
-		<td id='pl'>-</td>
-		<td id="pm" style="">:</td>
-		<td id='pr'>-</td>	
-	</tr>	
-	<tr>
-		<td id="inputName1" style='font-weight: bold'></td>
-		<td>
-			<input class='button' type="button" value="switch" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true)"><br>to switch players<br>
-			<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,true);">
-		</td>
-		<td id="inputName2" style='font-weight: bold'></td>
-	</tr> <?php if($_GET['c']!=12) { ?>
-	<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
-		<td id='kl'>
-			<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="+" name="pointP2" id="pb3" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP2" id="pb4" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-		</td>
-		<td id="km" style="">
-			Set:<br>
-			<input class='button' type="button" value="1" id='inputSet1' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
-			<input class='button' type="button" value="2" id='inputSet2' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
-			<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="javascript:pushButton(this,false)">
-		</td>
-		<td id='kr'>
-			<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="-" name="pointP1" id="pb8" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
-			<input class='button' type="button" value="+" name="pointP1" id="pb7" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="javascript:pushButton(this,true)">
+	<div id="settings" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
+	<table style='height: 100%'>
+		<tr>
+			<td class="settingslabel">match:</td>
+			<td>
+				<select id='selectMatch' name='selectMatch' onchange="pushButton(this,false)"></select>&nbsp;<img src='img/loading.gif' id='matchloading'>
+			</td>
+		</tr>
+		<tr>
+			<td class="settingslabel">event:</td><td>
+				<?php $events = scandir('players');
+				foreach($events as $event)
+				{
+					if($event == '.' || $event == '..' || strpos($event,'~') != 0 || strpos($event,'_') != 0) continue;
+					$event = str_replace(".txt","",$event);
+					?>
+					<input type="button" value='<?php echo $event; ?>' name='event' style="width: 3.5em; height: 1.5em; font-size: 200%" onclick="pushButton(this,false)">
+					<?php
+				}
+				?>
+			</td><td><img src="img/symbol_check.png" id='eventCheck' style="height:32px; width:32px; display: none"></td>
+		</tr>
+		<tr>
+			<td class="settingslabel">court:</td><td>
+				<?php
+				for($i=1;$i<$courts+1;$i++)
+				{
 
-		</td>	
-	</tr>	 <?php } ?>
-	<tr style="display: none">
-		<td colspan='3' style='color: gray'>
-			Court: <input id='currentCourt' type='text' value='<?php echo $_GET['c']; ?>' style='width: 4%'> - Event: <input id='currentEvent' type='text' value='' style='width: 4%'> - Players: <input id='currentPlayers' type='text' value=''> - Set: <input id='currentSet' type='text' value='' style='width: 4%'> 
-		</td>
-	</tr>
-</table>
+					$changetime = @filemtime("sessions/courts/".$i);
 
 
+					?>
+					<input type="button" value='<?php echo $i; ?>' name='court' style="width: 3em; height: 1.5em; font-size: 200%; <?php if((time()-$changetime)<120) { echo 'color: white;'; } ?>" onclick="pushButton(this,false)">
+					<?php
+				}
+				?>
+			</td><td><img src="img/symbol_check.png" id='courtCheck' style="height:32px; width:32px; display: none"></td>
+		</tr>
+		<tr id='player1' style='display: none'>
+			<td class="settingslabel"></td><td>
+				<select id='selectNation1' name='selectNation1' onchange="pushButton(this,false)"></select>
+				<select id='selectPlayer1' name='selectPlayer1' onchange="pushButton(this,false)"></select>
+			</td><td><img src="img/symbol_check.png" id='playerCheck1' style="height:32px; width:32px; display: none"></td>
+		</tr>
+		<tr id='player2' style='display: none'>
+			<td class="settingslabel">players:</td><td align="right">
+				<select id='selectPlayer2' name='selectPlayer2' onchange="pushButton(this,false)"></select>
+				<select id='selectNation2' name='selectNation2' onchange="pushButton(this,false)" <?php if($sameNationTrigger) { echo "style='display: none'"; } ?>></select>
+			</td><td><img src="img/symbol_check.png" id='playerCheck2' style="height:32px; width:32px; display: none"></td>
+		</tr>
+		<tr>
+			<td colspan='3' align='center'>
+				<input type="button" name='closeSettings' id='closeSettings' value='close' style="display:none; width: 40%; height: 1.5em; font-size: 200%" onclick="pushButton(this,false)">
+			</td>
+		</tr>
+		<tr><td></td><td class="settingslabel" id='settingsinfo'>please select event, court and players</td></tr>
+	</table>
+
+	</div>
+	<table id='input' style='height: 90%;'>
+	 <?php if($_GET['c']==12) { ?>
+		<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
+			<td id='kl'>
+				<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="+" name="pointP2" id="pb3" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="-" name="pointP2" id="pb4" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+			</td>
+			<td id="km" style="">
+				Set:<br>
+				<input class='button' type="button" value="1" id='inputSet1' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
+				<input class='button' type="button" value="2" id='inputSet2' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
+				<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
+			</td>
+			<td id='kr'>
+				<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 55%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="-" name="pointP1" id="pb8" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="+" name="pointP1" id="pb7" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+
+			</td>
+		</tr>
+	 <?php } ?>
+		<tr>
+			<td id='pl'>-</td>
+			<td id="pm" style="">:</td>
+			<td id='pr'>-</td>
+		</tr>
+		<tr>
+			<td id="inputName1" style='font-weight: bold'></td>
+			<td>
+				<input class='button' type="button" value="switch" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,true)"><br>to switch players<br>
+				<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="pushButton(this,true);">
+			</td>
+			<td id="inputName2" style='font-weight: bold'></td>
+		</tr> <?php if($_GET['c']!=12) { ?>
+		<tr style='<?php if(!$_GET['c']) {echo "display:none;"; } ?>' id='inputButtons'>
+			<td id='kl'>
+				<input class='button' type="button" value="+" name="pointP1" id="pb1" style="width: 55%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="-" name="pointP1" id="pb2" style="width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="+" name="pointP2" id="pb3" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="-" name="pointP2" id="pb4" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+			</td>
+			<td id="km" style="">
+				Set:<br>
+				<input class='button' type="button" value="1" id='inputSet1' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
+				<input class='button' type="button" value="2" id='inputSet2' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
+				<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
+			</td>
+			<td id='kr'>
+				<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="+" name="pointP2" id="pb5" style="width: 55%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="-" name="pointP1" id="pb8" style="display: none; width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+				<input class='button' type="button" value="+" name="pointP1" id="pb7" style="display: none; width: 55%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
+
+			</td>
+		</tr>	 <?php } ?>
+		<tr style="display: none">
+			<td colspan='3' style='color: gray'>
+				Court: <input id='currentCourt' type='text' value='<?php echo $_GET['c']; ?>' style='width: 4%'> - Event: <input id='currentEvent' type='text' value='' style='width: 4%'> - Players: <input id='currentPlayers' type='text' value=''> - Set: <input id='currentSet' type='text' value='' style='width: 4%'>
+			</td>
+		</tr>
+	</table>
 <?php } ?>
-<?php if($_GET['type']=='players') {
+
+<?php
+if($_GET['type']=='players') {
+
     if($_GET['file']) {
         echo '<div>saving file '.$_GET['file'].'..<br></div>';
         $fd = fopen('./players/'.$_GET['file'],'w');
@@ -739,132 +736,138 @@ if($_GET['c']=='x') {
         <?php
     }
 
-?>
-<div style="clear: both">
-<div>
-<table>
-<?php 
-$games = array("1. HD","DD","2. HD","DE","Mixed","1. HE","2. HE","3. HE");
+	?>
+	<div style="clear: both">
+	<div>
+	<table>
+	<?php
+	$games = array("1. HD","DD","2. HD","DE","Mixed","1. HE","2. HE","3. HE");
 
-foreach($games as $game) { ?>
-<tr><td><?php echo $game; ?></td><td>
-<?php 
-switch ($game) {
-    case "1. HD":
-    case "2. HD":
-	$file = "HD";
-	break;
-    case "1. HE":
-    case "2. HE":
-    case "3. HE":
-	$file = "HE";
-	break;
-    case "Mixed":
-	$file = "MX";
-	break;
-    default:
-	$file = $game;
-	//break;
-}
+	foreach($games as $game) { ?>
+		<tr><td><?php echo $game; ?></td><td>
+		<?php
+		switch ($game) {
+			case "1. HD":
+			case "2. HD":
+			$file = "HD";
+			break;
+			case "1. HE":
+			case "2. HE":
+			case "3. HE":
+			$file = "HE";
+			break;
+			case "Mixed":
+			$file = "MX";
+			break;
+			default:
+			$file = $game;
+			//break;
+		}
 
-?>
-<select>
-<option>---</option>
-<?php
-$f = file('players/'.$file.'.txt');
-print_r($f);
-foreach($line as $f) {
-?><option><?php echo $line; ?></option><?php
-}
-?>
-</select>
-</td><td></td><td></td></tr>
+		?>
+		<select>
+		<option>---</option>
+		<?php
+		$f = file('players/'.$file.'.txt');
+		//print_r($f);
+		if (!empty($line)) {
+			foreach($line as $f) {
+            ?><option><?php echo $line; ?></option><?php
+            }
+		}
+		?>
+		</select>
+		</td><td></td><td></td></tr>
+	<?php } ?>
+	</table>
+	</div>
+	</div>
 <?php } ?>
-</table>
-</div>
-<?php
 
-
-} ?>
 <?php
 if($_GET['type']=='output') {
-?>
-<div id="sponsoren" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
-	<script type="text/javascript" src="js/crossfade.js"></script>
-	<ul id="gallery" style='list-style-type:none; margin: 300px auto;'>
-	<?php 
-	$fotos = scandir('img/sponsors/');
-	
-	foreach($fotos as $foto)
-	{
-		if(substr($foto,0,1) == '.' || $foto == '..' ) continue;
-		?><li style='align: center;'><img src='img/spacer.gif' style="width:700px"></li><?php
-		if($_GET['style']==2) {
-			?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:700px"></li><?php
-		} else {
-			?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:700px"></li><?php	
-		}
-	}		
 	?>
-	</ul>
-</div>
+	<div id="sponsoren" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
+		<script type="text/javascript" src="js/crossfade.js"></script>
+		<ul id="gallery" style='list-style-type:none; margin: 300px auto;'>
+		<?php
+		$fotos = scandir('img/sponsors/');
+
+		foreach($fotos as $foto)
+		{
+			if(substr($foto,0,1) == '.' || $foto == '..' ) continue;
+			?><li style='align: center;'><img src='img/spacer.gif' style="width:700px"></li><?php
+			if($_GET['style']==2) {
+				?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:700px"></li><?php
+			} else {
+				?><li style='align: center;'><img src='img/sponsors/<?php echo $foto; ?>' style="width:700px"></li><?php
+			}
+		}
+		?>
+		</ul>
+	</div>
 
 
 
-<div id="images" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
-photos
-</div>
+	<div id="images" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3;">
+	photos
+	</div>
 
-<div id="misc" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: url('img/background.jpg'); z-index: 3; background-size: 100%  auto;"><div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: rgba(0,0,0,0.3); ">
-	<table style='height:100%'>
-		<td>
-			<!--<img src='img/astrop_black.png'>-->
-            <div style="background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 50px; ">
-			<span style="font-size: 4em;" nowrap>Unconnected&nbsp;Display</span>
-                </div>
-			<span style="display: show; font-size: 6em; position: absolute; right: -10px; bottom: 10px; background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $deviceid; ?></span>
-		</td>
+	<div id="misc" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: url('img/background.jpg'); z-index: 3; background-size: 100%  auto;"><div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: rgba(0,0,0,0.3); ">
+		<table style='height:100%'>
+			<td>
+				<!--<img src='img/astrop_black.png'>-->
+				<div style="background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 50px; ">
+				<span style="font-size: 4em;" nowrap>Unconnected&nbsp;Display</span>
+					</div>
+				<span style="display: show; font-size: 6em; position: absolute; right: -10px; bottom: 10px; background: rgba(0,0,0, 0.5); border-radius: 20px; padding: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php $ips = explode(".",$_SERVER['REMOTE_ADDR']);	echo $deviceid; ?></span>
+			</td>
+		</table>
+			</div>
+	</div>
+	<table summary="" id="output">
+		<tr id="tblNames1">
+			<td colspan="3" id="namePlayer1">&nbsp;</td>
+		</tr>
+		<tr id="tblScore1">
+			<td class='scoreboard' id='set1p1'>-</td>
+			<td class='scoreboard' id='set2p1'>-</td>
+			<td class='scoreboard' id='set3p1'>-</td>
+		</tr>
+		<tr id="tblScore2">
+			<td class='scoreboard' id='set1p2'>-</td>
+			<td class='scoreboard' id='set2p2'>-</td>
+			<td class='scoreboard' id='set3p2'>-</td>
+		</tr>
+		<tr id="tblNames2">
+			<td colspan="3" id="namePlayer2">&nbsp;</td>
+		</tr>
 	</table>
-        </div>
-</div>
-<table summary="" id="output">
-	<tr id="tblNames1">
-		<td colspan="3" id="namePlayer1">&nbsp;</td>	
-	</tr>
-	<tr id="tblScore1">
-		<td class='scoreboard' id='set1p1'>-</td>
-		<td class='scoreboard' id='set2p1'>-</td>
-		<td class='scoreboard' id='set3p1'>-</td>	
-	</tr>
-	<tr id="tblScore2">
-		<td class='scoreboard' id='set1p2'>-</td>
-		<td class='scoreboard' id='set2p2'>-</td>
-		<td class='scoreboard' id='set3p2'>-</td>	
-	</tr>
-	<tr id="tblNames2">
-		<td colspan="3" id="namePlayer2">&nbsp;</td>	
-	</tr>
-</table>
-			<span style="font-size: 5em; position: absolute; right: 10px; bottom: 10px; opacity:0.02"><?php if($ips[3]!=69) { echo $deviceid; } else { echo '<div style="border: 1px solid yellow; border-radius: 10px; padding: 2px; color: yellow">'.$_GET['debugid'].'</div>'; }?></span>
+	<span style="font-size: 5em; position: absolute; right: 10px; bottom: 10px; opacity:0.02"><?php
+		if($ips[3]!=69) {
+			echo $deviceid;
+		} else {
+			echo '<div style="border: 1px solid yellow; border-radius: 10px; padding: 2px; color: yellow">'.$_GET['debugid'].'</div>';
+		}
+		?></span>
 
 <?php } ?>
 
 <?php 
-if($_GET['type']=='control')
-{
-?>
+if($_GET['type']=='control') {
+	?>
 
-	these are the monitors
-	<div id="allmonitors">
-	
-	</div>
-<?php	
-}
-?>
+		these are the monitors
+		<div id="allmonitors">
+
+		</div>
+	<?php
+} ?>
 
 
 </center>
-	<div id="background" style='bottom: -10px; right: 10px; color: #333; font-weight: bold; z-index: -1; position: absolute;  font-size: 10em'></div>
+
+<div id="background" style='bottom: -10px; right: 10px; color: #333; font-weight: bold; z-index: -1; position: absolute;  font-size: 10em'></div>
 </div>
 </body>
 </html>
