@@ -16,7 +16,7 @@ if($f[7]==0) {
 
 ?>
 
-<body style="background: <?php echo $color; ?>; color: white">
+<body style="overflow:hidden; background: <?php echo $color; ?>; color: white">
 <span style="font-size: 1em">
 <?php 
 echo $_GET['c']; 
