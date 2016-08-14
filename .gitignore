@@ -19,7 +19,7 @@ img/retro_coin.png
 img/retro_mushroom_super_3.png
 img/sponsors/schriftzugVember.png
 index.php_bak
-players/*.txt
+players
 settings.php
 .idea
 players/zz.txt
@@ -29,4 +29,6 @@ img/sponsors/*
 img/background.jpg
 .htaccess
 meteor
+settings.php
+getPlayers2.php
 settings.php
