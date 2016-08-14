@@ -54,7 +54,7 @@ select { font-size: 1.1em; }
 -->
 </style>
 <?php
-//include('settings.php');
+include('settings.php');
 ?>
 
 <script type="text/javascript" src="js/prototype.js"></script>
