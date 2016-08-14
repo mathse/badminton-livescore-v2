@@ -1,4 +1,8 @@
 <?php
+// scoring
+$maxPoints = 11;
+$maxPointsStop = 15;
+$maxSets = 5;
 // the number of courts
 error_reporting(-1);
 ini_set('display_errors', 'Off');
@@ -16,7 +20,7 @@ if(@$_GET['debugid']) {
 } else {
 	$deviceid = $_SERVER['REMOTE_ADDR'];
 }
-$maxpoints=21;
+
 
 // autoswitch "flag" - altersklassen bei meisterschaften
 $sameNationTrigger=false;

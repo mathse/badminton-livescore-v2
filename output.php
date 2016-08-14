@@ -79,8 +79,8 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 	// set red marker
 	for($set=1;$set<=$maxSets;$set++) {
 		for ($i = 0; $i < 9; $i++) {
-			if ($sets[$set]['p1'] == ($maxPoints + $i) && $set1p2 < ($maxPoints - 1 + $i)) $sets[$set]['winner'] = 1;
-			if ($sets[$set]['p2'] == ($maxPoints + $i) && $set1p1 < ($maxPoints - 1 + $i)) $sets[$set]['winner'] = 2;
+			if ($sets[$set]['p1'] == ($maxPoints + $i) && $sets[$set]['p2'] < ($maxPoints - 1 + $i)) $sets[$set]['winner'] = 1;
+			if ($sets[$set]['p2'] == ($maxPoints + $i) && $sets[$set]['p1'] < ($maxPoints - 1 + $i)) $sets[$set]['winner'] = 2;
 		}
 	}
 //	for($i=0;$i<9;$i++)

@@ -50,7 +50,7 @@ select { font-size: 1.1em; }
 #output td { -moz-border-radius: 20px} 
 #namePlayer1, #namePlayer2 { font-size: 40%;  line-height: 70% } 
 
-.scoreboard { background-color: #111; border: 10px solid #111; width: 33%;  -webkit-border-radius: 10px; border-radius: 10px;}
+.scoreboard { background-color: #111; border: 10px solid #111; width: <?= (100/$maxSets); ?>%;  -webkit-border-radius: 10px; border-radius: 10px;}
 -->
 </style>
 <?php
@@ -343,8 +343,8 @@ new PeriodicalExecuter(function(pe) {
 					
 					 
 					// set the points
-					for(var p=1; p<3; p++) {
-						for(var s=1; s<4; s++) {
+					for(var p=1; p<=2; p++) {
+						for(var s=1; s<=<?= $maxSets ?>; s++) {
 							if(item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue == '-') {
 								$('set'+s+'p'+p).innerHTML = '&nbsp;'; 
 							} else {
@@ -649,6 +649,7 @@ if($_GET['type']=='input') {
 			</td>
 			<td id="km" style="">
 				Set:<br>
+
 				<input class='button' type="button" value="1" id='inputSet1' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
 				<input class='button' type="button" value="2" id='inputSet2' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
 				<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
@@ -684,9 +685,9 @@ if($_GET['type']=='input') {
 			</td>
 			<td id="km" style="">
 				Set:<br>
-				<input class='button' type="button" value="1" id='inputSet1' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
-				<input class='button' type="button" value="2" id='inputSet2' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
-				<input class='button' type="button" value="3" id='inputSet3' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
+				<?php for($set=1;$set<=$maxSets;$set++) { ?>
+				<input class='button' type="button" value="<?= $set ?>" id='inputSet<?= $set ?>' name='set' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,false)">
+				<?php } ?>
 			</td>
 			<td id='kr'>
 				<input class='button' type="button" value="-" name="pointP2" id="pb6" style="width: 35%; height: 4em; font-size: 200%" onclick="pushButton(this,true)">
@@ -830,14 +831,14 @@ if($_GET['type']=='output') {
 			<td colspan="3" id="namePlayer1">&nbsp;</td>
 		</tr>
 		<tr id="tblScore1">
-			<td class='scoreboard' id='set1p1'>-</td>
-			<td class='scoreboard' id='set2p1'>-</td>
-			<td class='scoreboard' id='set3p1'>-</td>
+			<?php for($set=1;$set<=$maxSets;$set++) { ?>
+			<td class='scoreboard' id='set<?= $set ?>p1'>-</td>
+			<?php } ?>
 		</tr>
 		<tr id="tblScore2">
-			<td class='scoreboard' id='set1p2'>-</td>
-			<td class='scoreboard' id='set2p2'>-</td>
-			<td class='scoreboard' id='set3p2'>-</td>
+			<?php for($set=1;$set<=$maxSets;$set++) { ?>
+			<td class='scoreboard' id='set<?= $set ?>p2'>-</td>
+			<?php } ?>
 		</tr>
 		<tr id="tblNames2">
 			<td colspan="3" id="namePlayer2">&nbsp;</td>
