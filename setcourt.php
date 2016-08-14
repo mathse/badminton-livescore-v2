@@ -1,5 +1,5 @@
 <?php
-
+include('settings.php');
 function sendToMeteorDB($collection,$object,$data) {
     echo $collection." ".$object." ".$data;
     $ch = curl_init();
@@ -22,7 +22,7 @@ function sendToMeteorDB($collection,$object,$data) {
     curl_close($ch);
 }
 
-if($_GET['deviceid'])
+if(@$_GET['deviceid'])
 {
 	// x = delete device id
 	@unlink('sessions/controller/'.$_GET['deviceid']);
@@ -72,74 +72,66 @@ if($_GET['deviceid'])
 			
 //		}
 
-        sendToMeteorDB("connections","device-".$_GET['deviceid'],'{"court" : "'.$_GET['court'].'","time":"'.time().'"}');
+//        sendToMeteorDB("connections","device-".$_GET['deviceid'],'{"court" : "'.$_GET['court'].'","time":"'.time().'"}');
 		$fd=fopen('sessions/connections/'.$_GET['deviceid'],'w');
 		fputs($fd, $_GET['court']);
 		fclose($fd);
 	}
 }
-if($_GET['newgame'])
+if(@$_GET['newgame'])
 {
 	$fd=fopen('sessions/courts/'.$_GET['court'],'w');
-	fputs($fd, $_GET['p1']."\n".$_GET['p2']."\n0\n0\n0\n0\n0\n0\n");
+	for($set=1;$set<=$maxSets;$set++) {
+		$sets[$set]['p1'] = 0;
+		$sets[$set]['p2'] = 0;
+		$sets[$set]['winner'] = 0;
+	}
+	$sets['p1'] = $_GET['p1']; $sets['p2'] = $_GET['p2'];
+	fputs($fd, json_encode($sets));
 	fclose($fd);
-    $parts_player1 = explode("-",$_GET['p1']);
-    $parts_player2 = explode("-",$_GET['p2']);
-    $plist = file('players/'.$parts_player1[0].'.txt');
-    $seperator = strpos(trim($plist[trim($parts_player1[1])])," ");
-    $player1name = substr(trim($plist[trim($parts_player1[1])]),$seperator+1);
-    $player2name = substr(trim($plist[trim($parts_player2[1])]),$seperator+1);
-    $player1flag = trim(str_replace($player1name,'',$plist[trim($parts_player1[1])]));
-    $player2flag = trim(str_replace($player2name,'',$plist[trim($parts_player2[1])]));
-    sendToMeteorDB("courts","court".$_GET['court'],'{"p1":"'.html_entity_decode($player1name).'","p2":"'.html_entity_decode($player2name).'","p1flag":"'.$player1flag.'","p2flag":"'.$player2flag.'"}');
-	$fd_matchcard=fopen('sessions/matchcards/'.date("Y-m-d",time())."-".str_replace("/","_",$parts_player1[0].'-court'.$_GET['court'].'-'.$player1.'-'.$player2).'-'.time().'.txt','a+');
-	 fputs($fd_matchcard,time().";".$_GET['player'].";".urlencode($_GET['value'])."\n");
-	 fclose($fd_matchcard);
+
+//    $parts_player1 = explode("-",$_GET['p1']);
+//    $parts_player2 = explode("-",$_GET['p2']);
+//    $plist = file('players/'.$parts_player1[0].'.txt');
+//    $seperator = strpos(trim($plist[trim($parts_player1[1])])," ");
+//    $player1name = substr(trim($plist[trim($parts_player1[1])]),$seperator+1);
+//    $player2name = substr(trim($plist[trim($parts_player2[1])]),$seperator+1);
+//    $player1flag = trim(str_replace($player1name,'',$plist[trim($parts_player1[1])]));
+//    $player2flag = trim(str_replace($player2name,'',$plist[trim($parts_player2[1])]));
+////    sendToMeteorDB("courts","court".$_GET['court'],'{"p1":"'.html_entity_decode($player1name).'","p2":"'.html_entity_decode($player2name).'","p1flag":"'.$player1flag.'","p2flag":"'.$player2flag.'"}');
+//	$fd_matchcard=fopen('sessions/matchcards/'.date("Y-m-d",time())."-".str_replace("/","_",$parts_player1[0].'-court'.$_GET['court'].'-'.$player1.'-'.$player2).'-'.time().'.txt','a+');
+//	 fputs($fd_matchcard,time().";".$_GET['player'].";".urlencode($_GET['value'])."\n");
+//	 fclose($fd_matchcard);
 }
 
-if($_GET['player'])
+if(@$_GET['player'])
 {
-	$court = file('sessions/courts/'.$_GET['court']);
-	
-	$fd=fopen('sessions/courts/'.$_GET['court'],'w');
-	
-	for($i=0; $i<3; $i++) {
-		if(urlencode($_GET['value'])=='+' && $_GET['player']==1 && $_GET['set'] == ($i+1)) $court[2+($i*2)]=trim($court[2+($i*2)])+1;
-		if(urlencode($_GET['value'])=='-' && $_GET['player']==1 && $_GET['set'] == ($i+1)) $court[2+($i*2)]=trim($court[2+($i*2)])-1;
-		if(urlencode($_GET['value'])=='+' && $_GET['player']==2 && $_GET['set'] == ($i+1)) $court[3+($i*2)]=trim($court[3+($i*2)])+1;
-		if(urlencode($_GET['value'])=='-' && $_GET['player']==2 && $_GET['set'] == ($i+1)) $court[3+($i*2)]=trim($court[3+($i*2)])-1;
+	$sets = json_decode(file_get_contents('sessions/courts/'.$_GET['court']),true);
+
+	for($set=1;$set<=$maxSets;$set++) {
+		if (urlencode($_GET['value']) == '+' && $_GET['set'] == $set) $sets[$set]['p' . $_GET['player']]++;
+		if (urlencode($_GET['value']) == '-' && $_GET['set'] == $set && $sets[$set]['p' . $_GET['player']] > 0) $sets[$set]['p' . $_GET['player']]--;
 	}
-	
-	$service = $_GET['player'];
+	$sets['service'] = $_GET['player'];
 
-
-
-	fputs($fd, 
-		trim($court[0])."\n".
-		trim($court[1])."\n".
-		trim(abs($court[2]))."\n".
-		trim(abs($court[3]))."\n".
-		trim(abs($court[4]))."\n".
-		trim(abs($court[5]))."\n".
-		trim(abs($court[6]))."\n".
-		trim(abs($court[7]))."\n".
-		$service."\n"		
-	);
-
-	$parts_player1 = explode("-",$court[0]);
-	$parts_player2 = explode("-",$court[1]);
-	$plist = file('players/'.$parts_player1[0].'.txt');
-	$seperator = strpos(trim($plist[trim($parts_player1[1])])," ");
-    $player1name = substr(trim($plist[trim($parts_player1[1])]),$seperator+1);
-    $player2name = substr(trim($plist[trim($parts_player2[1])]),$seperator+1);
-    $player1flag = trim(str_replace($player1name,'',$plist[trim($parts_player1[1])]));
-    $player2flag = trim(str_replace($player2name,'',$plist[trim($parts_player2[1])]));
-	$player1 = str_replace(' ','%20',$player1name);
-	$player2 = str_replace(' ','%20',$player2name);
-	
-	$s = $player1.";".$player2.";".trim($court[2]).";".trim($court[3]).";".trim($court[4]).";".trim($court[5]).";".trim($court[6]).";".trim($court[7]).";".$service.";";
-//	$c = @file_get_contents("http://badminton-livescore.de/set.php?c=".$_GET['court']."&s=".$s);
+	$fd=fopen('sessions/courts/'.$_GET['court'],'w');
+	fputs($fd, json_encode($sets));
 	fclose($fd);
+
+//	$parts_player1 = explode("-",$court[0]);
+//	$parts_player2 = explode("-",$court[1]);
+//	$plist = file('players/'.$parts_player1[0].'.txt');
+//	$seperator = strpos(trim($plist[trim($parts_player1[1])])," ");
+//    $player1name = substr(trim($plist[trim($parts_player1[1])]),$seperator+1);
+//    $player2name = substr(trim($plist[trim($parts_player2[1])]),$seperator+1);
+//    $player1flag = trim(str_replace($player1name,'',$plist[trim($parts_player1[1])]));
+//    $player2flag = trim(str_replace($player2name,'',$plist[trim($parts_player2[1])]));
+//	$player1 = str_replace(' ','%20',$player1name);
+//	$player2 = str_replace(' ','%20',$player2name);
+//
+//	$s = $player1.";".$player2.";".trim($court[2]).";".trim($court[3]).";".trim($court[4]).";".trim($court[5]).";".trim($court[6]).";".trim($court[7]).";".$service.";";
+////	$c = @file_get_contents("http://badminton-livescore.de/set.php?c=".$_GET['court']."&s=".$s);
+
 
 //    print_r(substr(trim($plist[trim($parts_player1[1])]),));
     #$context  = stream_context_create($opts);
@@ -147,7 +139,7 @@ if($_GET['player'])
     #echo file_get_contents(); //, false, $context);
 
     // put all changed data to meteors mongo db
-    sendToMeteorDB("courts","court".$_GET['court'],'{"p1":"'.html_entity_decode($player1name).'","p2":"'.html_entity_decode($player2name).'","p1flag":"'.$player1flag.'","p2flag":"'.$player2flag.'","set1p1":"'.abs($court[2]).'","set1p2":"'.abs($court[3]).'","set2p1":"'.abs($court[4]).'","set2p2":"'.abs($court[5]).'","set3p1":"'.abs($court[6]).'","set3p2":"'.abs($court[7]).'","service":"'.$service.'"}');
+//    sendToMeteorDB("courts","court".$_GET['court'],'{"p1":"'.html_entity_decode($player1name).'","p2":"'.html_entity_decode($player2name).'","p1flag":"'.$player1flag.'","p2flag":"'.$player2flag.'","set1p1":"'.abs($court[2]).'","set1p2":"'.abs($court[3]).'","set2p1":"'.abs($court[4]).'","set2p2":"'.abs($court[5]).'","set3p1":"'.abs($court[6]).'","set3p2":"'.abs($court[7]).'","service":"'.$service.'"}');
 
 #	if($_GET['court']==6){
 #	 $fd_matchcard=fopen('sessions/matchcards/'.date("Y-m-d",time())."-".str_replace("/","_",$parts_player1[0].'-court'.$_GET['court'].'-'.$player1.'-'.$player2).'.txt','a+');
