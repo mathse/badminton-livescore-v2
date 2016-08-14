@@ -55,7 +55,7 @@ if(!$_GET['nation'])
 	
 	$players_list = array_unique($players_list);
 	echo '<option>-select player-</option>';
-		
+	asort($players_list);		
 	foreach($players_list as $key => $player)
 	{
 		$player = ucwords(str_replace('&nbsp;',' ',strtolower($player)));
