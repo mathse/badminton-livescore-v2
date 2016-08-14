@@ -1,4 +1,5 @@
-<html>
+<html sytle="cursor: none;">
+<meta name="google" value="notranslate">
 <?php
 include('settings.php');
 $rows = count($courtlayout);
