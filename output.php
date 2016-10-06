@@ -53,10 +53,10 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 	$parts_player1 = explode("-",json_decode($court[0])->p1);
 	$parts_player2 = explode("-",json_decode($court[0])->p2);
 	$plist = file('players/'.$parts_player1[0].'.txt');
-	
-	
+
+
 	$seperator = strpos(trim($plist[trim($parts_player1[1])])," ");
-	
+
 	$player1 = str_replace("&","&amp;",substr(trim($plist[trim($parts_player1[1])]),$seperator+1));
 	$player2 = str_replace("&","&amp;",substr(trim($plist[trim($parts_player2[1])]),$seperator+1));
 	$flag1 = substr(trim($plist[trim($parts_player1[1])]),0,$seperator);
@@ -108,20 +108,22 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 //	if($set3p2=='-' && $winnerSet2>0 && $winnerSet1!=$winnerSet2) { $set3p2='0'; }
 
 	// set green marker on service
-	if($set1p1>0 || $set1p2>0) $currentSet = 1;
-	if($set2p1>0 || $set2p2>0) $currentSet = 2;
-	if($set3p1>0 || $set3p2>0) $currentSet = 3;
-	
+for($set=1;$set<=$maxSets;$set++) {
+	if($sets[$set]['p1']>0 || $sets[$set]['p2']>0) $currentSet = $set;
+}
+	// if($sets[2]['p1']>0 || $sets[2]['p2']>0) $currentSet = 2;
+	// if($sets[3]['p1']>0 || $sets[3]['p2']>0) $currentSet = 3;
+
 	$f1 = explode('|',$flag1);
 	$f2 = explode('|',$flag2);
-	
+
 	if($f1[0]==$f1[1]) {
 		$flag1 = $f1[0];
 	}
 	if($f2[0]==$f2[1]) {
 		$flag2 = $f2[0];
 	}
-	
+
 #	if($flag1=='O35' || $flag1=='O40' || $flag1=='O45' || $flag1=='O50' || $flag1=='O55' || $flag1=='O60' || $flag1=='O65' || $flag1=='O70' || $flag1=='O75' || $flag1=='U15' || $flag1=='U19') $flag1 = 'AAA'; $flag2 = 'AAA';
 }
 ?>
@@ -140,10 +142,13 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 		<flag2><?php echo $flag2; ?></flag2>
 	</names>
 	<sets>
-		<?php	for($set=1;$set<=$maxSets;$set++) {	?>
-		<set<?= $set; ?>p1><?= $sets[$set]['p1']; ?></set<?= $set; ?>p1>
-		<set<?= $set; ?>p2><?= $sets[$set]['p2']; ?></set<?= $set; ?>p2>
-		<?php } ?>
+		<?php
+            for($set=1;$set<=$maxSets;$set++) {
+                    ?>
+                    <set<?= $set; ?>p1><?= $sets[$set]['p1']; ?></set<?= $set; ?>p1>
+                    <set<?= $set; ?>p2><?= $sets[$set]['p2']; ?></set<?= $set; ?>p2>
+                    <?php
+            } ?>
 	</sets>
 	<currentSet><?php echo $currentSet; ?></currentSet>
 	<service><?php echo $service; ?></service>

@@ -6,16 +6,16 @@
    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <style type="text/css">
 <!--
-* { 
+* {
 	//cursor: none;
-	//font-size: 112%;	
+	//font-size: 112%;
 	color: white;
 	scrolling: no;
 	font-family: Arial;
 <?php
-if($_GET['type']=='output' && $_GET['style']==2) { 
-	echo "zoom: 0.9; cursor: none;";  
-}	
+if($_GET['type']=='output' && $_GET['style']==2) {
+	echo "zoom: 0.9; cursor: none;";
+}
 ?>
 }
 body {
@@ -27,9 +27,9 @@ body {
 }
 img {
 <?php
-if($_GET['type']=='output' && $_GET['style']==2) { 
-	//echo "height: 40%; ";  
-}	
+if($_GET['type']=='output' && $_GET['style']==2) {
+	//echo "height: 40%; ";
+}
 ?>
 }
 a { text-decoration: none }
@@ -47,8 +47,8 @@ select { font-size: 1.1em; }
 .settingslabel { font-size: 2em }
 #inputName1, #inputName2 { -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
 #output { height: 100%; width: 98%; font-size: 1300%; padding: 0px; text-align: center; line-height: 80%; }
-#output td { -moz-border-radius: 20px} 
-#namePlayer1, #namePlayer2 { font-size: 40%;  line-height: 70% } 
+#output td { -moz-border-radius: 20px}
+#namePlayer1, #namePlayer2 { font-size: 40%;  line-height: 70% }
 
 .scoreboard { background-color: #111; border: 10px solid #111; width: <?= (100/$maxSets); ?>%;  -webkit-border-radius: 10px; border-radius: 10px;}
 -->
@@ -83,8 +83,8 @@ function pushButton(v,disappear)
 	}
 	if(disappear)
 	{
-		new Effect.Highlight(v, { startcolor: '#0000ff', endcolor: '#000000' }); 
-	} else {	
+		new Effect.Highlight(v, { startcolor: '#0000ff', endcolor: '#000000' });
+	} else {
 		$(v).style.backgroundColor = 'blue';
 	}
 
@@ -109,7 +109,7 @@ function pushButton(v,disappear)
 				onSuccess: function(r) {
 					$('selectNation1').innerHTML = r.responseText; $('selectNation2').innerHTML = r.responseText; // set nations
 					$('selectPlayer1').innerHTML = ''; $('selectPlayer2').innerHTML = ''; // reset players
-					$('player1').show(); $('player2').show(); // show player selector 
+					$('player1').show(); $('player2').show(); // show player selector
 				}
 			}
 		);
@@ -143,7 +143,7 @@ function pushButton(v,disappear)
 	if(v.name == 'court')
 	{
 		$('currentCourt').value = v.value;
-		
+
 		$('courtCheck').show();
 	}
 	if(v.name == 'selectNation1')
@@ -167,40 +167,40 @@ function pushButton(v,disappear)
 	}
 	if(v.name == 'selectPlayer1') // set checkmark when player 1 is set
 	{
-		$('playerCheck1').show();		
+		$('playerCheck1').show();
 	}
 	if(v.name == 'selectPlayer2') // set checkmark when player 2 is set
 	{
-		$('playerCheck2').show();		
+		$('playerCheck2').show();
 	}
 	if(v.name == 'closeSettings')  // close settings and set values to main input
 	{
 		$('currentPlayers').value = $('selectPlayer1').value+"|"+$('selectPlayer2').value;
 		$('settings').hide();
 		$('settingsButton').hide();
-		   
+
 		$('inputButtons').show();
 
 		$('inputSet1').style.backgroundColor = 'blue';
 		$('currentSet').value = '1';
 		new Ajax.Request("setcourt.php?newgame=1&court="+$('currentCourt').value+"&p1="+$('selectPlayer1').value+"&p2="+$('selectPlayer2').value);
-				
+
 	}
-	
+
 	// show close button when all settings where set
 	try
 	{
-		if($('eventCheck').style.display == '' && $('courtCheck').style.display == '' && $('playerCheck1').style.display == '' && $('playerCheck2').style.display == '') 
-		{ $('closeSettings').show(); $('settingsinfo').hide(); }	
+		if($('eventCheck').style.display == '' && $('courtCheck').style.display == '' && $('playerCheck1').style.display == '' && $('playerCheck2').style.display == '')
+		{ $('closeSettings').show(); $('settingsinfo').hide(); }
 	} catch(r) {}
-	
-	
+
+
 	if(v.alt=='courtselect')
 	{
 		//alert("setcourt.php?deviceid="+v.name+"&court="+v.value);
-		new Ajax.Request("setcourt.php?deviceid="+v.name+"&court="+v.value);	
+		new Ajax.Request("setcourt.php?deviceid="+v.name+"&court="+v.value);
 	}
-	
+
 	if(v.name=='pointP1')
 	{
 		if($('currentSet').value=='') { $('currentSet').value = 1; $('inputSet1').style.backgroundColor = 'blue'; }
@@ -209,7 +209,7 @@ function pushButton(v,disappear)
 	if(v.name=='pointP2')
 	{
 		if($('currentSet').value=='') { $('currentSet').value = 1; $('inputSet1').style.backgroundColor = 'blue'; }
-		new Ajax.Request("setcourt.php?court="+$('currentCourt').value+"&value="+v.value+"&player=2&set="+$('currentSet').value);	
+		new Ajax.Request("setcourt.php?court="+$('currentCourt').value+"&value="+v.value+"&player=2&set="+$('currentSet').value);
 	}
 	if(v.name=='pointP1' || v.name=='pointP2')
 	{
@@ -228,7 +228,7 @@ function pushButton(v,disappear)
 	{
 		$('currentSet').value = v.value;
 	}
-	
+
 	if(v.value=='switch')
 	{
 		if(switched==0) { switched=1; } else { switched=0;}
@@ -241,7 +241,7 @@ function pushButton(v,disappear)
         new Ajax.Request("setzoom.php?type=" + v.alt + "&zoom=" + (parseInt($('zoomvalue_' + v.alt).value) + (parseInt(v.value+"1") *10)));
 
     }
-		
+
 }
 
 new PeriodicalExecuter(function(pe) {
@@ -259,53 +259,53 @@ new PeriodicalExecuter(function(pe) {
 				// status '' show misc/error
 				// alert(r.responseText);
 				var status = r.responseText;
-				if(status == '200') { 
-					$('sponsoren').hide(); $('misc').hide(); $('images').hide(); 
+				if(status == '200') {
+					$('sponsoren').hide(); $('misc').hide(); $('images').hide();
 					if(serv==0) {
 						$('tblScore1').hide();
 						$('tblScore2').hide();
 					} else {
 						$('tblScore1').show();
-						$('tblScore2').show();	
+						$('tblScore2').show();
 					}
-					
+
 //					$('tblNames1').show(); $('tblNames2').show();
-					$('tblNames1').show(); 
+					$('tblNames1').show();
 					$('tblNames2').show();
 					photos=0;
 				}
 				if(status == '201') { $('sponsoren').show(); $('misc').hide(); $('images').hide(); }
-				if(status == '202') { 
+				if(status == '202') {
 						$('sponsoren').hide(); $('misc').hide(); $('images').show();
 						if(photos==0)
-						{ 
+						{
 							$('images').innerHTML = '<iframe src="externalPhotos.php?source=photos" width="100%" height="100%" name="SELFHTML_in_a_box"></iframe>';
 							photos=1;
-						}					
+						}
 				}
-				
-				if(status == '210') 
-					{ 
-						$('sponsoren').hide(); $('misc').hide(); $('images').hide(); 
+
+				if(status == '210')
+					{
+						$('sponsoren').hide(); $('misc').hide(); $('images').hide();
 						$('tblScore1').hide(); $('tblScore2').hide(); $('tblNames1').show(); $('tblNames2').show();
-					}				
-				
-				if(status == '220') 
-					{ 
-						$('sponsoren').hide(); $('misc').hide(); $('images').hide(); 
+					}
+
+				if(status == '220')
+					{
+						$('sponsoren').hide(); $('misc').hide(); $('images').hide();
 						$('tblScore1').show(); $('tblScore2').show(); $('tblNames1').hide(); $('tblNames2').hide();
 
-					}				
-				
+					}
+
 				if(status == '400') { $('sponsoren').hide(); $('misc').show(); $('images').hide(); }
-				
-				if(status == '500') { window.location.reload(); }				
+
+				if(status == '500') { window.location.reload(); }
 			}
 		}
-	);	
+	);
 
-	
-	
+
+
 	new Ajax.Request("output.php?debugid=<?php echo $_GET['debugid']; ?>&direct=<?php echo $_GET['direct']; ?>",{
 			onSuccess: function(r) {
 				var root = r.responseXML;
@@ -321,54 +321,57 @@ new PeriodicalExecuter(function(pe) {
 					catch(err)
 					  {
 					  //Handle errors here
-					  
+
 					  }
-					
-					
+
+
 					 if(item.getElementsByTagName("flag1")[0].firstChild.nodeValue!='AAA')
 					 {
 					 	$('namePlayer1').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag1")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player1")[0].firstChild.nodeValue;
 					 } else {
 					 	$('namePlayer1').innerHTML = item.getElementsByTagName("player1")[0].firstChild.nodeValue.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
 					 }
-					 
+
 					 if(item.getElementsByTagName("flag2")[0].firstChild.nodeValue!='AAA')
 					 {
 						 $('namePlayer2').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag2")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player2")[0].firstChild.nodeValue;
 					 } else {
 						 $('namePlayer2').innerHTML = item.getElementsByTagName("player2")[0].firstChild.nodeValue.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
 					 }
-					 
+
 					// $('namePlayer2').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag2")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player2")[0].firstChild.nodeValue;
-					
-					 
+
+
 					// set the points
 					for(var p=1; p<=2; p++) {
 						for(var s=1; s<=<?= $maxSets ?>; s++) {
-							if(item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue == '-') {
-								$('set'+s+'p'+p).innerHTML = '&nbsp;'; 
+
+							if(s > root.getElementsByTagName("currentSet")[0].firstChild.nodeValue) {
+								$('set'+s+'p'+p).innerHTML = '&nbsp;';
 							} else {
 								$('set'+s+'p'+p).innerHTML = item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue;
 							}
 							// reset every border back to gray
 							$('set'+s+'p'+p).style.border = '10px solid #111';
-							
+
 						}
-						
+
 					}
 
 					// set one green border to show how is servicing at the moment
-					$('set'+item.getElementsByTagName("currentSet")[0].firstChild.nodeValue+'p'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '10px solid #0f0'; 
-					
-					// set colored borders on finished games 
-					if(item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue > 0) $('set1p'+item.getElementsByTagName("winnerSet1")[0].firstChild.nodeValue).style.border = '10px solid #f00';
-					if(item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue > 0) $('set2p'+item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue).style.border = '10px solid #f00';
-					if(item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) $('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.border = '10px solid #f00';
+					$('set'+item.getElementsByTagName("currentSet")[0].firstChild.nodeValue+'p'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '10px solid #0f0';
+
+					// set colored borders on finished games
+                    for(var s=1; s<=<?= $maxSets ?>; s++) {
+					if(item.getElementsByTagName("winnerSet"+s)[0].firstChild.nodeValue > 0) $('set'+s+'p'+item.getElementsByTagName("winnerSet"+s)[0].firstChild.nodeValue).style.border = '10px solid #f00';
+                }
+					//if(item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue > 0) $('set2p'+item.getElementsByTagName("winnerSet2")[0].firstChild.nodeValue).style.border = '10px solid #f00';
+					//if(item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue > 0) $('set3p'+item.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue).style.border = '10px solid #f00';
 
 					// set dynamic font-size
 					document.getElementsByTagName("body")[0].style.fontSize = item.getElementsByTagName("fontsize")[0].firstChild.nodeValue;
-					
-				}		
+
+				}
 			}
 		}
 	);
@@ -449,48 +452,57 @@ new PeriodicalExecuter(function(pe) {
 						if(item.getElementsByTagName('winnerSet'+$('currentSet').value)[0].firstChild.nodeValue>0 && dialogShown==false) {
 
 
-							if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
-							{
-								if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
-								if($('currentSet').value==2) { confirmtext='2nd set finished, switch to next match?'; }
-							} else {
-								if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
-								if($('currentSet').value==2) { confirmtext='2nd set finished, switch to 3rd set?'; }
-								if($('currentSet').value==3) { confirmtext='3rd set finished, switch to next match?'; }
-							}
+							// if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
+							// {
+							// 	if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
+							// 	if($('currentSet').value==2) { confirmtext='2nd set finished, switch to next match?'; }
+							// } else {
+							// 	if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
+							// 	if($('currentSet').value==2) { confirmtext='2nd set finished, switch to 3rd set?'; }
+							// 	if($('currentSet').value==3) { confirmtext='3rd set finished, switch to next match?'; }
+							// }
+                            if($('currentSet').value != <?= $maxSets ?>) {
+                                confirmtext='switch to next set?';
+                            } else {
+                                confirmtext='switch to next match?';
+                            }
 							if(confirm(confirmtext)) { //yes
-								if($('currentSet').value==3)
+								if($('currentSet').value==<?= $maxSets ?>)
 								{
 									$('currentSet').value = 1;
 									$('inputSet1').style.backgroundColor = 'blue';
 									$('inputSet3').style.backgroundColor = '';
 									dialogShown=true;
 									$('inputlocked').show();
-								}
+								} else {
+                                            $('inputSet'+$('currentSet').value).style.backgroundColor = '';
+                                            $('currentSet').value = parseInt($('currentSet').value)+1;
+                                            $('inputSet'+$('currentSet').value).style.backgroundColor = 'blue';
+                                        }
 
-								if($('currentSet').value==2)
-								{
-									if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
-									{
-										$('currentSet').value = 1;
-										$('inputSet1').style.backgroundColor = 'blue';
-										dialogShown=true;
-										$('inputlocked').show();
-									} else {
-										$('currentSet').value = 3;
-										$('inputSet3').style.backgroundColor = 'blue';
-
-									}
-									$('inputSet2').style.backgroundColor = '';
-								}
-
-								if($('currentSet').value==1)
-								{
-									$('currentSet').value = 2;
-									$('inputSet2').style.backgroundColor = 'blue';
-									$('inputSet1').style.backgroundColor = '';
-
-								}
+								// if($('currentSet').value==2)
+								// {
+								// 	if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
+								// 	{
+								// 		$('currentSet').value = 1;
+								// 		$('inputSet1').style.backgroundColor = 'blue';
+								// 		dialogShown=true;
+								// 		$('inputlocked').show();
+								// 	} else {
+								// 		$('currentSet').value = 3;
+								// 		$('inputSet3').style.backgroundColor = 'blue';
+                                //
+								// 	}
+								// 	$('inputSet2').style.backgroundColor = '';
+								// }
+                                //
+								// if($('currentSet').value==1)
+								// {
+								// 	$('currentSet').value = 2;
+								// 	$('inputSet2').style.backgroundColor = 'blue';
+								// 	$('inputSet1').style.backgroundColor = '';
+                                //
+								// }
 
 							} else {
 								dialogShown = true;
@@ -503,20 +515,20 @@ new PeriodicalExecuter(function(pe) {
 			}
 		);
 	}
-<?php } ?>	
+<?php } ?>
 
 <?php if($_GET['type']=='control') { ?>
 	new Ajax.Request("monitors.php",{
 			onSuccess: function(r) {
 
 				$('allmonitors').innerHTML = r.responseText;
-				
+
 			}
 		}
-	);	
-<?php } ?>	
-	
-	
+	);
+<?php } ?>
+
+
 }, <?php echo $updateInterval; ?>);
 
 
@@ -854,7 +866,7 @@ if($_GET['type']=='output') {
 
 <?php } ?>
 
-<?php 
+<?php
 if($_GET['type']=='control') {
 	?>
 
