@@ -461,13 +461,22 @@ new PeriodicalExecuter(function(pe) {
 							// 	if($('currentSet').value==2) { confirmtext='2nd set finished, switch to 3rd set?'; }
 							// 	if($('currentSet').value==3) { confirmtext='3rd set finished, switch to next match?'; }
 							// }
-                            if($('currentSet').value != <?= $maxSets ?>) {
-                                confirmtext='switch to next set?';
-                            } else {
+                            var winsP1 = 0
+                            var winsP2 = 0
+                            for(var s=1; s<=<?= $maxSets ?>; s++) {
+                                console.log('set ' + s + ' won by ' + item.getElementsByTagName('winnerSet'+s)[0].firstChild.nodeValue)
+                                if(item.getElementsByTagName('winnerSet'+s)[0].firstChild.nodeValue == 1) { winsP1=winsP1+1 }
+                                if(item.getElementsByTagName('winnerSet'+s)[0].firstChild.nodeValue == 2) { winsP2=winsP2+1 }
+                            }
+                            console.log(winsP1);
+                            console.log(winsP2);
+                            if($('currentSet').value == <?= $maxSets ?> || winsP1*2 > <?= $maxSets ?> || winsP2*2 > <?= $maxSets ?>) {
                                 confirmtext='switch to next match?';
+                            } else {
+                                confirmtext='switch to next set?';
                             }
 							if(confirm(confirmtext)) { //yes
-								if($('currentSet').value==<?= $maxSets ?>)
+								if($('currentSet').value==<?= $maxSets ?> || winsP1*2 > <?= $maxSets ?> || winsP2*2 > <?= $maxSets ?>)
 								{
 									$('currentSet').value = 1;
 									$('inputSet1').style.backgroundColor = 'blue';
