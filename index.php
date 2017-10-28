@@ -4,10 +4,13 @@
    <meta name="viewport" content=" user-scalable=0;" />
    <?php } ?>
    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+   <?php
+   include('settings.php');
+   ?>
 <style type="text/css">
 <!--
 * {
-	//cursor: none;
+    <?php  if($_GET['type']=='output') { ?> cursor: none; <?php } ?>
 	//font-size: 112%;
 	color: white;
 	scrolling: no;
@@ -19,6 +22,7 @@ if($_GET['type']=='output' && $_GET['style']==2) {
 ?>
 }
 body {
+    -webkit-user-select: none;
 	background: black;
 	text-align: center;
 	padding: 0;
@@ -38,7 +42,10 @@ select { font-size: 1.1em; }
 #currentEvent, #currentCourt, #currentPlayers, #currentSet {  background: black; border: 0px; color: gray; -webkit-border-radius: 10px; border-radius: 10px;}
 #main { height: 100%; }
 
-#input { height: 80%; margin: 15px auto; width: 90%; text-align: center }
+#input {
+    height: 80%; margin: 15px auto; width: 90%; text-align: center; border-radius: 0px;
+    -webkit-appearance: none;
+}
 <?php if($_GET['c']==12) { ?>
 #pl, #pm, #pr { font-size: 1000%; width: 30%; line-height:80%}
 <?php } else { ?>
@@ -53,9 +60,7 @@ select { font-size: 1.1em; }
 .scoreboard { background-color: #111; border: 10px solid #111; width: <?= (100/$maxSets); ?>%;  -webkit-border-radius: 10px; border-radius: 10px;}
 -->
 </style>
-<?php
-include('settings.php');
-?>
+
 
 <script type="text/javascript" src="js/prototype.js"></script>
 <script type="text/javascript" src="js/scriptaculous.js?load=effects"></script>
@@ -72,6 +77,22 @@ if (navigator.userAgent.match(/Android/i)) {
     window.scrollTo(0,1);
   }
 
+
+function getflags(name,flagsi,seperator) {
+    // console.log(name + " " + flagsi);
+    if(name!='AAA')
+    {
+       allflags = ""
+       flags = flagsi.split('|');
+       for (var f = 0; f < flags.length; f++) {
+           allflags = allflags + "<img style='border:1px solid white; border-radius: 5px; height:100px' src='img/flags/" + flags[f] + ".png' style='border: 1px solid white'> ";
+       }
+
+       return allflags + seperator + name;
+    } else {
+       return name.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
+    }
+}
 
 function pushButton(v,disappear)
 {
@@ -229,7 +250,7 @@ function pushButton(v,disappear)
 		$('currentSet').value = v.value;
 	}
 
-	if(v.value=='switch')
+	if(v.value=='change ends')
 	{
 		if(switched==0) { switched=1; } else { switched=0;}
 		$('pb1').toggle(); $('pb2').toggle(); $('pb3').toggle(); $('pb4').toggle();
@@ -327,14 +348,25 @@ new PeriodicalExecuter(function(pe) {
 
 					 if(item.getElementsByTagName("flag1")[0].firstChild.nodeValue!='AAA')
 					 {
-					 	$('namePlayer1').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag1")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player1")[0].firstChild.nodeValue;
+                        allflags = ""
+                        flags = item.getElementsByTagName("flag1")[0].firstChild.nodeValue.split('|');
+                        for (var f = 0; f < flags.length; f++) {
+                            allflags = allflags + "<img style='height:100px' src='img/flags/" + flags[f] + ".png' style='border: 1px solid white'> ";
+                        }
+
+                        $('namePlayer1').innerHTML = allflags + ' ' + item.getElementsByTagName("player1")[0].firstChild.nodeValue;
 					 } else {
 					 	$('namePlayer1').innerHTML = item.getElementsByTagName("player1")[0].firstChild.nodeValue.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
 					 }
-
+                    // $('namePlayer1').innerHTML = flags(item.getElementsByTagName("player1")[0].firstChild.nodeValue,item.getElementsByTagName("flag1")[0].firstChild.nodeValue);
 					 if(item.getElementsByTagName("flag2")[0].firstChild.nodeValue!='AAA')
 					 {
-						 $('namePlayer2').innerHTML = "<img src='img/flags/" + item.getElementsByTagName("flag2")[0].firstChild.nodeValue + ".png' style='border: 1px solid white'> " + item.getElementsByTagName("player2")[0].firstChild.nodeValue;
+                         allflags = ""
+                         flags = item.getElementsByTagName("flag2")[0].firstChild.nodeValue.split('|');
+                         for (var f = 0; f < flags.length; f++) {
+                             allflags = allflags + "<img style='height:100px' src='img/flags/" + flags[f] + ".png' style='border: 1px solid white'> ";
+                         }
+						 $('namePlayer2').innerHTML = allflags + ' ' + item.getElementsByTagName("player2")[0].firstChild.nodeValue;
 					 } else {
 						 $('namePlayer2').innerHTML = item.getElementsByTagName("player2")[0].firstChild.nodeValue.replace(/-lt-/gi,"<").replace(/-gt-/gi,">");
 					 }
@@ -346,10 +378,14 @@ new PeriodicalExecuter(function(pe) {
 					for(var p=1; p<=2; p++) {
 						for(var s=1; s<=<?= $maxSets ?>; s++) {
 
-							if(s > root.getElementsByTagName("currentSet")[0].firstChild.nodeValue) {
+							if(s > root.getElementsByTagName("currentSet")[0].firstChild.nodeValue && root.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue == 0) {
 								$('set'+s+'p'+p).innerHTML = '&nbsp;';
 							} else {
-								$('set'+s+'p'+p).innerHTML = item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue;
+                                if(item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue == '-') {
+                                    	$('set'+s+'p'+p).innerHTML = '&nbsp;';
+                                } else {
+                                        $('set'+s+'p'+p).innerHTML = item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue;
+                                }
 							}
 							// reset every border back to gray
 							$('set'+s+'p'+p).style.border = '10px solid #111';
@@ -359,8 +395,9 @@ new PeriodicalExecuter(function(pe) {
 					}
 
 					// set one green border to show how is servicing at the moment
-					$('set'+item.getElementsByTagName("currentSet")[0].firstChild.nodeValue+'p'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '10px solid #0f0';
-
+                    if(item.getElementsByTagName('set'+item.getElementsByTagName("currentSet")[0].firstChild.nodeValue+'p1')[0].firstChild.nodeValue != '-') {
+                        $('set'+item.getElementsByTagName("currentSet")[0].firstChild.nodeValue+'p'+item.getElementsByTagName("service")[0].firstChild.nodeValue).style.border = '10px solid #0f0';
+                    }
 					// set colored borders on finished games
                     for(var s=1; s<=<?= $maxSets ?>; s++) {
 					if(item.getElementsByTagName("winnerSet"+s)[0].firstChild.nodeValue > 0) $('set'+s+'p'+item.getElementsByTagName("winnerSet"+s)[0].firstChild.nodeValue).style.border = '10px solid #f00';
@@ -391,7 +428,7 @@ new PeriodicalExecuter(function(pe) {
 
 						// controls are locked when a match finished - we need to unlock it once both players got 0 points
 
-						if($('pl').innerText=='-' && $('pr').innerText=='-')
+						if($('pl').innerText=='-' && $('pr').innerText=='-' && item.getElementsByTagName('currentSet')[0].firstChild.nodeValue == 1)
 						{
 						//	alert(1);
 							$('inputlocked').hide();
@@ -400,15 +437,15 @@ new PeriodicalExecuter(function(pe) {
 							$('inputSet3').style.backgroundColor = '';
 							$('inputSet1').style.backgroundColor = 'blue';
 						}
-						if($('pl').innerHTML=='-' && $('pr').innerHTML=='-')
-						{
-						//	alert(1);
-							$('inputlocked').hide();
-							$('currentSet').value=1;
-							$('inputSet2').style.backgroundColor = '';
-							$('inputSet3').style.backgroundColor = '';
-							$('inputSet1').style.backgroundColor = 'blue';
-						}
+						// if($('pl').innerHTML=='-' && $('pr').innerHTML=='-')
+						// {
+						// //	alert(1);
+						// 	$('inputlocked').hide();
+						// 	$('currentSet').value=1;
+						// 	$('inputSet2').style.backgroundColor = '';
+						// 	$('inputSet3').style.backgroundColor = '';
+						// 	$('inputSet1').style.backgroundColor = 'blue';
+						// }
 						if(switched==0)
 						 {
 							if($('currentSet').value=='') { $('currentSet').value=1; }
@@ -417,14 +454,20 @@ new PeriodicalExecuter(function(pe) {
 							//$('pr').innerHTML = item.getElementsByTagName('set'+item.getElementsByTagName('currentSet')[0].firstChild.nodeValue+'p2')[0].firstChild.nodeValue;
 							$('pl').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue;
 							$('pr').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p2')[0].firstChild.nodeValue;
-							$('inputName1').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
-							$('inputName2').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue;
+							// $('inputName1').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
+							// $('inputName2').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue;
 
+                    $('inputName2').innerHTML = getflags(item.getElementsByTagName('player2')[0].firstChild.nodeValue,item.getElementsByTagName('flag2')[0].firstChild.nodeValue,'<br>');
+                    $('inputName1').innerHTML = getflags(item.getElementsByTagName('player1')[0].firstChild.nodeValue,item.getElementsByTagName('flag1')[0].firstChild.nodeValue,'<br>');
 						 } else {
 							$('pr').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p1')[0].firstChild.nodeValue;
 							$('pl').innerHTML = item.getElementsByTagName('set'+$('currentSet').value+'p2')[0].firstChild.nodeValue;
-							$('inputName2').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
-							$('inputName1').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue;
+							// $('inputName2').innerHTML = item.getElementsByTagName('player1')[0].firstChild.nodeValue;
+							// $('inputName1').innerHTML = item.getElementsByTagName('player2')[0].firstChild.nodeValue;
+
+
+                            $('inputName1').innerHTML = getflags(item.getElementsByTagName('player2')[0].firstChild.nodeValue,item.getElementsByTagName('flag2')[0].firstChild.nodeValue,'<br>');
+                            $('inputName2').innerHTML = getflags(item.getElementsByTagName('player1')[0].firstChild.nodeValue,item.getElementsByTagName('flag1')[0].firstChild.nodeValue,'<br>');
 
 						 }
 	//					alert(item.getElementsByTagName('player1')[0].firstChild.nodeValue);
@@ -450,8 +493,9 @@ new PeriodicalExecuter(function(pe) {
 						 // when a set is over - show a dialog box
 
 						if(item.getElementsByTagName('winnerSet'+$('currentSet').value)[0].firstChild.nodeValue>0 && dialogShown==false) {
-
-
+// && $('currentSet').value == item.getElementsByTagName('currentSet')[0].firstChild.nodeValue
+// console.log(item.getElementsByTagName('currentSet')[0].firstChild.nodeValue);
+// console.log($('currentSet').value)
 							// if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
 							// {
 							// 	if($('currentSet').value==1) { confirmtext='1st set finished, switch to 2nd set?'; }
@@ -464,16 +508,16 @@ new PeriodicalExecuter(function(pe) {
                             var winsP1 = 0
                             var winsP2 = 0
                             for(var s=1; s<=<?= $maxSets ?>; s++) {
-                                console.log('set ' + s + ' won by ' + item.getElementsByTagName('winnerSet'+s)[0].firstChild.nodeValue)
+                                // console.log('set ' + s + ' won by ' + item.getElementsByTagName('winnerSet'+s)[0].firstChild.nodeValue)
                                 if(item.getElementsByTagName('winnerSet'+s)[0].firstChild.nodeValue == 1) { winsP1=winsP1+1 }
                                 if(item.getElementsByTagName('winnerSet'+s)[0].firstChild.nodeValue == 2) { winsP2=winsP2+1 }
                             }
-                            console.log(winsP1);
-                            console.log(winsP2);
+                            // console.log(winsP1);
+                            // console.log(winsP2);
                             if($('currentSet').value == <?= $maxSets ?> || winsP1*2 > <?= $maxSets ?> || winsP2*2 > <?= $maxSets ?>) {
                                 confirmtext='switch to next match?';
                             } else {
-                                confirmtext='switch to next set?';
+                                confirmtext='switch to next game?';
                             }
 							if(confirm(confirmtext)) { //yes
 								if($('currentSet').value==<?= $maxSets ?> || winsP1*2 > <?= $maxSets ?> || winsP2*2 > <?= $maxSets ?>)
@@ -484,34 +528,10 @@ new PeriodicalExecuter(function(pe) {
 									dialogShown=true;
 									$('inputlocked').show();
 								} else {
-                                            $('inputSet'+$('currentSet').value).style.backgroundColor = '';
-                                            $('currentSet').value = parseInt($('currentSet').value)+1;
-                                            $('inputSet'+$('currentSet').value).style.backgroundColor = 'blue';
-                                        }
-
-								// if($('currentSet').value==2)
-								// {
-								// 	if(item.getElementsByTagName('winnerSet1')[0].firstChild.nodeValue==item.getElementsByTagName('winnerSet2')[0].firstChild.nodeValue)
-								// 	{
-								// 		$('currentSet').value = 1;
-								// 		$('inputSet1').style.backgroundColor = 'blue';
-								// 		dialogShown=true;
-								// 		$('inputlocked').show();
-								// 	} else {
-								// 		$('currentSet').value = 3;
-								// 		$('inputSet3').style.backgroundColor = 'blue';
-                                //
-								// 	}
-								// 	$('inputSet2').style.backgroundColor = '';
-								// }
-                                //
-								// if($('currentSet').value==1)
-								// {
-								// 	$('currentSet').value = 2;
-								// 	$('inputSet2').style.backgroundColor = 'blue';
-								// 	$('inputSet1').style.backgroundColor = '';
-                                //
-								// }
+                                    $('inputSet'+$('currentSet').value).style.backgroundColor = '';
+                                    $('currentSet').value = parseInt($('currentSet').value)+1;
+                                    $('inputSet'+$('currentSet').value).style.backgroundColor = 'blue';
+                                }
 
 							} else {
 								dialogShown = true;
@@ -692,7 +712,7 @@ if($_GET['type']=='input') {
 		<tr>
 			<td id="inputName1" style='font-weight: bold'></td>
 			<td>
-				<input class='button' type="button" value="switch" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,true)"><br>to switch players<br>
+				<input class='button' type="button" value="change ends" id='switchButton' style=" height: 2em; font-size: 150%"  onclick="pushButton(this,true)"><br><br>
 				<input class='button' type="button" value="settings" id='settingsButton' style="<?php if($_GET['c']) {echo "display:none;"; } ?> width: 50%; height: 2em; font-size: 150%"  onclick="pushButton(this,true);">
 			</td>
 			<td id="inputName2" style='font-weight: bold'></td>
@@ -849,7 +869,7 @@ if($_GET['type']=='output') {
 	</div>
 	<table summary="" id="output">
 		<tr id="tblNames1">
-			<td colspan="3" id="namePlayer1">&nbsp;</td>
+			<td colspan="<?= $maxSets ?>" id="namePlayer1">&nbsp;</td>
 		</tr>
 		<tr id="tblScore1">
 			<?php for($set=1;$set<=$maxSets;$set++) { ?>
@@ -862,7 +882,7 @@ if($_GET['type']=='output') {
 			<?php } ?>
 		</tr>
 		<tr id="tblNames2">
-			<td colspan="3" id="namePlayer2">&nbsp;</td>
+			<td colspan="<?= $maxSets ?>" id="namePlayer2">&nbsp;</td>
 		</tr>
 	</table>
 	<span style="font-size: 5em; position: absolute; right: 10px; bottom: 10px; opacity:0.02"><?php
