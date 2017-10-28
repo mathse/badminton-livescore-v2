@@ -595,6 +595,7 @@ if($_GET['type']=='input') {
 	{
 		echo '<input type="button" onclick="window.location.reload();" style="width:90%; height: 10%; font-size: 5em" value="Reload">';
 	}
+    echo '<title>Court Input '.$_GET['c'].'</title>';
 	if($_COOKIE['currentCourt'] && $_GET['c']=='x') {
 		$_GET['c'] = $_COOKIE['currentCourt'];
 		?>
