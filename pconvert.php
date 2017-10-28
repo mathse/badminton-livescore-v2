@@ -15,23 +15,23 @@ foreach($types as $key => $type) {
 		$regex = "/\[(\w+)\] ([\'\w&#;\- ]+), ([\'a-zA-Z0-9,&#;\- ]+[a-z])([0-9\/]*)/";
 	}
 	$lines = str_replace("\r\n\r\n","\n",str_replace("	","",strip_tags($x[1])));
-	preg_match_all ($regex, $lines, $output); 
+	preg_match_all ($regex, $lines, $output);
 	#print_r($output);
 	for($i=0;$i<count($output[1]);$i++) {
 		if($key>1) {
 			$flags[] = $output[1][$i];
 			$flags[] = $output[4][$i];
-			$buffer .= $output[1][$i].'|'.$output[4][$i].' '.ucwords(strtolower($output[3][$i])).' '.ucwords(strtolower($output[2][$i])).' &amp; '.ucwords(strtolower($output[6][$i])).' '.ucwords(strtolower($output[5][$i]));	
+			$buffer .= $output[1][$i].'|'.$output[4][$i].' '.ucwords(strtolower($output[3][$i])).' '.ucwords(strtolower($output[2][$i])).' &amp; '.ucwords(strtolower($output[6][$i])).' '.ucwords(strtolower($output[5][$i]));
 		} else {
 			$flags[] = $output[1][$i];
-			$buffer .= $output[1][$i].' '.ucwords(strtolower($output[3][$i])).' '.ucwords(strtolower($output[2][$i]));	
+			$buffer .= $output[1][$i].' '.ucwords(strtolower($output[3][$i])).' '.ucwords(strtolower($output[2][$i]));
 		}
 		$buffer .= "\n";
 	}
-	$fd = fopen('./players/'.$type.'.txt','w');
-	echo html_entity_decode($buffer);
+	$fd = fopen('./players/'.$type.'.txt','wa+');
+	echo html_entity_decode($buffer).'<br>';
 	$enc = mb_detect_encoding($data);
-	
+
 	$buffer = mb_convert_encoding($buffer, "UTF-8", $enc);
 	fwrite($fd,html_entity_decode($buffer));
 	fclose($fd);
@@ -51,8 +51,8 @@ $x = explode("<td>Player</td><td>Partner</td><td>Seed</td>",$file); //for mix an
 $lines = str_replace("\r\n\r\n","\n",str_replace("	","",strip_tags($x[1])));
 //echo $lines;
 $regex = "/\[(\w+)\] ([\'\w,&#;\- ]+), ([\'\w,&#;\- ]+)\[(\w+)\] ([\'\w,&#;\- ]+), ([\'a-zA-Z0-9,&#;\- ]+)/";
-preg_match_all ($regex, $lines, $output); 
+preg_match_all ($regex, $lines, $output);
 for($i=0;$i<count($output[1]);$i++) {
-	echo $output[1][$i].'|'.$output[4][$i].' '.ucwords(strtolower($output[3][$i])).' '.ucwords(strtolower($output[2][$i])).' &amp; '.ucwords(strtolower($output[6][$i])).' '.ucwords(strtolower($output[5][$i]));	
+	echo $output[1][$i].'|'.$output[4][$i].' '.ucwords(strtolower($output[3][$i])).' '.ucwords(strtolower($output[2][$i])).' &amp; '.ucwords(strtolower($output[6][$i])).' '.ucwords(strtolower($output[5][$i]));
 	echo "\n";
 }*/
