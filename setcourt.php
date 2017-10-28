@@ -37,39 +37,39 @@ if(@$_GET['deviceid'])
 			$fd=fopen('sessions/controller/'.$_GET['deviceid'],'w');
 			fputs($fd, '202');
 			fclose($fd);
-			exit;				
+			exit;
 		}
 		if(trim($_GET['court'])=='sponsors')
 		{
 			$fd=fopen('sessions/controller/'.$_GET['deviceid'],'w');
 			fputs($fd, '201');
 			fclose($fd);
-			exit;				
+			exit;
 		}
 		if(trim($_GET['court'])=='reset')
 		{
 			$fd=fopen('sessions/controller/'.$_GET['deviceid'],'w');
 			fputs($fd, '500');
 			fclose($fd);
-			exit;				
-		}		
+			exit;
+		}
 		if(substr($_GET['court'],1,4)==' / x')
 		{
 			$fd=fopen('sessions/controller/'.$_GET['deviceid'],'w');
 			fputs($fd, '210');
 			fclose($fd);
-			exit;				
+			exit;
 		}
 		if(substr($_GET['court'],0,4)=='x / ')
 		{
 			$fd=fopen('sessions/controller/'.$_GET['deviceid'],'w');
 			fputs($fd, '220');
 			fclose($fd);
-			exit;				
+			exit;
 		}
 //		if(is_numeric($_GET['']))
 //		{
-			
+
 //		}
 
 //        sendToMeteorDB("connections","device-".$_GET['deviceid'],'{"court" : "'.$_GET['court'].'","time":"'.time().'"}');
@@ -82,8 +82,8 @@ if(@$_GET['newgame'])
 {
 	$fd=fopen('sessions/courts/'.$_GET['court'],'w');
 	for($set=1;$set<=$maxSets;$set++) {
-		$sets[$set]['p1'] = 0;
-		$sets[$set]['p2'] = 0;
+		$sets[$set]['p1'] = '-';
+		$sets[$set]['p2'] = '-';
 		$sets[$set]['winner'] = 0;
 	}
 	$sets['p1'] = $_GET['p1']; $sets['p2'] = $_GET['p2'];
@@ -109,7 +109,15 @@ if(@$_GET['player'])
 	$sets = json_decode(file_get_contents('sessions/courts/'.$_GET['court']),true);
 
 	for($set=1;$set<=$maxSets;$set++) {
-		if (urlencode($_GET['value']) == '+' && $_GET['set'] == $set) $sets[$set]['p' . $_GET['player']]++;
+
+		if (urlencode($_GET['value']) == '+' && $_GET['set'] == $set)
+        {
+            if ($sets[$set]['p1'] == '-' && $sets[$set]['p2'] == '-') {
+                $sets[$set]['p1'] = 0;
+                $sets[$set]['p2'] = 0;
+            }
+            $sets[$set]['p' . $_GET['player']]++;
+        }
 		if (urlencode($_GET['value']) == '-' && $_GET['set'] == $set && $sets[$set]['p' . $_GET['player']] > 0) $sets[$set]['p' . $_GET['player']]--;
 	}
 	$sets['service'] = $_GET['player'];
