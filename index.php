@@ -112,17 +112,25 @@ function pushButton(v,disappear)
     if(v.value == 'settings')
     {
         $('settings').show();
-        new Ajax.Request("info-draw/matches.php?type=xml",{
+        /*new Ajax.Request("info-draw/matches.php?type=xml",{
                 onSuccess: function(r) {
                     $('selectMatch').innerHTML = r.responseText;
                     $('matchloading').hide();
                     $('player1').show(); $('player2').show(); // show player selector
                 }
             }
-        );
+        );*/
     }
 
-
+    if(v.name == 'match')
+    {
+        /*$('currentCourt').value = v.value;*/
+        $('matchCheck').show();
+        $('eventCheck').show();
+        $('playerCheck1').show();
+        $('playerCheck2').show();
+        $('eventBox').hide();
+    }
 
 	if(v.name == 'event')
 	{
@@ -164,7 +172,6 @@ function pushButton(v,disappear)
 	if(v.name == 'court')
 	{
 		$('currentCourt').value = v.value;
-
 		$('courtCheck').show();
 	}
 	if(v.name == 'selectNation1')

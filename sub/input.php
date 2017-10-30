@@ -34,10 +34,20 @@ if($_GET['c']=='x') {
     <tr>
         <td class="settingslabel">match:</td>
         <td>
-            <select id='selectMatch' name='selectMatch' onchange="pushButton(this,false)"></select>&nbsp;<img src='img/loading.gif' id='matchloading'>
-        </td>
+            <select id='selectMatch' name='match' onchange="pushButton(this,false)">
+                <?php
+                $lineup = json_decode(@fgets(fopen('./players/aufstellung.txt','r')));
+                $players_heim = explode("\n",$lineup->{'aufstellung-heim'});
+                $players_gast = explode("\n",$lineup->{'aufstellung-gast'});
+                ?><option> --- Mannschaftsspiel: SG EBT Berlin vs. <?php echo $lineup->gast; ?> --- </option><?php
+                foreach($players_heim as $k => $player_heim) {
+                    ?><option value=""><?php echo $player_heim; ?> vs. <?php echo $players_gast[$k]; ?></option><?php
+                }
+                ?>
+            </select>
+        </td><td><img src="img/symbol_check.png" id='matchCheck' style="height:32px; width:32px; display: none"></td>
     </tr>
-    <tr>
+    <tr id="eventBox">
         <td class="settingslabel">event:</td><td>
             <?php $events = scandir('players');
             foreach($events as $event)
