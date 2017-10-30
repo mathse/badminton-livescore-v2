@@ -28,7 +28,10 @@ if($_POST['name-gast']) {
     $content = json_encode(array("gast" => htmlentities($_POST['name-gast']),
                         "aufstellung-heim" => htmlentities($_POST['aufstellung-heim']),
                         "aufstellung-gast" => htmlentities($_POST['aufstellung-gast'])));
-                        // echo $content;
+    $content .= str_replace("\n","\n".strtoupper(substr(str_replace(" ","",htmlentities($_POST['name-heim'])),0,3))." ",
+                        htmlentities("\n".$_POST['aufstellung-heim']));
+    $content .= str_replace("\n","\n".strtoupper(substr(str_replace(" ","",htmlentities($_POST['name-gast'])),0,3))." ",
+                        htmlentities("\n".$_POST['aufstellung-gast']));
     if(fwrite($fd, $content)) {
         echo "speichern erfolgreich";
     } else {
@@ -37,7 +40,7 @@ if($_POST['name-gast']) {
     fclose($fd);
 }
 
-$lineup = json_decode(@file_get_contents('./players/aufstellung.txt'));
+$lineup = json_decode(@fgets(fopen('./players/aufstellung.txt','r')));
 
 ?>
 
