@@ -582,6 +582,10 @@ if($_GET['type']=='players') {
     include('sub/players.php');
 }
 
+if($_GET['type']=='teams') {
+    include('sub/teams.php');
+}
+
 if($_GET['type']=='output') {
     include('sub/output.php');
 }
