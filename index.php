@@ -73,10 +73,10 @@ border-radius: 10px; }
     border-radius: 4px;
     empty-cells: hide !important;
 }
-#greenscreen table td {  text-align: left; vertical-align: middle; border-radius: 2px;}
+#greenscreen table td { text-align: left; vertical-align: middle; border-radius: 2px;}
 #greenscreen img { width: 30px; height: 20px !important; border-radius: 2px;}
 #greenscreen #logo { height: 60px !important; width: 108px !important}
-#greenscreen table .scoreboard { background-color: #111; height: 15px; border-radius: 2px; border-width: 2px !important; text-align: left; font-size: 0.8em}
+#greenscreen table .scoreboard { width: 35px; background-color: #111; height: 15px; border-radius: 2px; border-width: 2px !important; text-align: left; font-size: 0.7em; text-align: center}
 #greenscreen #namePlayer1 { padding-left: 5px}
 #greenscreen #namePlayer2 { padding-left: 5px}
 -->
@@ -407,7 +407,7 @@ new PeriodicalExecuter(function(pe) {
 					for(var p=1; p<=2; p++) {
 						for(var s=1; s<=<?= $maxSets ?>; s++) {
                                 if(s > root.getElementsByTagName("currentSet")[0].firstChild.nodeValue && root.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue == 0) {
-                                    $('set'+s+'p'+p).innerHTML = '&nbsp;';
+                                    $('set'+s+'p'+p).innerHTML = ''; //&nbsp;
                                 } else {
                                     if(item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue == '-') {
                                         $('set'+s+'p'+p).innerHTML = '';

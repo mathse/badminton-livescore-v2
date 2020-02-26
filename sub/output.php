@@ -2,6 +2,7 @@
 if($_GET['style']=='greenscreen') {
     ?>
     <div id="greenscreen" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 3; background-size: 100%;">
+        <div id="outer">
         <table summary="" id="output1">
             <tr id="tblNames1">
                 <td rowspan="2" >
@@ -20,6 +21,7 @@ if($_GET['style']=='greenscreen') {
                 <?php } ?>
             </tr>
         </table>
+        </div>
     </div>
 
     <?php
