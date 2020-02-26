@@ -24,7 +24,7 @@ for($set=1;$set<=$maxSets;$set++) {
 //$set3p1 = '-';
 //$set3p2 = '-';
 $service = '-';
-$currentSet = 1;
+$currentSet = $maxSets;
 //$winnerSet1 = 0;
 //$winnerSet2 = 0;
 //$winnerSet3 = 0;
@@ -109,7 +109,9 @@ if($monitorconnection != '' && file_exists('sessions/courts/'.$monitorconnection
 
 	// set green marker on service
 for($set=$maxSets;$set>=1;$set--) {
-	if($sets[$set]['p1']>=0 && $sets[$set]['p2']>=0 && $sets[$set]['p1']<=$maxPoints && $sets[$set]['p2']<=$maxPoints && $sets[$set]['winner'] == 0) $currentSet = $set;
+	if($sets[$set]['p1']>=0 && $sets[$set]['p2']>=0 && $sets[$set]['p1']<=$maxPoints && $sets[$set]['p2']<=$maxPoints && $sets[$set]['winner'] == 0) {
+		$currentSet = $set;
+	}
 }
 	// if($sets[2]['p1']>0 || $sets[2]['p2']>0) $currentSet = 2;
 	// if($sets[3]['p1']>0 || $sets[3]['p2']>0) $currentSet = 3;

@@ -17,7 +17,7 @@
 	font-family: Arial;
 <?php
 if($_GET['type']=='output' && $_GET['style']==2) {
-	echo "zoom: 0.9; cursor: none;";
+	echo "zoom: 0.8; cursor: none;";
 }
 ?>
 }
@@ -52,12 +52,33 @@ select { font-size: 1.1em; }
 #pl, #pm, #pr { font-size: 1400%; width: 30%; line-height:80%}
 <?php } ?>
 .settingslabel { font-size: 2em }
+input { -webkit-appearance: none;
+border-radius: 10px; }
 #inputName1, #inputName2 { -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
 #output { height: 100%; width: 98%; font-size: 1300%; padding: 0px; text-align: center; line-height: 80%; }
 #output td { -moz-border-radius: 20px}
 #namePlayer1, #namePlayer2 { font-size: 40%;  line-height: 70% }
 
-.scoreboard { background-color: #111; border: 10px solid #111; width: <?= (100/$maxSets); ?>%;  -webkit-border-radius: 10px; border-radius: 10px;}
+#output .scoreboard { background-color: #111; border: 10px solid #111; width: <?= (100/$maxSets); ?>%;  -webkit-border-radius: 10px; border-radius: 10px;}
+
+#greenscreen { background-color: #0f0}
+#greenscreen table {
+    background: rgba(10,10,10,0.8);
+    font-size: 1.6em;
+    width: 0;
+    height: 0;
+    left: 0px;
+    top: 20px;
+    position: absolute;
+    border-radius: 4px;
+    empty-cells: hide !important;
+}
+#greenscreen table td {  text-align: left; vertical-align: middle; border-radius: 2px;}
+#greenscreen img { width: 30px; height: 20px !important; border-radius: 2px;}
+#greenscreen #logo { height: 60px !important; width: 108px !important}
+#greenscreen table .scoreboard { background-color: #111; height: 15px; border-radius: 2px; border-width: 2px !important; text-align: left; font-size: 0.8em}
+#greenscreen #namePlayer1 { padding-left: 5px}
+#greenscreen #namePlayer2 { padding-left: 5px}
 -->
 </style>
 
@@ -211,6 +232,7 @@ function pushButton(v,disappear)
 
 		$('inputSet1').style.backgroundColor = 'blue';
 		$('currentSet').value = '1';
+        /* alert($('selectMatch').value); */
 		new Ajax.Request("setcourt.php?newgame=1&court="+$('currentCourt').value+"&p1="+$('selectPlayer1').value+"&p2="+$('selectPlayer2').value);
 
 	}
@@ -384,18 +406,17 @@ new PeriodicalExecuter(function(pe) {
 					// set the points
 					for(var p=1; p<=2; p++) {
 						for(var s=1; s<=<?= $maxSets ?>; s++) {
-
-							if(s > root.getElementsByTagName("currentSet")[0].firstChild.nodeValue && root.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue == 0) {
-								$('set'+s+'p'+p).innerHTML = '&nbsp;';
-							} else {
-                                if(item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue == '-') {
-                                    	$('set'+s+'p'+p).innerHTML = '&nbsp;';
+                                if(s > root.getElementsByTagName("currentSet")[0].firstChild.nodeValue && root.getElementsByTagName("winnerSet3")[0].firstChild.nodeValue == 0) {
+                                    $('set'+s+'p'+p).innerHTML = '&nbsp;';
                                 } else {
+                                    if(item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue == '-') {
+                                        $('set'+s+'p'+p).innerHTML = '';
+                                    } else {
                                         $('set'+s+'p'+p).innerHTML = item.getElementsByTagName('set'+s+'p'+p)[0].firstChild.nodeValue;
+                                    }
                                 }
-							}
-							// reset every border back to gray
-							$('set'+s+'p'+p).style.border = '10px solid #111';
+                                // reset every border back to gray
+                                $('set'+s+'p'+p).style.border = '10px solid #111';
 
 						}
 
@@ -595,6 +616,10 @@ if($_GET['type']=='teams') {
 
 if($_GET['type']=='output') {
     include('sub/output.php');
+}
+
+if($_GET['type']=='greenscreen') {
+    include('sub/greenscreen.php');
 }
 
 if($_GET['type']=='control') {

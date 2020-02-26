@@ -6,7 +6,7 @@
 	<frame name="" src="draws.php" />
  <frameset rows="50%,50%">
     <frame name="" src="matches.php" />
-   <frame name="" src="../?type=output&style=2" />
+   <frame name="" src="../overview-courts.php" />
   </frameset>
 </frameset>
 

@@ -43,7 +43,7 @@ var currentpos=0,alt=1,curpos1=-1,curpos2=-1
 function initialize(){
 	starttime = new Date().getTime();
 	startit()
-	
+
 }
 old = 0
 function scrollwindow(){
@@ -51,17 +51,17 @@ function scrollwindow(){
 		temp=document.body.scrollTop
 	else
 		temp=window.pageYOffset
-	
+
 	if (alt==0)
 		alt=2
 	else
 		alt=1
-	
+
 	if (alt==0)
 		curpos1=temp
 	else
 		curpos2=temp
-	
+
 	if (curpos1!=curpos2){
 		if (document.all) {
 			currentpos = document.body.scrollTop + speed

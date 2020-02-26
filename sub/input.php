@@ -31,7 +31,7 @@ if($_GET['c']=='x') {
 
 <div id="settings" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
 <table style='height: 100%'>
-    <tr>
+    <tr style="display: none">
         <td class="settingslabel">match:</td>
         <td>
             <select id='selectMatch' name='match' onchange="pushButton(this,false)">
@@ -41,7 +41,7 @@ if($_GET['c']=='x') {
                 $players_gast = explode("\n",$lineup->{'aufstellung-gast'});
                 ?><option> --- Mannschaftsspiel: SG EBT Berlin vs. <?php echo $lineup->gast; ?> --- </option><?php
                 foreach($players_heim as $k => $player_heim) {
-                    ?><option value=""><?php echo $player_heim; ?> vs. <?php echo $players_gast[$k]; ?></option><?php
+                    ?><option value="aufstellung-<?php echo $k; ?>"><?php echo $player_heim; ?> vs. <?php echo $players_gast[$k]; ?></option><?php
                 }
                 ?>
             </select>

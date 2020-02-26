@@ -2,11 +2,16 @@
 include('settings.php');
 
 $types = array("ms", "ws", "md", "wd", "xd");
-
+$counter =0;
 foreach($types as $key => $type) {
 	$buffer = null;
-	echo "... importing ".$type."<br>";
-	$file = file_get_contents('http://www.tournamentsoftware.com/sport/event.aspx?id='.$tID.'&event='.($key+1));
+    $counter++;
+    $url = 'https://www.tournamentsoftware.com/sport/event.aspx?id='.$tID.'&event='.($key+1).'&draw='.$counter;
+
+	echo "... importing ".$type." from ".$url."<br>";
+	$file = file_get_contents($url);
+    // echo $file;
+    // break;
 	if($key>1) {
 		$x = explode("<td>Player</td><td>Partner</td><td>Seed</td>",$file); //for mix and doubles
 		$regex = "/\[(\w+)\] ([\'\w,&#;\- ]+), ([\'\w,&#;\- ]+)\[(\w+)\] ([\'\w,&#;\- ]+), ([\'a-zA-Z0-9,&#;\- ]+[a-z])([0-9\/]*)/";
@@ -28,13 +33,18 @@ foreach($types as $key => $type) {
 		}
 		$buffer .= "\n";
 	}
-	$fd = fopen('./players/'.$type.'.txt','wa+');
+	// $fd = fopen('./players/'.$type.'.txt','wa+');
 	echo html_entity_decode($buffer).'<br>';
-	$enc = mb_detect_encoding($data);
+	// $enc = mb_detect_encoding($data);
+    // //
+	// $buffer = mb_convert_encoding($buffer, "UTF-8", $enc);
+	// fwrite($fd,html_entity_decode($buffer));
+	// fclose($fd);
 
-	$buffer = mb_convert_encoding($buffer, "UTF-8", $enc);
-	fwrite($fd,html_entity_decode($buffer));
-	fclose($fd);
+    file_put_contents('./players/'.$type.'.txt', $buffer);
+    // file_put_contents('tempfolder/'.$a, $data);
+
+
 }
 
 echo "checking for missing flags ...<br>";

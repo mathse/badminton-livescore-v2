@@ -277,3 +277,8 @@ div.stepsinfo.foldable .less{display:none;margin-top:0;background-position:-960p
 .matchescalendar {display: none}
 body { background-color: black; overflow:hidden; }
 *, caption { color: white; font-weight: bold; }
+.primary-nav { display:none; }
+.page-head .wrapper--padding { display: none; }
+.page-head .wrapper .wrapper--branding { display: none}
+.masthead, #myheader { display: none}
+.content { margin-left: 0px }

@@ -1,3 +1,30 @@
+<?php
+if($_GET['style']=='greenscreen') {
+    ?>
+    <div id="greenscreen" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 3; background-size: 100%;">
+        <table summary="" id="output1">
+            <tr id="tblNames1">
+                <td rowspan="2" >
+                    <img id='logo' src="img/logo2020.png">
+                </td>
+                <td colspan="<?= $maxSets ?>" id="namePlayer1">&nbsp;</td>
+                <?php for($set=1;$set<=$maxSets;$set++) { ?>
+                <td class='scoreboard' id='set<?= $set ?>p1'>-</td>
+                <?php } ?>
+            </tr>
+            <tr id="tblScore2">
+
+                <td colspan="<?= $maxSets ?>" id="namePlayer2">&nbsp;</td>
+                <?php for($set=1;$set<=$maxSets;$set++) { ?>
+                <td class='scoreboard' id='set<?= $set ?>p2'>-</td>
+                <?php } ?>
+            </tr>
+        </table>
+    </div>
+
+    <?php
+} else {
+?>
 <div id="sponsoren" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background: black; z-index: 3">
     <script type="text/javascript" src="js/crossfade.js"></script>
     <ul id="gallery" style='list-style-type:none; margin: 300px auto;'>
@@ -62,3 +89,6 @@ photos
     }
     ?>
 </span>
+<?php
+}
+?>
